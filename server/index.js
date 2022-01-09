@@ -13,7 +13,7 @@ mongoose.connect(
   process.env.MONGO_URLADI,
   (err, data) => {
     console.log(err || data);
-    console.log("mongodb fddf connected");
+    console.log("mongodb  connected");
   }
 );
 app.use(cors())
