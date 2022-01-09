@@ -76,7 +76,10 @@ export default function ProfileCreate() {
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { firstName: '', lastName: '' }]);
+    setInputList([
+      ...inputList,
+      { axisTitle: '', axisDate: '', axisDescription },
+    ]);
   };
 
   const handleClick = async (e) => {
@@ -284,7 +287,7 @@ export default function ProfileCreate() {
                   <h1 style={{ textAlign: 'center' }}>Life Axis</h1>
                   {inputList.map((x, i) => {
                     return (
-                      <div className="box">
+                      <div className="box" key={x}>
                         <div className="inner-box">
                           <input
                             name="axisTitle"

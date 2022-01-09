@@ -19,7 +19,6 @@ const AuthRouter = Router();
 AuthRouter.post('/register', async (req, res) => {
   try {
     //gen new password
-    console.log(req.body, 'req')
     const salt = await bcrypt.genSalt(10);
     const hashedpassword = await bcrypt.hash(req.body.password, 10);
 
