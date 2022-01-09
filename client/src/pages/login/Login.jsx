@@ -6,9 +6,9 @@ import { CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 export default function Login() {
   // const email = useRef("Janesss@gamil.com");
-  const [email, setEmail] = useState('Janesss@gmail.com');
-  const [password, setPassword] = useState('123456');
-  const [phone, setPhone] = useState('0524355700');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
 
   const { isFetching, dispatch } = useContext(AuthContext);
 
@@ -44,10 +44,9 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
-                placeholder="Phone"
+                placeholder="Phone (optional)"
                 type="phone"
                 value={phone}
-                required
                 minLength="6"
                 className="loginInput"
                 onChange={(e) => setPhone(e.target.value)}

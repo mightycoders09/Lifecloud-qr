@@ -44,7 +44,7 @@ const Topbar = () => {
             <span className="topbarLink">Homepage</span>
           </Link>
           <Link
-            to={`/profile/${user.username}`}
+            to={`/profile/${user}`}
             style={{ textDecoration: 'none', color: 'white' }}
           >
             <span className="topbarLink">Timeline</span>

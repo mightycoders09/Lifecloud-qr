@@ -5,7 +5,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import axios from 'axios';
 import {SearchProvider} from './context/SearchContext';
 
-axios.defaults.baseURL = 'https://backendsociall.herokuapp.com/api';
+// axios.defaults.baseURL = 'https://backendsociall.herokuapp.com/api';
 
 ReactDOM.render(
   <React.StrictMode>

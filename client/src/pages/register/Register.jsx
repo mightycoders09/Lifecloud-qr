@@ -16,34 +16,55 @@ export default function Register() {
   const password = useRef();
   const passwordAgain = useRef();
   const history = useHistory();
+  const [error, setErro] = useState('')
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    companyName: '',
+    dateOfBirth: '',
+    gender: '',
+    email: '',
+    password: '',
+    passwordAgain: '',
+  })
 
   const handleChange = (e) => {
-    setSelectedGender(e.target.value);
+    const { name, value } = e.target;
+    console.log(name, value, 'va')
+    // setSelectedGender(e.target.value);
+    setUser({
+      ...user,
+      [name]: value
+    })
+    setErro('')
   };
   const handleClick = async (e) => {
     e.preventDefault();
-    if (passwordAgain.current.value !== password.current.value) {
-      passwordAgain.current.setCustomValidity("Passwords don't match!");
+    if (user.password !== user.passwordAgain) {
+      setErro("Passwords don't match!");
     } else {
-      const user = {
-        firstName: firstName.current.value,
-        lastName: lastName.current.value,
-        companyName: companyName.current.value,
-        dateOfBirth: dateOfBirth.current.value,
-        gender: gender.current.value,
-        phone: phone.current.value,
-        email: email.current.value,
-        password: password.current.value,
-      };
+      setErro('')
       try {
-        await axios.post('/auth/register', user);
-        history.push('/login');
+        fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(user)
+        }).then(res => {
+          return res.json()
+        }).then(res => {
+          history.push('/login');
+          console.log(res, 'res')
+        })
+
       } catch (err) {
         console.log(err);
       }
     }
   };
-
+  console.log(user, 'user')
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -57,78 +78,104 @@ export default function Register() {
                 <input
                   placeholder="First Name"
                   required
+                  onChange={handleChange}
                   ref={firstName}
+                  value={user.firstName}
+                  name='firstName'
                   className="nameInput"
                 />
                 <input
                   placeholder="lastName"
                   required
+                  onChange={handleChange}
                   ref={lastName}
+                  value={user.lastName}
+                  name='lastName'
                   className="nameInput"
                 />
               </div>
               <input
-                placeholder="company Name (optional)"
+                placeholder="company Name "
                 required
+                onChange={handleChange}
                 ref={companyName}
+                value={user.companyName}
+                name='companyName'
                 className="loginInput"
                 type="companyName"
               />
               <input
                 placeholder="Date of Birth"
                 required
+                onChange={handleChange}
                 ref={dateOfBirth}
                 className="loginInput"
-                type="dateOfBirth"
-                />
+                value={user.dateOfBirth}
+                name='dateOfBirth'
+                type="date"
+              />
               <div className='radio-container'>
                 <h3>Gender</h3>
                 <div className='radio-input-container'>
-                <input
-                  type="radio"
-                  value="male"
-                  id="male"
-                  onChange={handleChange}
-                  name="gender"
-                  className='radio'
+                  <input
+                    type="radio"
+                    value="male"
+                    id="male"
+                    value='male'
+                    onChange={handleChange}
+                    name="gender"
+                    checked={user.gender === "male"}
+                    className='radio'
                   />
-                <label for="male">Male</label>
-                  </div>
+                  <label for="male">Male</label>
+                </div>
                 <div className='radio-input-container'>
 
-                <input
-                  type="radio"
-                  value="female"
-                  id="female"
-                  onChange={handleChange}
-                  name="gender"
-                  className='radio'
+                  <input
+                    type="radio"
+                    value="female"
+                    id="female"
+                    onChange={handleChange}
+                    checked={user.gender === "female"}
+                    value='female'
+                    name="gender"
+                    className='radio'
                   />
-                <label for="female">Female</label>
-                  </div>
+                  <label for="female">Female</label>
+                </div>
               </div>
               <input
                 placeholder="Email"
                 required
+                value={user.email}
+                name='email'
                 ref={email}
+                onChange={handleChange}
                 className="loginInput"
                 type="email"
               />
               <input
                 placeholder="Password"
                 required
+                value={user.password}
+                name='password'
                 ref={password}
                 className="loginInput"
+                onChange={handleChange}
                 type="password"
                 minLength="6"
               />
               <input
                 placeholder="Password Again"
                 required
+                value={user.passwordAgain}
+                name='passwordAgain'
                 ref={passwordAgain}
+                onChange={handleChange}
                 className="loginInput"
                 type="password"
               />
+              <p style={{ color: 'red', textAlign: 'center' }}>{error.length ? error : ''}</p>
               <button className="loginButton" type="submit">
                 Sign Up
               </button>
