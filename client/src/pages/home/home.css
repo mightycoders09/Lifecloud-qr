@@ -21,16 +21,31 @@
   .sidebarWrapper {
     display: none;
   }
-  .topbarCenter{
-    flex: 12
+  .topbarCenter {
+    flex: 12;
   }
-  .topbarLeft{
-    flex: 6
+  .topbarLeft {
+    flex: 6;
   }
-  
-  
-
   .shareWrapper {
     padding: 2px;
   }
+}
+.main-image {
+  width: 100%;
+}
+.searchbar-container {
+  background-color: #DCECF4;
+    display: flex;
+    justify-content: center;
+    height: 7vh;
+    align-items: center;
+  }
+  .search-container {
+    display: flex;
+    flex-direction: column;
+  }
+.searchbar-2 {
+  width: 25%;
+  display: flex;
 }

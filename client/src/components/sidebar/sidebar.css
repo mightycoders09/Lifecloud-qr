@@ -53,4 +53,15 @@
     margin: 0;
     list-style: none;
   }
-  
+  .search-results {
+    margin: auto;
+    height: 100px;
+    overflow: auto;
+    width: 25%;
+    border: solid 1px #ccc;
+    border-radius: 15px;
+  }
+
+  .none {
+    display: none;
+  }

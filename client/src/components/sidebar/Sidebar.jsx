@@ -26,14 +26,10 @@ const Sidebar = () => {
     
   // }, [searchText])
   return (
-    <div className="sidebar">
-      <ul className="sidebarFriendList">
-        <hr className="sidebarHr" />
-        <h4 className="rightbarTitle">People on Social</h4>        
+    <div className={`${!searchText && 'none'} search-results`}>
         {people.map((u) => (
           <CloseFriend key={u._id} user={u} />
         ))}
-      </ul>
     </div>
   );
 };

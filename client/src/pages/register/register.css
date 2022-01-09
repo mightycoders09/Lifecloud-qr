@@ -127,3 +127,6 @@
 .loginBox {
   height: auto;
 }
+input::placeholder {
+  color: #ABC9DB
+}
