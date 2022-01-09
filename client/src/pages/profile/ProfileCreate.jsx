@@ -37,6 +37,7 @@ export default function ProfileCreate() {
   const [inputList, setInputList] = useState([
     { axisTitle: '', axisDate: '', axisDescription: '' },
   ]);
+  console.log(inputList,'')
   const [selectedGender, setSelectedGender] = useState('');
   const firstName = useRef();
   const lastName = useRef();
@@ -58,7 +59,7 @@ export default function ProfileCreate() {
   const handleChange = (e) => {
     setSelectedGender(e.target.value);
   };
-
+  console.log(gender, 'gender')
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -81,9 +82,6 @@ export default function ProfileCreate() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if (passwordAgain.current.value !== password.current.value) {
-      passwordAgain.current.setCustomValidity("Passwords don't match!");
-    } else {
       const wallInformation = {
         firstName: firstName.current.value,
         lastName: lastName.current.value,
@@ -102,11 +100,12 @@ export default function ProfileCreate() {
         axisDate: axisDate.current.value,
       };
       try {
-        await axios.post('/auth/register', wallInformation);
-        history.push('/login');
+        console.log(wallInformation, 'wallInformation')
+        // await axios.post('/auth/register', wallInformation);
+        // history.push('/login');
       } catch (err) {
         console.log(err);
-      }
+
     }
   };
 
@@ -207,9 +206,8 @@ export default function ProfileCreate() {
                     />
                     <label
                       for="male"
-                      className={`${
-                        selectedGender === 'male' && 'active'
-                      } input-label`}
+                      className={`${selectedGender === 'male' && 'active'
+                        } input-label`}
                     >
                       Male
                     </label>
@@ -225,9 +223,8 @@ export default function ProfileCreate() {
                     />
                     <label
                       for="female"
-                      className={`${
-                        selectedGender === 'female' && 'active'
-                      } input-label`}
+                      className={`${selectedGender === 'female' && 'active'
+                        } input-label`}
                     >
                       Female
                     </label>
