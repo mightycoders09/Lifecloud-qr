@@ -3,11 +3,10 @@
   height: 100vh;
   background-color: #f0f2f5;
   display: flex;
+  align-items: flex-start;
 }
 
 .loginWrapper {
-  width: 70%;
-  height: 70%;
   display: flex;
 }
 
@@ -27,9 +26,8 @@
   display: flex;
   align-items: center;
   text-align: center;
-  
-  color: #6097BF !important;
-  
+
+  color: #6097bf !important;
 }
 
 .loginDesc {
@@ -37,8 +35,6 @@
 }
 
 .RegBox {
-  height: 400px !important;
-  padding: 20px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -61,7 +57,7 @@
   font-size: 18px;
   padding-left: 20px;
   margin: 2px;
-  width: 45%;
+  width: 44%;
 }
 .loginInput:focus {
   outline: none;
@@ -93,7 +89,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 @media only screen and (max-width: 600px) {
@@ -116,6 +112,8 @@
   font-size: 35px;
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 .radio-input-container {
   margin: 0 2rem 0 2rem;
@@ -123,10 +121,12 @@
 .names-container {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .loginBox {
   height: auto;
 }
 input::placeholder {
-  color: #ABC9DB
+  color: #abc9db;
 }
