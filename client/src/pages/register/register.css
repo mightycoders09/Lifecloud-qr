@@ -91,6 +91,7 @@
   font-size: 30px;
   line-height: 41px;
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
   color: #FFFFFF;

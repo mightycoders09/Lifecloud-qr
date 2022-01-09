@@ -180,15 +180,15 @@ export default function Register() {
                 Sign Up
               </button>
             </form>
-            <button className="loginRegisterButton">
-              <Link
-                to="/login"
-                style={{ textDecoration: 'none' }}
-                className="loginRegisterButton"
-              >
+            <Link
+              to="/login"
+              style={{ textDecoration: 'none' }}
+              className="loginRegisterButton"
+            > <button className="loginRegisterButton">
+
                 Log into Account{' '}
-              </Link>
-            </button>
+
+              </button></Link>
           </div>
         </div>
       </div>
