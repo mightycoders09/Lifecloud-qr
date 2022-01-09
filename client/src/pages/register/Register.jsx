@@ -53,18 +53,18 @@ export default function Register() {
         <div className="loginRight">
           <div className="RegBox">
             <form className="loginBox" onSubmit={handleClick}>
-              <div>
+              <div className='names-container'>
                 <input
                   placeholder="First Name"
                   required
                   ref={firstName}
-                  className="loginInput"
+                  className="nameInput"
                 />
                 <input
                   placeholder="lastName"
                   required
                   ref={lastName}
-                  className="loginInput"
+                  className="nameInput"
                 />
               </div>
               <input
@@ -80,24 +80,33 @@ export default function Register() {
                 ref={dateOfBirth}
                 className="loginInput"
                 type="dateOfBirth"
-              />
-              <input
-                type="radio"
-                value="male"
-                id="male"
-                onChange={handleChange}
-                name="gender"
-              />
-              <label for="male">Male</label>
+                />
+              <div className='radio-container'>
+                <h3>Gender</h3>
+                <div className='radio-input-container'>
+                <input
+                  type="radio"
+                  value="male"
+                  id="male"
+                  onChange={handleChange}
+                  name="gender"
+                  className='radio'
+                  />
+                <label for="male">Male</label>
+                  </div>
+                <div className='radio-input-container'>
 
-              <input
-                type="radio"
-                value="female"
-                id="female"
-                onChange={handleChange}
-                name="gender"
-              />
-              <label for="female">Female</label>
+                <input
+                  type="radio"
+                  value="female"
+                  id="female"
+                  onChange={handleChange}
+                  name="gender"
+                  className='radio'
+                  />
+                <label for="female">Female</label>
+                  </div>
+              </div>
               <input
                 placeholder="Email"
                 required
