@@ -20,14 +20,14 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/register">
+        <Route exact path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route exact path="/register">
           {user ? <Redirect to="/" /> : <Register />}
         </Route>
-        <Route path="/profile/:username">
+        <Route exact path="/profile/:username">
           <Profile />
         </Route>
-        <Route path="/createprofile">
+        <Route exact path="/createprofile/:id" >
           <ProfileCreate />
         </Route>
       </Switch>

@@ -385,6 +385,7 @@ input::placeholder {
   box-sizing: border-box;
   border: 1px solid #fff;
   color: #abc9db;
+  cursor: pointer;
   width: 250px;
   height: 56px;
   margin: auto;

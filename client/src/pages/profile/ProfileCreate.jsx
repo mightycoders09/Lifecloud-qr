@@ -1,14 +1,18 @@
 import axios from 'axios';
-import { useRef, useState, useParams, useEffect } from 'react';
+import { useRef, useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Topbar from '../../components/topbar/Topbar';
 import profiles from './dummy-profiles.json';
 import './profile.css';
-
+import { AuthContext } from '../../context/AuthContext';
+import { useParams } from 'react-router';
 export default function ProfileCreate() {
+  const { user } = useContext(AuthContext);
+  const id = useParams().id;
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
+  console.log(imgData, 'imgData')
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
       console.log('picture: ', e.target.files);
@@ -37,7 +41,8 @@ export default function ProfileCreate() {
   const [inputList, setInputList] = useState([
     { axisTitle: '', axisDate: '', axisDescription: '' },
   ]);
-  console.log(inputList,'')
+  console.log(picture, 'pic')
+  console.log(image, 'image')
   const [selectedGender, setSelectedGender] = useState('');
   const firstName = useRef();
   const lastName = useRef();
@@ -79,35 +84,63 @@ export default function ProfileCreate() {
   const handleAddClick = () => {
     setInputList([
       ...inputList,
-      { axisTitle: '', axisDate: '', axisDescription },
+      { axisTitle: '', axisDate: '', axisDescription: '' },
     ]);
   };
-
   const handleClick = async (e) => {
+    console.log(id,'id')
     e.preventDefault();
-      const wallInformation = {
-        firstName: firstName.current.value,
-        lastName: lastName.current.value,
-        companyName: companyName.current.value,
-        birthDate: birthDate.current.value,
-        deathDate: deathDate.current.value,
-        gender: gender.current.value,
-        phone: phone.current.value,
-        email: email.current.value,
-        password: password.current.value,
-        wazeLocation: wazeLocation.current.value,
-        googleLocation: googleLocation.current.value,
-        description: description.current.value,
-        axisDescription: axisDescription.current.value,
-        axisTitle: axisTitle.current.value,
-        axisDate: axisDate.current.value,
-      };
-      try {
-        console.log(wallInformation, 'wallInformation')
-        // await axios.post('/auth/register', wallInformation);
-        // history.push('/login');
-      } catch (err) {
-        console.log(err);
+    const wallInformation = {
+      originalUser: id,
+      profileImg: picture,
+      wallImg: image,
+      firstName: firstName.current.value,
+      lastName: lastName.current.value,
+      birthDate: birthDate.current.value,
+      deathDate: deathDate.current.value,
+      gender: selectedGender,
+      wazeLocation: wazeLocation.current.value,
+      googleLocation: googleLocation.current.value,
+      description: description.current.value,
+      lifeAxis: inputList
+      // gallery: picture,
+    };
+
+    try {
+      const formdata = new FormData()
+      formdata.append('profileImg', picture)
+      formdata.append('wallImg', image)
+      formdata.append('firstName', wallInformation.firstName)
+      formdata.append('originalUser', wallInformation.originalUser)
+      formdata.append('lastName', wallInformation.lastName)
+      formdata.append('birthDate', wallInformation.birthDate)
+      formdata.append('deathDate', wallInformation.deathDate)
+      formdata.append('gender', wallInformation.gender)
+      formdata.append('wazeLocation', wallInformation.wazeLocation)
+      formdata.append('googleLocation', wallInformation.googleLocation)
+      formdata.append('description', wallInformation.description)
+      formdata.append('lifeAxis', JSON.stringify(wallInformation.lifeAxis))
+      // const config = {
+      //   headers: {
+      //     'content-type': 'multipart/form-data'
+      //   }
+      // }
+      fetch("/api/profile/createProfile", {
+        method: "POST",
+        body: formdata
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(res => {
+          console.log(res);
+
+        });
+      // let res = await axios.post('api/profile/createProfile', formdata);
+      // console.log('res', res)
+      // history.push('/login');
+    } catch (err) {
+      console.log(err);
 
     }
   };
@@ -145,6 +178,7 @@ export default function ProfileCreate() {
               <input
                 className="custom-file-input"
                 type="file"
+                name='profileImg'
                 onChange={onChangePicture}
               />
             </div>
@@ -162,6 +196,7 @@ export default function ProfileCreate() {
                 className="custom-file-input"
                 type="file"
                 onChange={onChangeCover}
+                name='profileImg'
               />
             </div>
           </div>
@@ -188,10 +223,12 @@ export default function ProfileCreate() {
                     required
                     ref={birthDate}
                     className="nameInput"
+                    type='date'
                   />
                   <input
                     placeholder="* Death Date"
                     required
+                    type='date'
                     ref={deathDate}
                     className="nameInput"
                   />
@@ -260,6 +297,7 @@ export default function ProfileCreate() {
                         <input
                           id="profilePic"
                           type="file"
+                          name='profileImg'
                           onChange={onChangePicture}
                         />
                       </div>

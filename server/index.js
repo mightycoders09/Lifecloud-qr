@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const { UserRouter } = require('./Routes/users')
 const { AuthRouter } = require('./Routes/auth')
 const { PostRouter } = require('./Routes/posts')
+const { ProfileRouter, uploadpic } = require('./Routes/profile')
 var cors = require('cors')
 dotenv.config();
 mongoose.connect(
@@ -26,6 +27,7 @@ app.use(bodyParser.json());
 app.use('/api/users', UserRouter);
 app.use('/api/auth', AuthRouter);
 app.use('/api/posts', PostRouter);
+app.use('/api/profile', ProfileRouter);
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
 

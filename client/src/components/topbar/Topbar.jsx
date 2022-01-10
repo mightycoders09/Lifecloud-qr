@@ -16,7 +16,7 @@ const Topbar = () => {
   const history = useHistory();
   const { searchText, setSearchText } = useSearch();
   const { user } = useContext(AuthContext);
- 
+  const userName = `${user.firstName} ${user.lastName}`
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -31,7 +31,7 @@ const Topbar = () => {
             type="text"
             placeholder="Search for Friends"
             className="SearchInput"
-            onChange={(e)=>setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
           />
         </div>
       </div>
@@ -43,27 +43,33 @@ const Topbar = () => {
           >
             <span className="topbarLink">Homepage</span>
           </Link>
-          <Link
-            to={`/profile/${user}`}
+          {user ? <Link
+            to={`/profile/${userName}`}
             style={{ textDecoration: 'none', color: 'white' }}
           >
             <span className="topbarLink">Timeline</span>
-          </Link>
+          </Link> : <Link
+            to={`/`}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <span className="topbarLink">Timeline</span>
+          </Link>}
+
         </div>
         <div className="topbarIcons">
-         
-          
-            <div
-              className="topbarIconItem"
-              onClick={() => {
-                localStorage.clear();
-                history.push("/")
-                window.location.reload();
-              }}
-            >
-              <ExitToApp />
-            </div>
-         
+
+
+          <div
+            className="topbarIconItem"
+            onClick={() => {
+              localStorage.clear();
+              history.push("/")
+              window.location.reload();
+            }}
+          >
+            <ExitToApp />
+          </div>
+
           {/* <div className="topbarIconItem">
             <Chat />
             <span className="tobparIconBadge">1</span>
@@ -74,7 +80,7 @@ const Topbar = () => {
           </div> */}
         </div>
       </div>
-      <Link style={{ marginRight: '15px' }} to={`/profile/${user.username}`}>
+      {user ?       <Link style={{ marginRight: '15px' }} to={`/profile/${user.username}`}>
         <img
           src={
             user.profilePicture
@@ -84,7 +90,18 @@ const Topbar = () => {
           alt=""
           className="topbarImg"
         />
-      </Link>
+      </Link>:       <Link style={{ marginRight: '15px' }} to={`/`}>
+        <img
+          src={
+            user.profilePicture
+              ? user.profilePicture
+              : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
+          }
+          alt=""
+          className="topbarImg"
+        />
+      </Link>}
+
     </div>
   );
 };

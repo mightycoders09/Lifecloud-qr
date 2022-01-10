@@ -13,6 +13,7 @@ import {AuthContext} from '../../context/AuthContext'
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const LoggedUser = useContext(AuthContext);
+  console.log(LoggedUser)
   const [user, setUser] = useState({});
   const username = useParams().username;
   const random =
@@ -57,7 +58,7 @@ export default function Profile() {
                   </ul>
                 </div>
               ))}
-              <a href={`/createprofile`}>
+              <Link to={`/createprofile/${LoggedUser.user._id}`}>
                 <div className="profile-container">
                   <img
                     className="profile-image"
@@ -66,7 +67,7 @@ export default function Profile() {
                   />
                   <div className="profile-name">Make a new profile</div>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
           {/* <div className="profileRightTop">
