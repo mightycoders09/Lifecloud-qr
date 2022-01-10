@@ -1,3 +1,4 @@
+@import '../../../node_modules/video-react/dist/video-react.css';
 .homeContainer {
   display: flex;
 }
@@ -84,4 +85,164 @@
 .popups-container {
   display: flex;
   justify-content: center;
+}
+.img-300 {
+  width: 300px;
+  height: 300px;
+}
+.imgs-container {
+  display: flex;
+  justify-content: space-evenly;
+  color: #6097bf;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.modal {
+  font-size: 12px;
+  background-color: #fff;
+  border: 1px solid #d7d7d7;
+  color: #6097bf;
+  width: 50vw;
+}
+.modal > .header {
+  width: 98.5%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+  font-size: 15px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .actions > .button {
+  font-size: 12px;
+  border-radius: 15px;
+  background-color: #fff;
+  border: 1px solid #d7d7d7;
+  color: #6097bf;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+.video-react-button {
+  display: none !important;
+}
+.slick-slider {
+  width: 75%;
+}
+.slick-next {
+  right: 0;
+}
+.slick-next::before {
+  font-size: 20px;
+  line-height: 1;
+  color: #dcecf4;
+}
+.slick-prev {
+  left: 0;
+}
+.slick-prev::before {
+  font-size: 20px;
+  line-height: 1;
+  color: #dcecf4;
+}
+.testimonials {
+  text-align: center;
+  color: #6097bf;
+  display: flex;
+  text-align: center;
+  color: #6097bf;
+  height: 300px;
+  justify-content: center;
+  width: 99vw;
+  align-items: center;
+  font-size: 21px;
+}
+.example-profile {
+  text-align: center;
+  background: #dcecf4;
+  padding-top: 7.5%;
+  padding-bottom: 7.5%;
+}
+.example-profile-image {
+  width: 85vw;
+  height: 85vh;
+  border-radius: 10px;
+}
+.profile-div {
+  background: #abc9db;
+  height: 10vh;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+.creation-btn {
+  text-decoration: none;
+  font-size: 25px;
+}
+.plans-container {
+  display: flex;
+}
+.plan-container {
+  width: 376px;
+  height: 500px;
+  border: 2px solid #dcecf4;
+  box-sizing: border-box;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 1rem;
+  text-align: center;
+  padding-top: 3rem;
+}
+.plans-title {
+  color: #6097bf;
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+.plan-title {
+  margin-top: 3rem;
+  color: #6097bf;
+  text-align: center;
+}
+.plan-description {
+  margin-top: 30%;
+  font-size: 20px;
+  color: #6097bf;
+}
+.link-plans {
+  display: flex;
+  width: 774px;
+  height: 60px;
+  background: #6097bf;
+  border-radius: 30px;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  cursor: pointer;
+  color: #fff;
+}
+.plans-section a {
+  cursor: pointer;
 }
