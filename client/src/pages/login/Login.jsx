@@ -70,7 +70,7 @@ export default function Login() {
                   <CircularProgress color="white" size="20px" />
                 ) : (
                   <Link
-                    to="/"
+                    to="/register"
                     style={{ textDecoration: 'none' }}
                     className="loginRegisterButton"
                   >
@@ -84,7 +84,7 @@ export default function Login() {
                   <CircularProgress color="white" size="20px" />
                 ) : (
                   <Link
-                    to="/"
+                    to="/register"
                     style={{ textDecoration: 'none' }}
                     className="loginRegisterButton"
                   >

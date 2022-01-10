@@ -1,7 +1,17 @@
 [
     {
-        "id": "1",
-        "name": "tzahi dali",
+        "id": 1,
+        "name": "Zahi dali",
+        "birthDate": "10.11.1975",
+        "deathDate": "2.12.2010",
+        "city": "Herzliya",
+        "memorialDate": "1.1.2010",
+        "memorialLocation": "Herzliya Military Cemetary",
+        "wazeLink": "",
+        "whatsappLink": "",
+        "zoomLink": "",
+        "profileImg": "https://golani.gal-ed.co.il/view_files/Nofel_Pic/027314/NP_027314_0.jpg",
+        "coverImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6FLIoaO6nN82p7wxKO87u325dXAmj4-Q-uQ&usqp=CAU",
         "img": "https://www.google.co.il/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjNy7KHwK7UAhWGz6QKHXKlC_QQjRwIBw&url=http%3A%2F%2Fwww.tamir.co.il%2F&psig=AFQjCNG-_Z_Z_X_X_X_X_X_X_X_X_X_X_X&ust=1479794901990899",
         "admins": [
             "1"

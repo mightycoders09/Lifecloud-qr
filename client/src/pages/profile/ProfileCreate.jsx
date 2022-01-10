@@ -12,7 +12,7 @@ export default function ProfileCreate() {
   const id = useParams().id;
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
-  console.log(imgData, 'imgData')
+  console.log(imgData, 'imgData');
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
       console.log('picture: ', e.target.files);
@@ -41,8 +41,8 @@ export default function ProfileCreate() {
   const [inputList, setInputList] = useState([
     { axisTitle: '', axisDate: '', axisDescription: '' },
   ]);
-  console.log(picture, 'pic')
-  console.log(image, 'image')
+  console.log(picture, 'pic');
+  console.log(image, 'image');
   const [selectedGender, setSelectedGender] = useState('');
   const firstName = useRef();
   const lastName = useRef();
@@ -64,7 +64,7 @@ export default function ProfileCreate() {
   const handleChange = (e) => {
     setSelectedGender(e.target.value);
   };
-  console.log(gender, 'gender')
+  console.log(gender, 'gender');
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -88,7 +88,7 @@ export default function ProfileCreate() {
     ]);
   };
   const handleClick = async (e) => {
-    console.log(id,'id')
+    console.log(id, 'id');
     e.preventDefault();
     const wallInformation = {
       originalUser: id,
@@ -102,46 +102,44 @@ export default function ProfileCreate() {
       wazeLocation: wazeLocation.current.value,
       googleLocation: googleLocation.current.value,
       description: description.current.value,
-      lifeAxis: inputList
+      lifeAxis: inputList,
       // gallery: picture,
     };
 
     try {
-      const formdata = new FormData()
-      formdata.append('profileImg', picture)
-      formdata.append('wallImg', image)
-      formdata.append('firstName', wallInformation.firstName)
-      formdata.append('originalUser', wallInformation.originalUser)
-      formdata.append('lastName', wallInformation.lastName)
-      formdata.append('birthDate', wallInformation.birthDate)
-      formdata.append('deathDate', wallInformation.deathDate)
-      formdata.append('gender', wallInformation.gender)
-      formdata.append('wazeLocation', wallInformation.wazeLocation)
-      formdata.append('googleLocation', wallInformation.googleLocation)
-      formdata.append('description', wallInformation.description)
-      formdata.append('lifeAxis', JSON.stringify(wallInformation.lifeAxis))
+      const formdata = new FormData();
+      formdata.append('profileImg', picture);
+      formdata.append('wallImg', image);
+      formdata.append('firstName', wallInformation.firstName);
+      formdata.append('originalUser', wallInformation.originalUser);
+      formdata.append('lastName', wallInformation.lastName);
+      formdata.append('birthDate', wallInformation.birthDate);
+      formdata.append('deathDate', wallInformation.deathDate);
+      formdata.append('gender', wallInformation.gender);
+      formdata.append('wazeLocation', wallInformation.wazeLocation);
+      formdata.append('googleLocation', wallInformation.googleLocation);
+      formdata.append('description', wallInformation.description);
+      formdata.append('lifeAxis', JSON.stringify(wallInformation.lifeAxis));
       // const config = {
       //   headers: {
       //     'content-type': 'multipart/form-data'
       //   }
       // }
-      fetch("/api/profile/createProfile", {
-        method: "POST",
-        body: formdata
+      fetch('/api/profile/createProfile', {
+        method: 'POST',
+        body: formdata,
       })
-        .then(res => {
+        .then((res) => {
           return res.json();
         })
-        .then(res => {
+        .then((res) => {
           console.log(res);
-
         });
       // let res = await axios.post('api/profile/createProfile', formdata);
       // console.log('res', res)
       // history.push('/login');
     } catch (err) {
       console.log(err);
-
     }
   };
 
@@ -178,7 +176,7 @@ export default function ProfileCreate() {
               <input
                 className="custom-file-input"
                 type="file"
-                name='profileImg'
+                name="profileImg"
                 onChange={onChangePicture}
               />
             </div>
@@ -196,7 +194,7 @@ export default function ProfileCreate() {
                 className="custom-file-input"
                 type="file"
                 onChange={onChangeCover}
-                name='profileImg'
+                name="profileImg"
               />
             </div>
           </div>
@@ -223,12 +221,12 @@ export default function ProfileCreate() {
                     required
                     ref={birthDate}
                     className="nameInput"
-                    type='date'
+                    type="date"
                   />
                   <input
                     placeholder="* Death Date"
                     required
-                    type='date'
+                    type="date"
                     ref={deathDate}
                     className="nameInput"
                   />
@@ -246,8 +244,9 @@ export default function ProfileCreate() {
                     />
                     <label
                       for="male"
-                      className={`${selectedGender === 'male' && 'active'
-                        } input-label`}
+                      className={`${
+                        selectedGender === 'male' && 'active'
+                      } input-label`}
                     >
                       Male
                     </label>
@@ -263,8 +262,9 @@ export default function ProfileCreate() {
                     />
                     <label
                       for="female"
-                      className={`${selectedGender === 'female' && 'active'
-                        } input-label`}
+                      className={`${
+                        selectedGender === 'female' && 'active'
+                      } input-label`}
                     >
                       Female
                     </label>
@@ -297,7 +297,7 @@ export default function ProfileCreate() {
                         <input
                           id="profilePic"
                           type="file"
-                          name='profileImg'
+                          name="profileImg"
                           onChange={onChangePicture}
                         />
                       </div>

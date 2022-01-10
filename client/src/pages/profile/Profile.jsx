@@ -8,12 +8,12 @@ import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightbar/Rightbar';
 import profiles from './dummy-profiles.json';
 import { Link } from 'react-router-dom';
-import {AuthContext} from '../../context/AuthContext'
+import { AuthContext } from '../../context/AuthContext';
 
 export default function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const LoggedUser = useContext(AuthContext);
-  console.log(LoggedUser)
+  console.log(LoggedUser);
   const [user, setUser] = useState({});
   const username = useParams().username;
   const random =
@@ -40,23 +40,28 @@ export default function Profile() {
             <h1 className="profiles-title">My profiles</h1>
             <div className="profiles">
               {profiles.map((profile) => (
-                <div className="profile-container" key={profile._id}>
-                  <img
-                    className="profile-image"
-                    src={
-                      profile.profilePicture
-                        ? profile.profilePicture
-                        : `https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png`
-                    }
-                    alt=""
-                  />
-                  <div className="profile-name">{profile.name}</div>
-                  <ul className="admins-list">
-                    {profile.admins.map((admin) => (
-                      <li key={admin._id}>{admin}</li>
-                    ))}
-                  </ul>
-                </div>
+                <Link
+                  to={`/profileDetails/${profile.id}`}
+                  state={{ id: profile.id }}
+                >
+                  <div className="profile-container" key={profile._id}>
+                    <img
+                      className="profile-image"
+                      src={
+                        profile.profilePicture
+                          ? profile.profilePicture
+                          : `https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png`
+                      }
+                      alt=""
+                    />
+                    <div className="profile-name">{profile.name}</div>
+                    <ul className="admins-list">
+                      {profile.admins.map((admin) => (
+                        <li key={admin._id}>{admin}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </Link>
               ))}
               <Link to={`/createprofile/${LoggedUser.user._id}`}>
                 <div className="profile-container">

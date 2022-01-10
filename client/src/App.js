@@ -1,6 +1,7 @@
 import Home from './pages/home/Home';
 import Profile from './pages/profile/Profile';
 import ProfileCreate from './pages/profile/ProfileCreate';
+import ProfileDetails from './pages/profile/ProfileDetails';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import { AuthContext } from './context/AuthContext';
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/createprofile/:id" >
           <ProfileCreate />
+        </Route>
+        <Route exact path="/profiledetails/:id" >
+          <ProfileDetails />
         </Route>
       </Switch>
     </Router>
