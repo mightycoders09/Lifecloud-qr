@@ -47,6 +47,7 @@
   flex-direction: column;
 }
 .searchbar-2 {
+  background: #fff;
   width: 25%;
   display: flex;
 }

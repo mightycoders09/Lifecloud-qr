@@ -69,7 +69,7 @@ export default function Register() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">הרשמה</h3>
+          <h3 className="loginLogo">Register</h3>
         </div>
         <div className="loginRight">
           <div className="RegBox">
