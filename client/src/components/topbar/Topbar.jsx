@@ -16,11 +16,11 @@ const Topbar = () => {
   const history = useHistory();
   const { searchText, setSearchText } = useSearch();
   const { user } = useContext(AuthContext);
-  const userName = `${user.firstName} ${user.lastName}`
+  const userName = `${user.firstName} ${user.lastName}`;
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/" style={{ textDecoration: 'none', color: '#6097BF' }}>
           <span className="logo">LifeCloud</span>
         </Link>
       </div>
@@ -38,43 +38,47 @@ const Topbar = () => {
       <div className="topbarRight">
         <div className="topbarLinks">
           <Link
-            style={{ textDecoration: 'none', color: 'white', padding: '10px' }}
+            style={{
+              textDecoration: 'none',
+              color: '#6097BF',
+              padding: '10px',
+            }}
             to="/"
           >
             <span className="topbarLink">Homepage</span>
           </Link>
           {user ? <Link
             to={`/userprofiles/${user._id}`}
-            style={{ textDecoration: 'none', color: 'white' }}
+            style={{ textDecoration: 'none', color:'blue' }}
           >
             <span className="topbarLink">user page</span>
           </Link> : <Link
             to={`/`}
-            style={{ textDecoration: 'none', color: 'white' }}
+            style={{ textDecoration: 'none', color: 'blue' }}
           >
             <span className="topbarLink">user page</span>
           </Link>}
-          {user ? <Link
-            to={`/profile/${userName}`}
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <span className="topbarLink">Timeline</span>
-          </Link> : <Link
-            to={`/`}
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <span className="topbarLink">Timeline</span>
-          </Link>}
+      
 
+          {user ? (
+            <Link
+              to={`/profile/${userName}`}
+              style={{ textDecoration: 'none', color: '#6097BF' }}
+            >
+              <span className="topbarLink">Timeline</span>
+            </Link>
+          ) : (
+            <Link to={`/`} style={{ textDecoration: 'none', color: '#6097BF' }}>
+              <span className="topbarLink">Timeline</span>
+            </Link>
+          )}
         </div>
         <div className="topbarIcons">
-
-
           <div
             className="topbarIconItem"
             onClick={() => {
               localStorage.clear();
-              history.push("/")
+              history.push('/');
               window.location.reload();
             }}
           >
@@ -91,28 +95,31 @@ const Topbar = () => {
           </div> */}
         </div>
       </div>
-      {user ? <Link style={{ marginRight: '15px' }} to={`/profile/${user.username}`}>
-        <img
-          src={
-            user.profilePicture
-              ? user.profilePicture
-              : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
-          }
-          alt=""
-          className="topbarImg"
-        />
-      </Link> : <Link style={{ marginRight: '15px' }} to={`/`}>
-        <img
-          src={
-            user.profilePicture
-              ? user.profilePicture
-              : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
-          }
-          alt=""
-          className="topbarImg"
-        />
-      </Link>}
-
+      {user ? (
+        <Link style={{ marginRight: '15px' }} to={`/profile/${user.username}`}>
+          <img
+            src={
+              user.profilePicture
+                ? user.profilePicture
+                : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
+            }
+            alt=""
+            className="topbarImg"
+          />
+        </Link>
+      ) : (
+        <Link style={{ marginRight: '15px' }} to={`/`}>
+          <img
+            src={
+              user.profilePicture
+                ? user.profilePicture
+                : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
+            }
+            alt=""
+            className="topbarImg"
+          />
+        </Link>
+      )}
     </div>
   );
 };

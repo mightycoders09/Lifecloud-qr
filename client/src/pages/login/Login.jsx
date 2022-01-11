@@ -21,7 +21,7 @@ export default function Login() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <span className="loginDesc">התחברות</span>
+          <span className="loginDesc">Login</span>
         </div>
         <div className="loginRight">
           <div className="loginBox">
