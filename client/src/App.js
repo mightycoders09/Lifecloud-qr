@@ -4,7 +4,7 @@ import ProfileCreate from './pages/profile/ProfileCreate';
 import ProfileDetails from './pages/profile/ProfileDetails';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
-import {UserAndprofiles} from './pages/userpage/user-and-profiles'
+import {UserAndprofiles} from './pages/userpage/user-and-profiles';
 import { AuthContext } from './context/AuthContext';
 import {
   BrowserRouter as Router,
