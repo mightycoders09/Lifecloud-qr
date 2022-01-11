@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import instagram from '../../assets/instagram.png';
 import Footer from '../../components/footer/Footer';
 export const UserAndprofiles = () => {
   const LoggedUser = useContext(AuthContext);
-  const [data, setData] = React.useState([]);
+  const [data, setData] = useState([]);
   const id = useParams().id;
   useEffect(() => {
     fetchuserprofiles();
@@ -21,7 +21,6 @@ export const UserAndprofiles = () => {
 
     setData(res.data);
   };
-  console.log(LoggedUser);
   return (
     <>
       <Topbar />
@@ -43,7 +42,7 @@ export const UserAndprofiles = () => {
                 data.map((userProfiles, i) => {
                   return (
                     <Link
-                      to={`/profileDetails/${userProfiles._id}`}
+                      to={`/profiledetails/${userProfiles._id}`}
                       state={{ id: userProfiles._id }}
                       key={i}
                     >
