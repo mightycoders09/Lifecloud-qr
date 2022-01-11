@@ -44,6 +44,17 @@ const Topbar = () => {
             <span className="topbarLink">Homepage</span>
           </Link>
           {user ? <Link
+            to={`/userprofiles/${user._id}`}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <span className="topbarLink">user page</span>
+          </Link> : <Link
+            to={`/`}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <span className="topbarLink">user page</span>
+          </Link>}
+          {user ? <Link
             to={`/profile/${userName}`}
             style={{ textDecoration: 'none', color: 'white' }}
           >
@@ -80,7 +91,7 @@ const Topbar = () => {
           </div> */}
         </div>
       </div>
-      {user ?       <Link style={{ marginRight: '15px' }} to={`/profile/${user.username}`}>
+      {user ? <Link style={{ marginRight: '15px' }} to={`/profile/${user.username}`}>
         <img
           src={
             user.profilePicture
@@ -90,7 +101,7 @@ const Topbar = () => {
           alt=""
           className="topbarImg"
         />
-      </Link>:       <Link style={{ marginRight: '15px' }} to={`/`}>
+      </Link> : <Link style={{ marginRight: '15px' }} to={`/`}>
         <img
           src={
             user.profilePicture
