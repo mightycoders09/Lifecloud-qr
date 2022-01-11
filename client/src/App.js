@@ -1,5 +1,4 @@
 import Home from './pages/home/Home';
-import Profile from './pages/profile/Profile';
 import ProfileCreate from './pages/profile/ProfileCreate';
 import ProfileDetails from './pages/profile/ProfileDetails';
 import Register from './pages/register/Register';
@@ -25,9 +24,6 @@ function App() {
         <Route exact path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route exact path="/register">
           {user ? <Redirect to="/" /> : <Register />}
-        </Route>
-        <Route exact path="/profile/:username">
-          <Profile />
         </Route>
         <Route exact path="/createprofile/:id" >
           <ProfileCreate />

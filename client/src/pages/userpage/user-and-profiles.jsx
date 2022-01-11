@@ -5,7 +5,10 @@ import axios from 'axios';
 import './userandprofiles.css';
 import Topbar from '../../components/topbar/Topbar';
 import { AuthContext } from '../../context/AuthContext';
-
+import Lock from '../../assets/Lock.png';
+import facebook from '../../assets/facebook.png';
+import instagram from '../../assets/instagram.png';
+import Footer from '../../components/footer/Footer';
 export const UserAndprofiles = () => {
   const LoggedUser = useContext(AuthContext);
   const [data, setData] = React.useState([]);
@@ -33,7 +36,7 @@ export const UserAndprofiles = () => {
             </p>
           </div>
           <div className="profiles-container">
-            <h1 className="profiles-title">My profiles</h1>
+            <h1 className="profile-title">My profiles</h1>
             <div className="profiles">
               {data &&
                 data.length > 0 &&
@@ -77,22 +80,40 @@ export const UserAndprofiles = () => {
               </Link>
             </div>
           </div>
-          <div className='settings-container'>
-            <h1 className='settings-title'>User settings</h1>
-            <div className='btns-container'>
-              <div className="big-button">privacy</div>
+          <div className="settings-container">
+            <h1 className="profile-title">User settings</h1>
+            <div className="btns-container">
+              <div className="big-button">
+                privacy{' '}
+                <img
+                  src={Lock}
+                  alt=""
+                  style={{ height: '15px', width: '15px' }}
+                ></img>
+              </div>
               <div className="big-button">Payments</div>
               <div className="big-button">Manage plan</div>
             </div>
             <div>
-              <h3 className='settings-subtitle'>Plan type: </h3>
-              <h3 className='settings-subtitle'>Plan's end date: </h3>
+              <h3 className="settings-subtitle">Plan type: </h3>
+              <h3 className="settings-subtitle">Plan's end date: </h3>
             </div>
             <div className="logout-btn">Log out</div>
           </div>
+          <div className="white-footer">
+            <h1 className="profile-title">Follow us</h1>
+            <div className="social-media-icons">
+              <a href="https://www.facebook.com/">
+                <img src={facebook} alt=""></img>
+              </a>
+              <a href="https://www.instagram.com/">
+                <img src={instagram} alt=""></img>
+              </a>
+            </div>
+          </div>
         </div>
-        <div></div>
       </div>
+      <Footer />
     </>
   );
 };

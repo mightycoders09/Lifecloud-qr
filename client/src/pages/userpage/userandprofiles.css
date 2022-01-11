@@ -447,6 +447,7 @@ a {
   margin-left: 1rem;
   cursor: pointer;
   font-size: 1.5rem;
+  justify-content: space-evenly;
 }
 .settings-container {
   color: #6097bf;
@@ -463,4 +464,28 @@ a {
 .settings-subtitle {
   font-size: 21px;
   font-weight: 400;
+}
+.logout-btn {
+  width: 115px;
+  margin-top: 2rem;
+  height: 35px;
+  background: #6097bf;
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.profile-title {
+  font-size: 41px;
+  margin-top: 2rem;
+}
+.white-footer {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color: #6097bf;
 }
