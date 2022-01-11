@@ -322,7 +322,7 @@ export default function ProfileCreate() {
                   <h1 style={{ textAlign: 'center' }}>Life Axis</h1>
                   {inputList.map((x, i) => {
                     return (
-                      <div className="box" key={x}>
+                      <div className="box" key={i}>
                         <div className="inner-box">
                           <input
                             name="axisTitle"

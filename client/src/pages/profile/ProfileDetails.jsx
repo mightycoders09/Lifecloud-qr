@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios'
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
 import profile from './dummy-profiles.json';
 import waze from '../../assets/waze.png';
 import wts from '../../assets/wts.png';
