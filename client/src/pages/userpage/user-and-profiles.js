@@ -1,18 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useContext } from 'react'
 import { useParams } from 'react-router';
+import {Link} from 'react-router-dom'
 import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
+import {fetchuserprofiles} from '../../apiCalls'
 export const UserAndprofiles = () => {
-    const [data, setData] = React.useState([])
+    // const [data, setData] = React.useState([])
+    
+  const { profiledata, dispatch } = useContext(AuthContext);
     const id = useParams().id;
     useEffect(() => {
-        fetchuserprofiles()
+        fetchuserprofiles(id,dispatch)
     }, [])
-    const fetchuserprofiles = async () => {
-        const res = await axios.get(`/api/profile/getallprofileofSingleUser/${id}`);
+    // const fetchuserprofiles = async () => {
+    //     const res = await axios.get(`/api/profile/getallprofileofSingleUser/${id}`);
 
-        setData(res.data)
-    }
-    console.log(data)
+    //     setData(res.data)
+    // }
+    console.log(profiledata)
     return <>
         <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
             <div>
@@ -27,8 +32,9 @@ export const UserAndprofiles = () => {
 
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',marginTop: '20px' }}>
-            {data && data.length > 0 && data.map(((userProfiles, i) => {
-                return <div key={i} >
+            {profiledata && profiledata.length > 0 && profiledata.map(((userProfiles, i) => {
+                
+                return <Link to={`/profiledetails/${userProfiles._id}`}> <div key={i} >
                     <p>User:{userProfiles.firstName}</p>
                     profile Image
                     <div>
@@ -40,7 +46,7 @@ export const UserAndprofiles = () => {
                     </div>
                     <p>gender: {userProfiles.gender}</p>
                     <p>googleLocation: {userProfiles.googleLocation}</p>
-                </div>
+                </div></Link>
             }))}
         </div>
     </>

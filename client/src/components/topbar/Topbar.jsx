@@ -16,7 +16,7 @@ const Topbar = () => {
   const history = useHistory();
   const { searchText, setSearchText } = useSearch();
   const { user } = useContext(AuthContext);
-  const userName = `${user.firstName} ${user.lastName}`;
+  const userName = `${user ? user.firstName : ''} ${user ? user.lastName : ''}`;
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">

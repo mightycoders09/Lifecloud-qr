@@ -3,6 +3,7 @@ import AuthReducer from './AuthReducer';
 
 const INITIAL_STATE = {
   user: '',
+  profiledata:[],
   isFetching: false,
   error: false,
 };
@@ -20,6 +21,7 @@ console.log(state)
     <AuthContext.Provider
       value={{
         user: state.user,
+        profiledata: state.profiledata,
         isFetching: state.isFetching,
         error: state.error,
         dispatch,
