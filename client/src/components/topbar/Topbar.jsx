@@ -59,7 +59,7 @@ const Topbar = () => {
             <span className="topbarLink">user page</span>
           </Link>}
       
-
+{/* 
           {user ? (
             <Link
               to={`/profile/${userName}`}
@@ -71,7 +71,7 @@ const Topbar = () => {
             <Link to={`/`} style={{ textDecoration: 'none', color: '#6097BF' }}>
               <span className="topbarLink">Timeline</span>
             </Link>
-          )}
+          )} */}
         </div>
         <div className="topbarIcons">
           <div

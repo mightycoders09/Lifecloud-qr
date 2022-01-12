@@ -2,11 +2,13 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import classes from './userProfile.module.css'
 import './userandprofiles.css';
 import Topbar from '../../components/topbar/Topbar';
 import { AuthContext } from '../../context/AuthContext';
 import Lock from '../../assets/Lock.png';
 import facebook from '../../assets/facebook.png';
+import ProgressBar from '../../components/progressbar/progressBar'
 import instagram from '../../assets/instagram.png';
 import Footer from '../../components/footer/Footer';
 export const UserAndprofiles = () => {
@@ -18,7 +20,6 @@ export const UserAndprofiles = () => {
   }, []);
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getallprofileofSingleUser/${id}`);
-
     setData(res.data);
   };
   return (
@@ -28,7 +29,7 @@ export const UserAndprofiles = () => {
         <div className="profileRight">
           <div className="user-main">
             <h1 className="user-name">Hello {LoggedUser.user.firstName}!</h1>
-            <p className="user-description">
+            <p className={classes.userDescription}>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s,{' '}
@@ -38,21 +39,20 @@ export const UserAndprofiles = () => {
             <h1 className="profile-title">My profiles</h1>
             <div className="profiles">
               {data &&
-                data.length > 0 &&
+                data.length > 0 ?
                 data.map((userProfiles, i) => {
                   return (
                     <Link
                       to={`/profiledetails/${userProfiles._id}`}
                       state={{ id: userProfiles._id }}
                       key={i}
+                      style={{ cursor: 'hover' }}
                     >
                       <div className="profile-container" key={i}>
                         <img
                           className="profile-image"
                           src={
-                            userProfiles.profilePicture
-                              ? userProfiles.profilePicture
-                              : `https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png`
+                            `http://localhost:8800/${userProfiles.profileImg}`
                           }
                           alt=""
                         />
@@ -68,7 +68,10 @@ export const UserAndprofiles = () => {
                       </div>
                     </Link>
                   );
-                })}
+                }) : <div style={{
+                  paddingTop: '8%',
+                  paddingLeft: '29%',
+                }}> <ProgressBar /></div>}
               <Link to={`/createprofile/${LoggedUser.user._id}`}>
                 <div className="profile-container">
                   <div className="profile-image create-profile-container">
