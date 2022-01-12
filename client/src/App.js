@@ -5,6 +5,7 @@ import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import {UserAndprofiles} from './pages/userpage/user-and-profile';
 import { AuthContext } from './context/AuthContext';
+import  ProfileEdit  from './pages/profile/edit-proile';
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route exact path="/userprofiles/:id" >
           <UserAndprofiles />
+        </Route>
+        <Route exact path="/editprofiles/:id" >
+          <ProfileEdit />
         </Route>
       </Switch>
     </Router>

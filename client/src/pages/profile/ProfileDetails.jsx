@@ -9,6 +9,7 @@ import google from '../../assets/google.png';
 import map from '../../assets/map.png';
 import share from '../../assets/share.png';
 import heart from '../../assets/heart.png';
+import { Link } from 'react-router-dom'
 import './profiledetails.css';
 import TopBar from '../../components/topbar/Topbar';
 import ProgressBar from '../../components/progressbar/progressBar'
@@ -49,7 +50,7 @@ export default function Profile() {
         </div>
         <div className="btns-container">
           <div>
-            <span className="small-btn">Update me</span>
+            <Link to={`/editprofiles/${id}`}><span className="small-btn">Update me</span></Link>
             <span className="small-btn">+ Add Friend</span>
             <span className="small-btn">Friends list</span>
           </div>

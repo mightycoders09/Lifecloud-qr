@@ -64,7 +64,7 @@ export default function ProfileCreate() {
   const handleChange = (e) => {
     setSelectedGender(e.target.value);
   };
-  console.log(gender, 'gender');
+ 
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -87,6 +87,7 @@ export default function ProfileCreate() {
       { axisTitle: '', axisDate: '', axisDescription: '' },
     ]);
   };
+  
   const handleClick = async (e) => {
     console.log(id, 'id');
     e.preventDefault();
@@ -120,11 +121,7 @@ export default function ProfileCreate() {
       formdata.append('googleLocation', wallInformation.googleLocation);
       formdata.append('description', wallInformation.description);
       formdata.append('lifeAxis', JSON.stringify(wallInformation.lifeAxis));
-      // const config = {
-      //   headers: {
-      //     'content-type': 'multipart/form-data'
-      //   }
-      // }
+     
       fetch('/api/profile/createProfile', {
         method: 'POST',
         body: formdata,
@@ -135,9 +132,7 @@ export default function ProfileCreate() {
         .then((res) => {
           console.log(res);
         });
-      // let res = await axios.post('api/profile/createProfile', formdata);
-      // console.log('res', res)
-      // history.push('/login');
+
     } catch (err) {
       console.log(err);
     }
@@ -149,7 +144,7 @@ export default function ProfileCreate() {
       <div className="profile-creation">
         <div className="loginWrapper">
           <div className="loginLeft">
-            <h3 className="loginLogo">Edit Profile</h3>
+            <h3 className="loginLogo">Create Profile</h3>
           </div>
           <div className="profile-images">
             <div className="register_profile_image"></div>

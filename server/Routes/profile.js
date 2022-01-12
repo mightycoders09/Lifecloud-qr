@@ -49,8 +49,10 @@ ProfileRouter.post('/createProfile', uploadpic.fields([{ name: 'profileImg', max
             birthDate: req.body.birthDate,
             deathDate: req.body.deathDate,
             wazeLocation: req.body.wazeLocation,
+            description: req.body.description,
             googleLocation: req.body.googleLocation,
             lifeAxis: req.body.lifeAxis,
+            
         });
 
         //   //save and response
