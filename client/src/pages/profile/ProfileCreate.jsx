@@ -37,10 +37,14 @@ export default function ProfileCreate() {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-
+  const [multiFiles, setMultiFiles] = useState()
+  const onChangeMultiplePicture = (e) => {
+    setMultiFiles(e.target.files)
+  }
   const [inputList, setInputList] = useState([
     { axisTitle: '', axisDate: '', axisDescription: '' },
   ]);
+  console.log(multiFiles, 'multiFiles')
   console.log(picture, 'pic');
   console.log(image, 'image');
   const [selectedGender, setSelectedGender] = useState('');
@@ -64,7 +68,7 @@ export default function ProfileCreate() {
   const handleChange = (e) => {
     setSelectedGender(e.target.value);
   };
- 
+
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -87,7 +91,7 @@ export default function ProfileCreate() {
       { axisTitle: '', axisDate: '', axisDescription: '' },
     ]);
   };
-  
+
   const handleClick = async (e) => {
     console.log(id, 'id');
     e.preventDefault();
@@ -121,7 +125,11 @@ export default function ProfileCreate() {
       formdata.append('googleLocation', wallInformation.googleLocation);
       formdata.append('description', wallInformation.description);
       formdata.append('lifeAxis', JSON.stringify(wallInformation.lifeAxis));
-     
+      for (let i = 0; i < multiFiles.length; i++) {
+        formdata.append('multiplefiles', multiFiles[i]);
+
+      }
+
       fetch('/api/profile/createProfile', {
         method: 'POST',
         body: formdata,
@@ -239,9 +247,8 @@ export default function ProfileCreate() {
                     />
                     <label
                       for="male"
-                      className={`${
-                        selectedGender === 'male' && 'active'
-                      } input-label`}
+                      className={`${selectedGender === 'male' && 'active'
+                        } input-label`}
                     >
                       Male
                     </label>
@@ -257,9 +264,8 @@ export default function ProfileCreate() {
                     />
                     <label
                       for="female"
-                      className={`${
-                        selectedGender === 'female' && 'active'
-                      } input-label`}
+                      className={`${selectedGender === 'female' && 'active'
+                        } input-label`}
                     >
                       Female
                     </label>
@@ -292,16 +298,17 @@ export default function ProfileCreate() {
                         <input
                           id="profilePic"
                           type="file"
-                          name="profileImg"
-                          onChange={onChangePicture}
+                          name="multiplefiles"
+                          multiple
+                          onChange={onChangeMultiplePicture}
                         />
                       </div>
                       <div className="previewProfilePic">
-                        <img
+                        {/* <img
                           className="playerProfilePic_home_tile"
                           src={imgData}
                           alt=""
-                        />
+                        /> */}
                       </div>
                     </div>
                   </div>{' '}

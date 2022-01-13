@@ -107,9 +107,10 @@
   font-size: 30px;
 }
 .gallery-img {
-  height: 250px;
-  width: 250px;
+  /* height: 250px;
+  width: 250px; */
   border-radius: 30px;
+  overflow: hidden;
   margin-left: 20px;
   border: 1px solid #6097bf;
 }

@@ -33,12 +33,12 @@ const PostSchema = new mongoose.Schema(
         description: {
             type: String
         },
-        // gallery: {
-        //     type: String
-        // },
+        gallery: {
+            type: Array
+        },
         lifeAxis: {
             type: String
-        }
+        },
     },
     { timestamps: true }
 );

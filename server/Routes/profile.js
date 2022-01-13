@@ -11,15 +11,20 @@ var storage = multer.diskStorage({
 });
 let uploadpic = multer({ storage: storage });
 // create profile
-ProfileRouter.post('/createProfile', uploadpic.fields([{ name: 'profileImg', maxCount: 1 }, { name: 'wallImg', maxCount: 1 }]), async (req, res) => {
+ProfileRouter.post('/createProfile', uploadpic.fields([{ name: 'profileImg', maxCount: 1 }, { name: 'wallImg', maxCount: 1 }, { name: 'multiplefiles', maxCount: 20 }]), async (req, res) => {
     try {
         //gen new password
         const url = req.protocol + '://' + req.get('host')
         console.log(req.body, 'body')
         console.log(req.files, 'file')
+        let multiFiles = req.files.multiplefiles.map(res => {
+            return res.path.slice(7)
+        })
+        console.log(multiFiles, 'multiFiles')
         //new user
         let newUser = new profileModel({
             originalUser: req.body.originalUser,
+            gallery: multiFiles,
             profileImg: req.files.profileImg[0].path.slice(7),
             wallImg: req.files.wallImg[0].path.slice(7),
             firstName: req.body.firstName,
@@ -34,7 +39,7 @@ ProfileRouter.post('/createProfile', uploadpic.fields([{ name: 'profileImg', max
 
         });
 
-        //   //save and response
+        //save and response
         newUser.save().then(resp => {
             res.send(resp)
         });
@@ -51,7 +56,7 @@ ProfileRouter.put('/updateProfile', uploadpic.fields([{ name: 'profileImg', maxC
         console.log(req.body, 'body')
         console.log(req.files, 'file')
         //new user
-        if (req.files.profileImg && req.files.wallImg ) {
+        if (req.files.profileImg && req.files.wallImg) {
             var dataSource = {
                 originalUser: req.body.originalUser,
                 profileImg: req.files.profileImg[0].path.slice(7),
@@ -111,28 +116,6 @@ ProfileRouter.put('/updateProfile', uploadpic.fields([{ name: 'profileImg', maxC
             }
         }
         profileModel.findOneAndUpdate({ _id: req.body._id },
-            // {
-            //     $push: {
-            //         originalUser: req.body.originalUser,
-            //     },
-            //     profileImg: req.files.profileImg[0].path.slice(7),
-            //     wallImg: req.files.wallImg[0].path.slice(7),
-            //     firstName: req.body.firstName,
-            //     lastName: req.body.lastName,
-            //     gender: req.body.gender,
-            //     birthDate: req.body.birthDate,
-            //     deathDate: req.body.deathDate,
-            //     wazeLocation: req.body.wazeLocation,
-            //     description: req.body.description,
-            //     googleLocation: req.body.googleLocation,
-            //     lifeAxis: req.body.lifeAxis,
-            // }, function (err, result) {
-            //     if (err) {
-            //         console.log(err)
-            //     } else {
-            //         res.send(result)
-            //     }
-            // }
             {
                 $set: dataSource
             },

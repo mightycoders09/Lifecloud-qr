@@ -88,9 +88,12 @@ export default function Profile() {
           <div className="gallery-container">
             <h1 className="gallery-title">Gallery</h1>
             <div className="imgs-container">
-              <div className="gallery-img"></div>
-              <div className="gallery-img"></div>
-              <div className="gallery-img"></div>
+              { profiledata.gallery.map(img => {
+                return <div className="gallery-img">
+                  <img style={{width:'250px',hegight:'250px'}} src={`http://localhost:8800/${img}`} alt="" />
+                </div>
+              })}
+
               <div className="gallery-img last-img">+</div>
             </div>
             <div className="full-btn">+ Full Gallery</div>
