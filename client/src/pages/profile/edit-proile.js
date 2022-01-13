@@ -38,7 +38,7 @@ export default function ProfileEdit() {
     const axisDate = useRef();
     const history = useHistory();
     const [wallInformation, setWallInformation] = useState({
-        originalUser: Object.keys(profiledata).length ? profiledata._id : '',
+        originalUser: Object.keys(profiledata).length ? profiledata.originalUser[0]._id : '',
         profileImg: Object.keys(profiledata).length ? profiledata.profileImg : '',
         wallImg: Object.keys(profiledata).length ? profiledata.wallImg : '',
         firstName: Object.keys(profiledata).length ? profiledata.firstName : '',
@@ -51,7 +51,7 @@ export default function ProfileEdit() {
         description: Object.keys(profiledata).length ? profiledata.description : '',
         // gallery: picture,
     })
- 
+
     const handleChangeValue = (e) => {
         setWallInformation({
             ...wallInformation,
@@ -98,7 +98,7 @@ export default function ProfileEdit() {
     useEffect(() => {
         if (Object.keys(profiledata).length) {
             setWallInformation({
-                originalUser: profiledata._id,
+                originalUser: profiledata.originalUser[0]._id,
                 profileImg: profiledata.profileImg,
                 wallImg: profiledata.wallImg,
                 firstName: profiledata.firstName,
@@ -116,8 +116,8 @@ export default function ProfileEdit() {
             ])
         }
     }, [profiledata])
-    console.log(profiledata,'pro')
-    console.log(wallInformation,'wallInformation')
+    console.log(profiledata, 'pro')
+    console.log(wallInformation, 'wallInformation')
     // handle input change
     const handleInputChange = (e, index) => {
         console.log(e.target.value, index)
@@ -144,25 +144,12 @@ export default function ProfileEdit() {
     const handleClick = async (e) => {
         console.log(id, 'id');
         e.preventDefault();
-        const wallInformation = {
-            originalUser: id,
-            profileImg: picture,
-            wallImg: image,
-            firstName: firstName.current.value,
-            lastName: lastName.current.value,
-            birthDate: birthDate.current.value,
-            deathDate: deathDate.current.value,
-            gender: selectedGender,
-            wazeLocation: wazeLocation.current.value,
-            googleLocation: googleLocation.current.value,
-            description: description.current.value,
-            lifeAxis: inputList,
-            // gallery: picture,
-        };
 
         try {
             const formdata = new FormData();
             formdata.append('profileImg', picture);
+            formdata.append('_id', profiledata._id);
+            formdata.append('id', profiledata.originalUser[0]._id);
             formdata.append('wallImg', image);
             formdata.append('firstName', wallInformation.firstName);
             formdata.append('originalUser', wallInformation.originalUser);
@@ -173,14 +160,15 @@ export default function ProfileEdit() {
             formdata.append('wazeLocation', wallInformation.wazeLocation);
             formdata.append('googleLocation', wallInformation.googleLocation);
             formdata.append('description', wallInformation.description);
-            formdata.append('lifeAxis', JSON.stringify(wallInformation.lifeAxis));
+            formdata.append('lifeAxis', JSON.stringify(inputList));
             // const config = {
             //   headers: {
             //     'content-type': 'multipart/form-data'
             //   }
             // }
-            fetch('/api/profile/createProfile', {
-                method: 'POST',
+            console.log(formdata,'formdata')
+            fetch('/api/profile/updateProfile', {
+                method: 'PUT',
                 body: formdata,
             })
                 .then((res) => {
