@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom'
 import './profiledetails.css';
 import TopBar from '../../components/topbar/Topbar';
 import ProgressBar from '../../components/progressbar/progressBar'
+import { Gallery } from '../../components/gallery/gallery'
 // import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router'
 // import { useParams } from 'react-router-dom';
@@ -86,17 +87,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="gallery-container">
-            <h1 className="gallery-title">Gallery</h1>
-            <div className="imgs-container">
-              { profiledata.gallery.map(img => {
-                return <div className="gallery-img">
-                  <img style={{width:'250px',hegight:'250px'}} src={`http://localhost:8800/${img}`} alt="" />
-                </div>
-              })}
-
-              <div className="gallery-img last-img">+</div>
-            </div>
-            <div className="full-btn">+ Full Gallery</div>
+            <Gallery profiledata={profiledata} id={id} />
           </div>
           <div className="grave-location-container">
             <h1 className="grave-location-title">Graves location</h1>

@@ -48,7 +48,7 @@ ProfileRouter.post('/createProfile', uploadpic.fields([{ name: 'profileImg', max
     }
 });
 
-ProfileRouter.put('/updateProfile', uploadpic.fields([{ name: 'profileImg', maxCount: 1 }, { name: 'wallImg', maxCount: 1 }]), async (req, res) => {
+ProfileRouter.put('/updateProfile', uploadpic.fields([{ name: 'profileImg', maxCount: 1 }, { name: 'wallImg', maxCount: 1 }, { name: 'multiplefiles', maxCount: 20 }]), async (req, res) => {
     try {
         //gen new password
 
@@ -56,6 +56,9 @@ ProfileRouter.put('/updateProfile', uploadpic.fields([{ name: 'profileImg', maxC
         console.log(req.body, 'body')
         console.log(req.files, 'file')
         //new user
+        let multiFiles = req.files && req.files.multiplefiles && req.files.multiplefiles.map(res => {
+            return res.path.slice(7)
+        })
         if (req.files.profileImg && req.files.wallImg) {
             var dataSource = {
                 originalUser: req.body.originalUser,
@@ -117,11 +120,21 @@ ProfileRouter.put('/updateProfile', uploadpic.fields([{ name: 'profileImg', maxC
         }
         profileModel.findOneAndUpdate({ _id: req.body._id },
             {
-                $set: dataSource
+                $set: dataSource,
+                $push: {
+                    gallery: {
+                        $each: multiFiles,
+                        $position: 0
+                    }
+                }
             },
+
             { upsert: true }, (err, doc) => {
                 if (err) { throw err; }
-                else { console.log("Updated", doc); }
+                else {
+                    console.log("Updated", doc);
+                    res.send(true)
+                }
 
             }
         );

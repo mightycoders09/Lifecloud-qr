@@ -8,6 +8,7 @@ import './profile.css';
 import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router';
 import moment from 'moment'
+import SnackBar from '../../components/snackbar/SnackBar'
 export default function ProfileEdit() {
     const { user } = useContext(AuthContext);
     const [image, setImage] = useState(null);
@@ -16,6 +17,9 @@ export default function ProfileEdit() {
     const id = useParams().id;
     const [picture, setPicture] = useState(null);
     const [imgData, setImgData] = useState(null);
+    const [open, setOpen] = useState(false)
+    const [message, setMessage] = useState('')
+    const [multiFiles, setMultiFiles] = useState()
     const [inputList, setInputList] = useState([
         { axisTitle: '', axisDate: '', axisDescription: '' },
     ]);
@@ -89,7 +93,9 @@ export default function ProfileEdit() {
         }
     };
 
-
+    const onChangeMultiplePicture = (e) => {
+        setMultiFiles(e.target.files)
+    }
 
 
     const handleChange = (e) => {
@@ -161,12 +167,16 @@ export default function ProfileEdit() {
             formdata.append('googleLocation', wallInformation.googleLocation);
             formdata.append('description', wallInformation.description);
             formdata.append('lifeAxis', JSON.stringify(inputList));
+                for (let i = 0; i < multiFiles.length; i++) {
+                    formdata.append('multiplefiles', multiFiles[i]);
+
+            }
             // const config = {
             //   headers: {
             //     'content-type': 'multipart/form-data'
             //   }
             // }
-            console.log(formdata,'formdata')
+            console.log(formdata, 'formdata')
             fetch('/api/profile/updateProfile', {
                 method: 'PUT',
                 body: formdata,
@@ -176,15 +186,24 @@ export default function ProfileEdit() {
                 })
                 .then((res) => {
                     console.log(res);
+                    if (res) {
+                        setMessage('Profile updated successfully!')
+                        setOpen(true)
+                    }
                 });
             // let res = await axios.post('api/profile/createProfile', formdata);
             // console.log('res', res)
             // history.push('/login');
         } catch (err) {
             console.log(err);
+            setMessage('Something went wrong!')
+            setOpen(true)
         }
     };
-
+    const handleClose = () => {
+        setOpen(false)
+        setMessage('')
+    }
     return (
         <div className="create-profile-container">
             <Topbar />
@@ -347,17 +366,18 @@ export default function ProfileEdit() {
                                                 <input
                                                     id="profilePic"
                                                     type="file"
-                                                    name="profileImg"
-                                                    onChange={onChangePicture}
+                                                    name="multiplefiles"
+                                                    multiple
+                                                    onChange={onChangeMultiplePicture}
                                                 />
                                             </div>
-                                            <div className="previewProfilePic">
+                                            {/* <div className="previewProfilePic">
                                                 <img
                                                     className="playerProfilePic_home_tile"
                                                     src={imgData}
                                                     alt=""
                                                 />
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>{' '}
                                     to do
@@ -427,6 +447,7 @@ export default function ProfileEdit() {
                         </div>
                     </div>
                 </div>
+                <SnackBar open={open} handleClose={handleClose} message={message} />
             </div>
         </div>
     );

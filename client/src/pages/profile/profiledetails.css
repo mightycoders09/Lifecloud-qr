@@ -9,6 +9,9 @@
   display: flex;
   align-items: center;
 }
+.hideBtn{
+  display: none;
+}
 .profile-img {
   height: 300px;
   width: 300px;
@@ -135,6 +138,7 @@
   width: 265px;
   border: 2px solid #6097bf;
   border-radius: 15px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   margin: auto;

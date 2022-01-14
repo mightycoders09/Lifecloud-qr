@@ -7,11 +7,14 @@ import profiles from './dummy-profiles.json';
 import './profile.css';
 import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router';
+import SnackBar from '../../components/snackbar/SnackBar'
 export default function ProfileCreate() {
   const { user } = useContext(AuthContext);
   const id = useParams().id;
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
+  const [open,setOpen] = useState(false)
+  const [message,setMessage]  = useState('')
   console.log(imgData, 'imgData');
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
@@ -139,13 +142,22 @@ export default function ProfileCreate() {
         })
         .then((res) => {
           console.log(res);
+          if(res){
+            setMessage('Profile created successfully!')
+            setOpen(true)
+          }
         });
 
     } catch (err) {
       console.log(err);
+      setMessage('Something went wrong!')
+      setOpen(true)
     }
   };
-
+const handleClose = () => {
+  setOpen(false)
+  setMessage('')
+}
   return (
     <div className="create-profile-container">
       <Topbar />
@@ -377,6 +389,7 @@ export default function ProfileCreate() {
             </div>
           </div>
         </div>
+        <SnackBar open={open} handleClose={handleClose} message={message}  />
       </div>
     </div>
   );
