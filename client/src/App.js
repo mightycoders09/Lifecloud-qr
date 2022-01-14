@@ -3,9 +3,10 @@ import ProfileCreate from './pages/profile/ProfileCreate';
 import ProfileDetails from './pages/profile/ProfileDetails';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
-import {UserAndprofiles} from './pages/userpage/user-and-profile';
+import { UserAndprofiles } from './pages/userpage/user-and-profile';
 import { AuthContext } from './context/AuthContext';
-import  ProfileEdit  from './pages/profile/edit-proile';
+import ProfileEdit from './pages/profile/edit-proile';
+
 import {
   BrowserRouter as Router,
   Switch,
