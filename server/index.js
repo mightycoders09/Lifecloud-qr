@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const dotenv = require('dotenv')
 const mongoose = require("mongoose");
-
+const {MemoryRouter} = require('./Routes/memory')
 const { UserRouter } = require('./Routes/users')
 const { AuthRouter } = require('./Routes/auth')
 const { PostRouter } = require('./Routes/posts')
@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use('/api/users', UserRouter);
+app.use('/api/memory', MemoryRouter);
 app.use('/api/auth', AuthRouter);
 app.use('/api/posts', PostRouter);
 app.use('/api/profile', ProfileRouter);
