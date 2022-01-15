@@ -1,0 +1,21 @@
+.memory-page {
+    min-height: 100vh;
+    min-width: 100vw;
+    background: #fff;
+}
+.close-btn {
+    cursor: pointer;
+}
+.top-cloud {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.bottom-cloud {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}

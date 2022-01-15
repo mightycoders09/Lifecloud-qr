@@ -14,6 +14,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { useContext } from 'react';
+import MemoryCreation from './components/memory/memoryCreation';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -38,6 +39,9 @@ function App() {
         </Route>
         <Route exact path="/editprofiles/:id" >
           <ProfileEdit />
+        </Route>
+        <Route exact path="/memorycreation/:profileid" >
+          <MemoryCreation />
         </Route>
       </Switch>
     </Router>

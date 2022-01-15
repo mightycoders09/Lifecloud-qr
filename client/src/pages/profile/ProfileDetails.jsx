@@ -175,7 +175,11 @@ export default function Profile() {
                     nested
                   >
                     {(close) => (
-                      <Memory close={close} memories={profiledata.gallery} /> //change to memories
+                      <Memory
+                        close={close}
+                        profiledata={profiledata}
+                        index={index}
+                      /> //change to memories
                     )}
                   </Popup>
                 )
@@ -192,7 +196,9 @@ export default function Profile() {
               >
                 + Full Gallery
               </div>
-              <div className="full-memory-btn">+ add memory</div>
+              <Link to={`/memorycreation/${id}`}>
+                <div className="full-memory-btn">+ add memory</div>
+              </Link>
             </div>
           </div>
         </div>
