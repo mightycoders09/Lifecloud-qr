@@ -194,7 +194,7 @@ export default function Profile() {
                 }
                 onClick={handleShowMoreMemories}
               >
-                + Full Gallery
+                + Show more
               </div>
               <Link to={`/memorycreation/${id}`}>
                 <div className="full-memory-btn">+ add memory</div>

@@ -204,6 +204,7 @@
 }
 .plans-container {
   display: flex;
+  justify-content: center;
 }
 .plan-container {
   width: 376px;
@@ -232,6 +233,8 @@
   color: #6097bf;
 }
 .link-plans {
+  margin-top: 3rem !important;
+  margin-bottom: 5rem !important;
   display: flex;
   width: 774px;
   height: 60px;

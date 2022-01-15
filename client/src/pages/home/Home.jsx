@@ -26,6 +26,8 @@ import Popup from 'reactjs-popup';
 import { Player } from 'video-react';
 import Slider from 'react-slick';
 import './home.css';
+import Footer from '../../components/footer/Footer';
+import SocialFooter from '../../components/socialFooter/socialFooter';
 
 const Home = () => {
   const settings = {
@@ -472,8 +474,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className='link-plans'>+ To the plans and purchase page</div>
+        <div className="link-plans">+ To the plans and purchase page</div>
       </div>
+      <SocialFooter />
+      <Footer />
     </div>
   );
 };
