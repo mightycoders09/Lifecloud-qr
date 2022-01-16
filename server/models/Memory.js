@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema(
     {
-        firstName:{
+        firstName: {
             type: String
         },
-        lastName:{
+        lastName: {
             type: String
         },
         file: {
@@ -17,10 +17,11 @@ const UserSchema = new mongoose.Schema(
         likes: {
             type: Array
         },
-        comments: {
-            userId: String,
-            text: String
-        },
+        comments: [{
+            text: String,
+            id: Number,
+            date:Date
+        }, { timestamps: true, }],
         originalUser: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 
     },

@@ -27,10 +27,7 @@ MemoryRouter.post('/createMemory', uploadpic.fields([{ name: 'memoryImges', maxC
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             likes: [],
-            comments: {
-                userId: req.body.originalUser,
-                text: ''
-            },
+            comments: [],
 
         });
 
@@ -43,41 +40,9 @@ MemoryRouter.post('/createMemory', uploadpic.fields([{ name: 'memoryImges', maxC
     }
 });
 
-
-MemoryRouter.put('/updateMemory', async (req, res) => {
-    try {
-        profileModel.findOneAndUpdate({ _id: req.body._id },
-            {
-                $set: {
-                    originalUser: req.body.originalUser,
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    likes: [],
-                    comments: {
-                        userId: req.body.originalUser,
-                        text: req.body.text
-                    },
-                },
-            },
-
-            { upsert: true }, (err, doc) => {
-                if (err) { throw err; }
-                else {
-                    console.log("Updated", doc);
-                    res.send(true)
-                }
-
-            }
-        );
-
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
 MemoryRouter.put('/like/:id', async (req, res) => {
     try {
-        console.log(req.params.id,req.body.userId)
+        console.log(req.params.id, req.body.userId)
         const memory = await Memory.findById(req.params.id);
         if (!memory.likes.includes(req.body.userId)) {
             await memory.updateOne({ $push: { likes: req.body.userId } });
@@ -86,6 +51,27 @@ MemoryRouter.put('/like/:id', async (req, res) => {
             await memory.updateOne({ $pull: { likes: req.body.userId } });
             res.status(200).json('The post has been disliked');
         }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+MemoryRouter.put('/comment/:id', async (req, res) => {
+    try {
+        console.log(req.params.id, req.body)
+        const memory = await Memory.findById(req.params.id);
+        await memory.updateOne({
+            $push: {
+                comments: {
+                    $each: [{ text: req.body.comments[0].text, id: Math.ceil(Math.random() * 1000), date: Date.now() }],
+                    $position: -1
+                }
+            }
+        }, {
+            upsert: true //to return updated document
+        });
+        res.status(200).json('Coment Added');
+
     } catch (err) {
         res.status(500).json(err);
     }

@@ -27,8 +27,11 @@ export default function Profile() {
   const [memoryData, setmemoryData] = useState([]);
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('')
+  const [text, setText] = useState({comments:[{ text: '' }]})
   const [show, setShow] = useState('wall');
-  const [likeMessage,setLikeMessage] = useState('')
+  const [likeMessage, setLikeMessage] = useState('')
+  const [commenting, setCommenting] = useState(false)
+  const [comment,setComment] = useState()
   const id = useParams().id;
   const [memories, setMemories] = useState([]);
   const [next, setnext] = useState(1);
@@ -39,7 +42,7 @@ export default function Profile() {
   useEffect(() => {
     fetchuserprofiles();
     fetchmemories()
-  }, [likeMessage]);
+  }, [likeMessage,comment]);
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
@@ -83,7 +86,7 @@ export default function Profile() {
         })
         .then((res) => {
           console.log(res);
-         
+
           if (res) {
             setLikeMessage(res)
             // setMessage('like added successfully!')
@@ -96,6 +99,51 @@ export default function Profile() {
       setOpen(true)
     }
   }
+
+//
+const handleComment = (e) => {
+console.log(e)
+  try {
+    fetch(`/api/memory/comment/${e._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'Application/json'
+      },
+      body: JSON.stringify(text),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+
+        if (res) {
+          setCommenting(false)
+          setComment(res)
+          // setMessage('like added successfully!')
+          // setOpen(true)
+        }
+      });
+  } catch (err) {
+    console.log(err);
+    setMessage('Something went wrong!')
+    setOpen(true)
+  }
+}
+
+
+
+
+//
+
+
+
+  const onhandleChangeComment = (e) => {
+    setText({comments:[{
+      text: e.target.value
+    }]})
+  }
+  console.log(text,'setText')
   // const {file} = memoryData
   if (Object.keys(profiledata).length > 0) {
     return (
@@ -244,6 +292,10 @@ export default function Profile() {
                         data={imgData}
                         index={index}
                         handleLike={handleLike}
+                        onhandleChangeComment={onhandleChangeComment}
+                        handleComment={handleComment}
+                        setCommenting={setCommenting}
+                        commenting={commenting}
                       /> //change to memories
                     )}
                   </Popup>

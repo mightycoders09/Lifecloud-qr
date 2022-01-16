@@ -7,10 +7,10 @@ import heart from '../../assets/heart.png';
 import instagram from '../../assets/instagram.png';
 import facebook from '../../assets/facebook.png';
 import Arrow1 from '../../assets/Arrow1.png';
+import moment from 'moment'
 
+const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment, commenting, setCommenting }) => {
 
-const Memory = ({ data, close, handleLike }) => {
-    const [commenting, setCommenting] = useState(false)
     const isUserAdmin = true
     const comments = [
         {
@@ -26,7 +26,7 @@ const Memory = ({ data, close, handleLike }) => {
             <div className='single-memory-content-container'>
                 <div className='single-memory-subcontainer'>
                     <h1 className='single-memory-title'>Raz Cohen | 12.3.22</h1>  {/* add the title prome profiledata memory with the memory index */}
-                    <img src={Rectangle6} alt='' className='single-memory-img'></img>
+                    <img src={`http://localhost:8800/${data.file}`} alt='' className='single-memory-img'></img>
                     <div className="icons-container">
                         <div className="memory-heart-container">
                             <div className="heart-div">
@@ -35,7 +35,7 @@ const Memory = ({ data, close, handleLike }) => {
                                     className="heart-icon"
                                     src={heart}
                                     alt=""
-                                    onClick={()=>handleLike(data)}
+                                    onClick={() => handleLike(data)}
                                 ></img>
                                 {data.likes.length}
                             </div>
@@ -62,31 +62,32 @@ const Memory = ({ data, close, handleLike }) => {
                     <p className='single-memory-text'>{Memory.text || 'lorem ipsum'}</p>
                     <div className='comments-container'>
                         <h2>Comments</h2>
-                        {comments.map((comment, index) => {
+                        {data.comments.map((comment, index) => {
                             return (
                                 <div className='comment-container'>
                                     <span className='comment-subcontainer'>
-                                        <img src={comment.profileImg} alt='' className='comment-img' />
-                                        <p>{comment.uploadDate}</p>
+                                        <img src={`http://localhost:8800/${data.file}`} alt='' className='comment-img' />
+                                        <p>{moment(comment.date).utc().format("YYYY-DD-MM")}</p>
                                         |
-                                        <p>{comment.uploadTime}</p>
-                                        <p>{comment.uploaderName}:</p>
-                                        <p>{comment.comment}</p>
+                                        <p>{`${data.firstName} ${data.lastName}`}</p>
+                                        |
+                                        {/* <p>{comment.uploaderName}:</p> */}
+                                        <p>{comment.text}</p>
                                     </span>
                                     <span>delete -</span>
                                 </div>
                             )
                         })}
                         <div className='action-btns-container'>
-                            <div onClick={() => setCommenting(!commenting)} className={!commenting && 'comment-btn'}>
-                                {commenting ?
-                                    <input />
-                                    :
-                                    'Comment...'
-                                }
-                            </div>
+                            <div onClick={() => setCommenting(!commenting)} style={{ cursor: 'pointer' }} className={!commenting && 'comment-btn'}> Comment... </div>
+                            {commenting ?
+                                <input onChange={onhandleChangeComment} placeholder='write comment' />
+                                :
+                                ''
+                            }
+
                             <div className='action-btns'>
-                                <div className='action-btn'>Publish</div>
+                                <div className='action-btn' onClick={() => handleComment(data)} style={{ cursor: 'pointer' }}>Publish</div>
                                 <div className='action-btn'>Cancel</div>
                             </div>
                             {isUserAdmin &&
