@@ -20,6 +20,8 @@ import { Gallery } from '../../components/gallery/gallery';
 import { useParams } from 'react-router';
 import Memory from '../../components/memory/Memory';
 import Popup from 'reactjs-popup';
+import {useHistory} from 'react-router'
+import SnackBar from '../../components/snackbar/SnackBar'
 // import { useParams } from 'react-router-dom';
 export default function Profile() {
   const { dispatch } = useContext(AuthContext);
@@ -29,9 +31,11 @@ export default function Profile() {
   const [message, setMessage] = useState('')
   const [text, setText] = useState({comments:[{ text: '' }]})
   const [show, setShow] = useState('wall');
+  const history = useHistory();
   const [likeMessage, setLikeMessage] = useState('')
   const [commenting, setCommenting] = useState(false)
   const [comment,setComment] = useState()
+  const [DellComment,setDelComment] = useState('')
   const id = useParams().id;
   const [memories, setMemories] = useState([]);
   const [next, setnext] = useState(1);
@@ -42,7 +46,10 @@ export default function Profile() {
   useEffect(() => {
     fetchuserprofiles();
     fetchmemories()
-  }, [likeMessage,comment]);
+    setCommenting('')
+    setComment('')
+    setLikeMessage('')
+  }, [likeMessage,comment,DellComment]);
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
@@ -143,6 +150,54 @@ console.log(e)
       text: e.target.value
     }]})
   }
+
+const handleDelete = (e,id) =>{
+  console.log(e,id)
+  fetch(`/api/memory/commentdell/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'Application/json'
+    },
+    body:JSON.stringify({comment:e})
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      setDelComment(res)
+      if (res) {
+        setCommenting(false)
+        setComment(res)
+        // setMessage('like added successfully!')
+        // setOpen(true)
+      }
+    });
+}
+const handleDellMemory = (e) =>{
+  console.log(e,'e')
+  fetch(`/api/memory/commentdellOBJ/${e._id}`, {
+    method: 'DELETE',
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+      setDelComment(res)
+      if (res) {
+        setCommenting(false)
+        setComment(res)
+        history.push(`/userprofiles/${profiledata.originalUser[0]._id}`)
+        setMessage('delete successfully!')
+        // setOpen(true)
+      }
+    });
+}
+const handleClose = () => {
+  setOpen(false)
+  setMessage('')
+}
   console.log(text,'setText')
   // const {file} = memoryData
   if (Object.keys(profiledata).length > 0) {
@@ -296,6 +351,8 @@ console.log(e)
                         handleComment={handleComment}
                         setCommenting={setCommenting}
                         commenting={commenting}
+                        handleDelete={handleDelete}
+                        handleDellMemory={handleDellMemory}
                       /> //change to memories
                     )}
                   </Popup>
@@ -364,6 +421,7 @@ console.log(e)
             ))}
           </div>
         </div>
+        <SnackBar open={open} handleClose={handleClose} message={message} />
       </div >
     );
   } else {

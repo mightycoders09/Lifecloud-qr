@@ -9,7 +9,7 @@ import facebook from '../../assets/facebook.png';
 import Arrow1 from '../../assets/Arrow1.png';
 import moment from 'moment'
 
-const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment, commenting, setCommenting }) => {
+const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment, commenting, setCommenting, handleDelete,handleDellMemory }) => {
 
     const isUserAdmin = true
     const comments = [
@@ -74,7 +74,7 @@ const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment,
                                         {/* <p>{comment.uploaderName}:</p> */}
                                         <p>{comment.text}</p>
                                     </span>
-                                    <span>delete -</span>
+                                    <span style={{ cursor: 'pointer' }} onClick={() => handleDelete(comment, data._id)}>delete -</span>
                                 </div>
                             )
                         })}
@@ -91,7 +91,7 @@ const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment,
                                 <div className='action-btn'>Cancel</div>
                             </div>
                             {isUserAdmin &&
-                                <div className='dlt-comment-btn'>Delete Memory</div>
+                                <div className='dlt-comment-btn' onClick={() => handleDellMemory(data)}  style={{ cursor: 'pointer' }}>Delete Memory</div>
                             }
                         </div>
                     </div>

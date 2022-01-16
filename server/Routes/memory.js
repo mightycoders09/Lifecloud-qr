@@ -77,6 +77,37 @@ MemoryRouter.put('/comment/:id', async (req, res) => {
     }
 });
 
+MemoryRouter.delete('/commentdell/:id', async (req, res) => {
+    try {
+        console.log(req.params.id, req.body)
+        // const memory = await Memory.findById(req.params.id);
+        // console.log(memory, 'memory')
+        await Memory.updateOne(
+            { _id: req.params.id },
+            { $pull: { comments: req.body.comment } }
+        );
+        res.status(200).json('Comment Deleted');
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
+MemoryRouter.delete('/commentdellOBJ/:id', async (req, res) => {
+    try {
+        console.log(req.params.id, req.body)
+        // const memory = await Memory.findById(req.params.id);
+        // console.log(memory, 'memory')
+        await Memory.deleteOne(
+            { _id: req.params.id },
+        );
+        res.status(200).json('Comment Deleted');
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 MemoryRouter.get('/getallmemory', (req, res) => {
     Memory
