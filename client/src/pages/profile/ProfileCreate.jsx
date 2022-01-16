@@ -130,7 +130,6 @@ export default function ProfileCreate() {
       formdata.append('lifeAxis', JSON.stringify(wallInformation.lifeAxis));
       for (let i = 0; i < multiFiles.length; i++) {
         formdata.append('multiplefiles', multiFiles[i]);
-
       }
 
       fetch('/api/profile/createProfile', {

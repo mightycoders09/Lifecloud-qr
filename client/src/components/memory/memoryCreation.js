@@ -23,7 +23,7 @@ const MemoryCreation = () => {
         setText(e.target.value)
     }
     const onChangeMultiplePicture = (e) => {
-        setMultiFiles(e.target.files)
+        setMultiFiles(e.target.files[0])
     }
     const handleClick = async (e) => {
         console.log(id, 'id');
@@ -34,10 +34,10 @@ const MemoryCreation = () => {
             formdata.append('originalUser', profiledata.originalUser[0]._id);
             formdata.append('firstName', profiledata.originalUser[0].firstName);
             formdata.append('lastName', profiledata.originalUser[0].lastName);
-            for (let i = 0; i < multiFiles.length; i++) {
-                formdata.append('memoryImges', multiFiles[i]);
+            // for (let i = 0; i < multiFiles.length; i++) {
+            formdata.append('memoryImges', multiFiles);
 
-            }
+            // }
             console.log(formdata, 'formdata')
             fetch('/api/memory/createMemory', {
                 method: 'POST',
@@ -88,7 +88,7 @@ const MemoryCreation = () => {
                             type="file"
                             className='white-circle add-icon'
                             name="multiplefiles"
-                            multiple
+                            // multiple
                             onChange={onChangeMultiplePicture}
                         />
                         <span>Add image</span>

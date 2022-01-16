@@ -24,7 +24,11 @@ import Popup from 'reactjs-popup';
 export default function Profile() {
   const { dispatch } = useContext(AuthContext);
   const [profiledata, setProfileData] = useState([]);
+  const [memoryData, setmemoryData] = useState([]);
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState('')
   const [show, setShow] = useState('wall');
+  const [likeMessage,setLikeMessage] = useState('')
   const id = useParams().id;
   const [memories, setMemories] = useState([]);
   const [next, setnext] = useState(1);
@@ -34,17 +38,65 @@ export default function Profile() {
   console.log(id);
   useEffect(() => {
     fetchuserprofiles();
-  }, []);
+    fetchmemories()
+  }, [likeMessage]);
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
   };
+
+  const fetchmemories = async () => {
+    const res = await axios.get(`/api/memory/getallmemory`);
+    console.log(res)
+    setmemoryData(res.data);
+  };
+
+  console.log(memoryData);
   console.log(profiledata);
   let pasrseAxios = Object.keys(profiledata).length
     ? JSON.parse(profiledata.lifeAxis)
     : '';
   console.log(pasrseAxios);
   console.log();
+  const handleLike = (e) => {
+
+    try {
+      const formdata = new FormData();
+      // formdata.append('userId',);
+      // const config = {
+      //   headers: {
+      //     'content-type': 'multipart/form-data'
+      //   }
+      // }
+      let data = {
+        userId: profiledata.originalUser[0]._id
+      }
+      fetch(`/api/memory/like/${e._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'Application/json'
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          console.log(res);
+         
+          if (res) {
+            setLikeMessage(res)
+            // setMessage('like added successfully!')
+            // setOpen(true)
+          }
+        });
+    } catch (err) {
+      console.log(err);
+      setMessage('Something went wrong!')
+      setOpen(true)
+    }
+  }
+  // const {file} = memoryData
   if (Object.keys(profiledata).length > 0) {
     return (
       <div>
@@ -127,27 +179,39 @@ export default function Profile() {
           <div className="">
             <h1 className="memories-title">Memories</h1>
             <div className="memories-container">
-              {profiledata.gallery.map(
+              {/* {memoryData.forEach((data, key) => { */}
+              {/* console.log(data.file[0], '--> data') */}
+              {memoryData.length > 0 ? memoryData.map(
                 (
-                  img,
+                  imgData,
                   index //change to memories
                 ) => (
                   <Popup
                     trigger={
                       <div className="memory-container" key={index}>
                         <img
-                          src={`http://localhost:8800/${img}`}
+                          src={`http://localhost:8800/${imgData.file}`}
                           alt=""
                           className="memory-img"
                         ></img>
+                        {/* {imgData.file.map(item => {
+                          return <img
+                            src={`http://localhost:8800/${item}`}
+                            alt=""
+                            className="memory-img"
+                          ></img>
+                        })} */}
+
                         <div className="icons-container">
                           <div className="memory-heart-container">
                             <div className="heart-div">
                               <img
+                                style={{ cursor: 'pointer' }}
                                 className="heart-icon"
                                 src={heart}
                                 alt=""
                               ></img>
+                              <span>{imgData.likes.length}</span>
                             </div>
                           </div>
                           <div className="facebook-container">
@@ -174,16 +238,19 @@ export default function Profile() {
                     modal
                     nested
                   >
-                    {(close) => (
+                    {(close, item) => (
                       <Memory
                         close={close}
-                        profiledata={profiledata}
+                        data={imgData}
                         index={index}
+                        handleLike={handleLike}
                       /> //change to memories
                     )}
                   </Popup>
                 )
-              )}
+              ) : <p style={{ merginBottom: '40px' }}>Loading...</p>}
+
+              {/* })} */}
             </div>
             <div className="memory-actions">
               <div
@@ -245,7 +312,7 @@ export default function Profile() {
             ))}
           </div>
         </div>
-      </div>
+      </div >
     );
   } else {
     return (

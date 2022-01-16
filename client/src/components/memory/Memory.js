@@ -1,4 +1,4 @@
-import React, { onClick, useState } from 'react'
+import React, { onClick, useEffect, useState } from 'react'
 import './memory-page.css'
 import BottomLeftCloud from '../../assets/bottom-left-cloud.png'
 import TopRightCloud from '../../assets/top-right-cloud.png'
@@ -9,7 +9,7 @@ import facebook from '../../assets/facebook.png';
 import Arrow1 from '../../assets/Arrow1.png';
 
 
-const Memory = ({ profiledata, close }) => {
+const Memory = ({ data, close, handleLike }) => {
     const [commenting, setCommenting] = useState(false)
     const isUserAdmin = true
     const comments = [
@@ -20,6 +20,7 @@ const Memory = ({ profiledata, close }) => {
             uploaderName: 'John Doe',
             comment: 'time flies...'
         }]
+    console.log(data, 'data')
     return (
         <div className="memory-page">
             <div className='single-memory-content-container'>
@@ -30,10 +31,13 @@ const Memory = ({ profiledata, close }) => {
                         <div className="memory-heart-container">
                             <div className="heart-div">
                                 <img
+                                    style={{ cursor: 'pointer' }}
                                     className="heart-icon"
                                     src={heart}
                                     alt=""
+                                    onClick={()=>handleLike(data)}
                                 ></img>
+                                {data.likes.length}
                             </div>
                         </div>
                         <div className="facebook-container">

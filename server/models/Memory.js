@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema(
             type: String
         },
         file: {
-            type: Array
+            type: String
         },
         description: {
             type: String

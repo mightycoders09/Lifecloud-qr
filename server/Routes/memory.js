@@ -11,19 +11,19 @@ var storage = multer.diskStorage({
 });
 let uploadpic = multer({ storage: storage });
 // create profile
-MemoryRouter.post('/createMemory', uploadpic.fields([{ name: 'memoryImges', maxCount: 20 }]), async (req, res) => {
+MemoryRouter.post('/createMemory', uploadpic.fields([{ name: 'memoryImges', maxCount: 1 }]), async (req, res) => {
     try {
         //gen new password
         const url = req.protocol + '://' + req.get('host')
         console.log(req.body, 'body')
         console.log(req.files, 'file')
-        let multiFiles = req.files.memoryImges.map(res => {
-            return res.path.slice(7)
-        })
-        console.log(multiFiles, 'multiFiles')
+        // let multiFiles = req.files.memoryImges.map(res => {
+        //     return res.path.slice(7)
+        // })
+        // console.log(multiFiles, 'multiFiles')
         let newUser = new Memory({
             originalUser: req.body.originalUser,
-            file: multiFiles,
+            file: req.files.memoryImges[0].path.slice(7),
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             likes: [],
@@ -77,6 +77,7 @@ MemoryRouter.put('/updateMemory', async (req, res) => {
 
 MemoryRouter.put('/like/:id', async (req, res) => {
     try {
+        console.log(req.params.id,req.body.userId)
         const memory = await Memory.findById(req.params.id);
         if (!memory.likes.includes(req.body.userId)) {
             await memory.updateOne({ $push: { likes: req.body.userId } });
@@ -89,6 +90,20 @@ MemoryRouter.put('/like/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
+MemoryRouter.get('/getallmemory', (req, res) => {
+    Memory
+        .find({}) // key to populate
+        .then(resonse => {
+            if (!resonse) {
+                return res.status(404).json({
+                    message: 'data not found'
+                })
+            }
+            res.json(resonse);
+        });
+})
 
 
 module.exports = { MemoryRouter };

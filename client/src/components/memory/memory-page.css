@@ -1,9 +1,10 @@
 .memory-page {
-  min-height: 100vh;
+  height: 100vh;
   min-width: 100vw;
   background: #fff;
   color: #6097bf;
   text-align: center;
+  overflow-y: auto;
 }
 .close-btn {
   padding-top: 2rem;
