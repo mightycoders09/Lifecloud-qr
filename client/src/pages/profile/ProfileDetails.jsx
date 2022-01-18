@@ -20,22 +20,25 @@ import { Gallery } from '../../components/gallery/gallery';
 import { useParams } from 'react-router';
 import Memory from '../../components/memory/Memory';
 import Popup from 'reactjs-popup';
-import {useHistory} from 'react-router'
-import SnackBar from '../../components/snackbar/SnackBar'
+import { useHistory } from 'react-router';
+import SnackBar from '../../components/snackbar/SnackBar';
+import Footer from '../../components/footer/Footer';
+import SocialFooter from '../../components/socialFooter/socialFooter';
+import FriendsList from '../../components/friendsList/friendsList';
 // import { useParams } from 'react-router-dom';
 export default function Profile() {
   const { dispatch } = useContext(AuthContext);
   const [profiledata, setProfileData] = useState([]);
   const [memoryData, setmemoryData] = useState([]);
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState('')
-  const [text, setText] = useState({comments:[{ text: '' }]})
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [text, setText] = useState({ comments: [{ text: '' }] });
   const [show, setShow] = useState('wall');
   const history = useHistory();
-  const [likeMessage, setLikeMessage] = useState('')
-  const [commenting, setCommenting] = useState(false)
-  const [comment,setComment] = useState()
-  const [DellComment,setDelComment] = useState('')
+  const [likeMessage, setLikeMessage] = useState('');
+  const [commenting, setCommenting] = useState(false);
+  const [comment, setComment] = useState();
+  const [DellComment, setDelComment] = useState('');
   const id = useParams().id;
   const [memories, setMemories] = useState([]);
   const [next, setnext] = useState(1);
@@ -45,11 +48,11 @@ export default function Profile() {
   console.log(id);
   useEffect(() => {
     fetchuserprofiles();
-    fetchmemories()
-    setCommenting('')
-    setComment('')
-    setLikeMessage('')
-  }, [likeMessage,comment,DellComment]);
+    fetchmemories();
+    setCommenting('');
+    setComment('');
+    setLikeMessage('');
+  }, [likeMessage, comment, DellComment]);
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
@@ -57,7 +60,7 @@ export default function Profile() {
 
   const fetchmemories = async () => {
     const res = await axios.get(`/api/memory/getallmemory`);
-    console.log(res)
+    console.log(res);
     setmemoryData(res.data);
   };
 
@@ -69,7 +72,6 @@ export default function Profile() {
   console.log(pasrseAxios);
   console.log();
   const handleLike = (e) => {
-
     try {
       const formdata = new FormData();
       // formdata.append('userId',);
@@ -79,12 +81,12 @@ export default function Profile() {
       //   }
       // }
       let data = {
-        userId: profiledata.originalUser[0]._id
-      }
+        userId: profiledata.originalUser[0]._id,
+      };
       fetch(`/api/memory/like/${e._id}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'Application/json'
+          'Content-Type': 'Application/json',
         },
         body: JSON.stringify(data),
       })
@@ -95,110 +97,116 @@ export default function Profile() {
           console.log(res);
 
           if (res) {
-            setLikeMessage(res)
+            setLikeMessage(res);
             // setMessage('like added successfully!')
             // setOpen(true)
           }
         });
     } catch (err) {
       console.log(err);
-      setMessage('Something went wrong!')
-      setOpen(true)
+      setMessage('Something went wrong!');
+      setOpen(true);
     }
-  }
+  };
 
-//
-const handleComment = (e) => {
-console.log(e)
-  try {
-    fetch(`/api/memory/comment/${e._id}`, {
-      method: 'PUT',
+  //
+  const handleComment = (e) => {
+    console.log(e);
+    try {
+      fetch(`/api/memory/comment/${e._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'Application/json',
+        },
+        body: JSON.stringify(text),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          console.log(res);
+
+          if (res) {
+            setCommenting(false);
+            setComment(res);
+            // setMessage('like added successfully!')
+            // setOpen(true)
+          }
+        });
+    } catch (err) {
+      console.log(err);
+      setMessage('Something went wrong!');
+      setOpen(true);
+    }
+  };
+
+  //
+
+  const onhandleChangeComment = (e) => {
+    setText({
+      comments: [
+        {
+          text: e.target.value,
+        },
+      ],
+    });
+  };
+
+  const handleDelete = (e, id) => {
+    console.log(e, id);
+    fetch(`/api/memory/commentdell/${id}`, {
+      method: 'DELETE',
       headers: {
-        'Content-Type': 'Application/json'
+        'Content-Type': 'Application/json',
       },
-      body: JSON.stringify(text),
+      body: JSON.stringify({ comment: e }),
     })
       .then((res) => {
         return res.json();
       })
       .then((res) => {
         console.log(res);
-
+        setDelComment(res);
         if (res) {
-          setCommenting(false)
-          setComment(res)
+          setCommenting(false);
+          setComment(res);
           // setMessage('like added successfully!')
           // setOpen(true)
         }
       });
-  } catch (err) {
-    console.log(err);
-    setMessage('Something went wrong!')
-    setOpen(true)
-  }
-}
-
-
-
-
-//
-
-
-
-  const onhandleChangeComment = (e) => {
-    setText({comments:[{
-      text: e.target.value
-    }]})
-  }
-
-const handleDelete = (e,id) =>{
-  console.log(e,id)
-  fetch(`/api/memory/commentdell/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'Application/json'
-    },
-    body:JSON.stringify({comment:e})
-  })
-    .then((res) => {
-      return res.json();
+  };
+  const handleDellMemory = (e) => {
+    console.log(e, 'e');
+    fetch(`/api/memory/commentdellOBJ/${e._id}`, {
+      method: 'DELETE',
     })
-    .then((res) => {
-      console.log(res);
-      setDelComment(res)
-      if (res) {
-        setCommenting(false)
-        setComment(res)
-        // setMessage('like added successfully!')
-        // setOpen(true)
-      }
-    });
-}
-const handleDellMemory = (e) =>{
-  console.log(e,'e')
-  fetch(`/api/memory/commentdellOBJ/${e._id}`, {
-    method: 'DELETE',
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((res) => {
-      console.log(res);
-      setDelComment(res)
-      if (res) {
-        setCommenting(false)
-        setComment(res)
-        history.push(`/userprofiles/${profiledata.originalUser[0]._id}`)
-        setMessage('delete successfully!')
-        // setOpen(true)
-      }
-    });
-}
-const handleClose = () => {
-  setOpen(false)
-  setMessage('')
-}
-  console.log(text,'setText')
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+        setDelComment(res);
+        if (res) {
+          setCommenting(false);
+          setComment(res);
+          history.push(`/userprofiles/${profiledata.originalUser[0]._id}`);
+          setMessage('delete successfully!');
+          // setOpen(true)
+        }
+      });
+  };
+  const handleClose = () => {
+    setOpen(false);
+    setMessage('');
+  };
+
+  var options = {
+    weekday: 'long', //to display the full name of the day, you can use short to indicate an abbreviation of the day
+    day: 'numeric',
+    month: 'long', //to display the full name of the month
+    year: 'numeric',
+  };
+  console.log(text, 'setText');
   // const {file} = memoryData
   if (Object.keys(profiledata).length > 0) {
     return (
@@ -218,7 +226,7 @@ const handleClose = () => {
           <div className="deceased-details">
             <h1>{`${profiledata.firstName} ${profiledata.lastName}`}</h1>
             <p>
-              {profiledata.birthDate} - {profiledata.deathDate}
+              {profiledata.birthDate.split('T')[0]} - {profiledata.deathDate.split('T')[0]}
             </p>
             {/* <p>{profile[0].city}</p> */}
           </div>
@@ -226,39 +234,49 @@ const handleClose = () => {
         <div className="btns-container">
           <div>
             <Link to={`/editprofiles/${id}`}>
-              <span className="small-btn">Update me</span>
+              <span className="small-btn">ערוך פרופיל</span>
             </Link>
-            <span className="small-btn">+ Add Friend</span>
-            <span className="small-btn">Friends list</span>
+            <span className="small-btn">הוסף חבר</span>
+            <span className="small-btn" onClick={() => setShow('friends')}>
+              רשימת חברים
+            </span>
           </div>
           <div className="big-btns-container">
             <div
               onClick={() => setShow('bio')}
               className={`${show === 'bio' && 'active'} big-btn`}
             >
-              Biography
+              ביוגרפיה
             </div>
             <div
               onClick={() => setShow('wall')}
               className={`${show === 'wall' && 'active'} big-btn`}
             >
-              Wall
+              קיר
             </div>
           </div>
         </div>
-        <div className={`${show === 'wall' && 'display'} d-none`}>
+        <div className={`${show === 'wall' && 'display'} d-none wall-main-container`}>
           <div className="memorial-container">
-            <h1 className="memorial-title">Memorial date</h1>
+            <h1 className="memorial-title">תאריך האזכרה</h1>
             <div className="details-and-icons">
               <div className="memorial-details">
-                <h3>| {profile[0].memorialDate}</h3>
-                <h3>| {profile[0].memorialDate}</h3>
-                <h3>| {profile[0].memorialLocation}</h3>
+                <h3>| {profiledata.birthDate.split('T')[0]}</h3>
+                <h3>| {profiledata.deathDate.split('T')[0]}</h3>
+                <h3>| {profiledata.wazeLocation}</h3>
               </div>
-              <div className="icons-container">
-                <img src={waze} alt="" className="icon"></img>
-                <img src={wts} alt="" className="icon"></img>
-                <img src={zoom} alt="" className="icon"></img>
+              <div className="profile-icons-container">
+                <img
+                  src={waze}
+                  alt=""
+                  className="icon"
+                  href={`https://www.waze.com/ul?q=${profiledata.wazeLocation}`}
+                ></img>
+                <img
+                  src={zoom}
+                  alt=""
+                  className={`${!profiledata.zoomLink && 'no-link-icon'} icon`}
+                ></img>
               </div>
             </div>
           </div>
@@ -266,38 +284,38 @@ const handleClose = () => {
             <Gallery profiledata={profiledata} id={id} />
             <div onClick={() => setShow('gallery')} className="full-btn">
               {' '}
-              Full Gallery
+              + לכל הגלריה
             </div>
           </div>
           <div className="grave-location-container">
-            <h1 className="grave-location-title">Graves location</h1>
+            <h1 className="grave-location-title">מיקום הקבר</h1>
             <div className="grave-imgs-container">
-              <img src={profile[0].graveImg} alt="" className="grave-img"></img>
-              <img src={map} alt="" className="grave-img"></img>
+              <img src={profiledata.graveImage} alt="" className="grave-img"></img>
             </div>
             <div className="navigation-btn">
-              Tap here for navigation <img src={google} alt=""></img>
+              <a href={`https://www.google.com/maps/search/?api=1&query=${profiledata.googleLocation}`}></a>לחץ כאן כדי לנווט לקבר <img src={google} alt=""></img>
             </div>
           </div>
-          <div className="">
-            <h1 className="memories-title">Memories</h1>
+          <div className="memories-div">
+            <h1 className="memories-title">זכרונות</h1>
             <div className="memories-container">
               {/* {memoryData.forEach((data, key) => { */}
               {/* console.log(data.file[0], '--> data') */}
-              {memoryData.length > 0 ? memoryData.map(
-                (
-                  imgData,
-                  index //change to memories
-                ) => (
-                  <Popup
-                    trigger={
-                      <div className="memory-container" key={index}>
-                        <img
-                          src={`http://localhost:8800/${imgData.file}`}
-                          alt=""
-                          className="memory-img"
-                        ></img>
-                        {/* {imgData.file.map(item => {
+              {memoryData.length > 0 ? (
+                memoryData.map(
+                  (
+                    imgData,
+                    index //change to memories
+                  ) => (
+                    <Popup
+                      trigger={
+                        <div className="memory-container" key={index}>
+                          <img
+                            src={`http://localhost:8800/${imgData.file}`}
+                            alt=""
+                            className="memory-img"
+                          ></img>
+                          {/* {imgData.file.map(item => {
                           return <img
                             src={`http://localhost:8800/${item}`}
                             alt=""
@@ -305,59 +323,62 @@ const handleClose = () => {
                           ></img>
                         })} */}
 
-                        <div className="icons-container">
-                          <div className="memory-heart-container">
-                            <div className="heart-div">
-                              <img
-                                style={{ cursor: 'pointer' }}
-                                className="heart-icon"
-                                src={heart}
-                                alt=""
-                              ></img>
-                              <span>{imgData.likes.length}</span>
+                          <div className="icons-container">
+                            <div className="memory-heart-container">
+                              <div className="heart-div">
+                                <img
+                                  style={{ cursor: 'pointer' }}
+                                  className="heart-icon"
+                                  src={heart}
+                                  alt=""
+                                ></img>
+                                <span>{imgData.likes.length}</span>
+                              </div>
                             </div>
-                          </div>
-                          <div className="facebook-container">
-                            <div className="heart-div">
-                              <img
-                                className="heart-icon"
-                                src={facebook}
-                                alt=""
-                              ></img>
+                            <div className="facebook-container">
+                              <div className="heart-div">
+                                <img
+                                  className="heart-icon"
+                                  src={facebook}
+                                  alt=""
+                                ></img>
+                              </div>
                             </div>
-                          </div>
-                          <div className="instagram-container">
-                            <div className="heart-div">
-                              <img
-                                className="heart-icon"
-                                src={instagram}
-                                alt=""
-                              ></img>
+                            <div className="instagram-container">
+                              <div className="heart-div">
+                                <img
+                                  className="heart-icon"
+                                  src={instagram}
+                                  alt=""
+                                ></img>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    }
-                    modal
-                    nested
-                  >
-                    {(close, item) => (
-                      <Memory
-                        close={close}
-                        data={imgData}
-                        index={index}
-                        handleLike={handleLike}
-                        onhandleChangeComment={onhandleChangeComment}
-                        handleComment={handleComment}
-                        setCommenting={setCommenting}
-                        commenting={commenting}
-                        handleDelete={handleDelete}
-                        handleDellMemory={handleDellMemory}
-                      /> //change to memories
-                    )}
-                  </Popup>
+                      }
+                      modal
+                      nested
+                    >
+                      {(close, item) => (
+                        <Memory
+                          close={close}
+                          data={imgData}
+                          index={index}
+                          handleLike={handleLike}
+                          onhandleChangeComment={onhandleChangeComment}
+                          handleComment={handleComment}
+                          setCommenting={setCommenting}
+                          commenting={commenting}
+                          handleDelete={handleDelete}
+                          handleDellMemory={handleDellMemory}
+                        /> //change to memories
+                      )}
+                    </Popup>
+                  )
                 )
-              ) : <p style={{ merginBottom: '40px' }}>Loading...</p>}
+              ) : (
+                <p style={{ marginBottom: '40px' }}>כאן יהיו הזכרונות שלנו מ{profiledata.firstName}</p>
+              )}
 
               {/* })} */}
             </div>
@@ -370,25 +391,25 @@ const handleClose = () => {
                 }
                 onClick={handleShowMoreMemories}
               >
-                + Show more
+                + עוד זכרונות
               </div>
               <Link to={`/memorycreation/${id}`}>
-                <div className="full-memory-btn">+ add memory</div>
+                <div className="full-memory-btn">+ הוסף זיכרון</div>
               </Link>
             </div>
           </div>
         </div>
         <div className={`${show === 'bio' && 'display'} d-none`}>
           <div className="bio-content">
-            <h1 className="bio-name">{profile[0].name}.</h1>
-            <p className="bio-bio">{profile[0].bio}</p>
+            <h1 className="bio-name">{profiledata.firstName}.</h1>
+            <p className="bio-bio">{profiledata.description}</p>
           </div>
           <div className="life-axis">
-            <h1 className="axis-name">Biography and life axis</h1>
-            <p className="axis-desc">{profile[0].axisDescription}</p>
+            <h1 className="axis-name">ביוגרפיה וציר חיים</h1>
+            {/* <p className="axis-desc">{profiledata.description}</p> */}
           </div>
           <div>
-            {/* {pasrseAxios.map((axis) => (
+            {pasrseAxios.map((axis) => (
             <div className="axis-container">
               <div className="axis-sub-container">
                 <h1 className="axis-title">{axis.axisTitle}</h1>
@@ -398,7 +419,7 @@ const handleClose = () => {
                 <span>{axis.axisDate}</span>
               </div>
             </div>
-          ))} */}
+          ))}
           </div>
         </div>
         <div
@@ -421,8 +442,15 @@ const handleClose = () => {
             ))}
           </div>
         </div>
+        <div
+          className={`${show === 'friends' && 'display'} friends-list d-none`}
+        >
+          <FriendsList />
+        </div>
         <SnackBar open={open} handleClose={handleClose} message={message} />
-      </div >
+        <SocialFooter />
+        <Footer />
+      </div>
     );
   } else {
     return (

@@ -152,6 +152,7 @@
 }
 
 .profile-creation {
+  color: #6097bf;
   background-color: #dcecf4;
   display: flex;
   justify-content: center;
@@ -202,7 +203,9 @@
   margin: 2px;
   margin-top: 4%;
 }
-.nameInput {
+.profile-creation-description {
+  width: 95% !important;
+  height: 153px !important;
   height: 50px;
   border-radius: 10px;
   border: 1px solid #fff;
@@ -210,6 +213,7 @@
   padding-left: 20px;
   margin: 2px;
   width: 45%;
+  margin-top: 2rem;
 }
 .loginInput:focus {
   outline: none;
@@ -276,6 +280,14 @@
 }
 .loginBox {
   height: auto;
+}
+.profile-creation-box {
+  height: auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  direction: rtl;
 }
 .profile-images {
   display: flex;
@@ -396,8 +408,44 @@ input::placeholder {
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
+.custom-file-input-cover::-webkit-file-upload-button {
+  visibility: hidden;
+}
 .custom-file-input::before {
-  content: '+ Edit profile image';
+  content: '+ הוסף תמונת פרופיל';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  /* border: 1px solid #999; */
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+#profilePic::-webkit-file-upload-button {
+  visibility: hidden;
+}
+#profilePic::before {
+  content: '+ הוסף תמונות לגלריה';
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  /* border: 1px solid #999; */
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input-cover::before {
+  content: '+ הוסף תמונת קאבר';
   display: inline-block;
   background: linear-gradient(top, #f9f9f9, #e3e3e3);
   /* border: 1px solid #999; */

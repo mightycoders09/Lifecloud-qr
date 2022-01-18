@@ -11,6 +11,7 @@ import facebook from '../../assets/facebook.png';
 import ProgressBar from '../../components/progressbar/progressBar'
 import instagram from '../../assets/instagram.png';
 import Footer from '../../components/footer/Footer';
+import SocialFooter from '../../components/socialFooter/socialFooter';
 export const UserAndprofiles = () => {
   const LoggedUser = useContext(AuthContext);
   const [data, setData] = useState([]);
@@ -28,15 +29,15 @@ export const UserAndprofiles = () => {
       <div className="profile">
         <div className="profileRight">
           <div className="user-main">
-            <h1 className="user-name">Hello {LoggedUser.user.firstName}!</h1>
-            <p className={classes.userDescription}>
+            <h1 className="user-name">שלום, {LoggedUser.user.firstName}!</h1>
+            {/* <p className='user-description'>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s,{' '}
-            </p>
+            </p> */}
           </div>
           <div className="profiles-container">
-            <h1 className="profile-title">My profiles</h1>
+            <h1 className="profile-title">הפרופילים שלי</h1>
             <div className="profiles">
               {data &&
                 data.length > 0 ?
@@ -77,44 +78,36 @@ export const UserAndprofiles = () => {
                   <div className="profile-image create-profile-container">
                     +
                   </div>
-                  <div className="profile-name">Make a new profile</div>
+                  <div className="profile-name"> צור פרופיל חדש</div>
                 </div>
               </Link>
             </div>
           </div>
           <div className="settings-container">
-            <h1 className="profile-title">User settings</h1>
+            <h1 className="profile-title">הגדרות חשבון</h1>
             <div className="btns-container">
               <div className="big-button">
-                privacy{' '}
                 <img
                   src={Lock}
                   alt=""
                   style={{ height: '15px', width: '15px' }}
                 ></img>
+                פרטי{' '}
               </div>
-              <div className="big-button">Payments</div>
-              <div className="big-button">Manage plan</div>
+              <div className="big-button">תשלומים</div>
+              <div className="big-button">נהל תוכנית</div>
             </div>
             <div>
-              <h3 className="settings-subtitle">Plan type: </h3>
-              <h3 className="settings-subtitle">Plan's end date: </h3>
+              <h3 className="settings-subtitle">:סוג התוכנית </h3>
+              <h3 className="settings-subtitle">:סיום התוכנית </h3>
             </div>
-            <div className="logout-btn">Log out</div>
-          </div>
-          <div className="white-footer">
-            <h1 className="profile-title">Follow us</h1>
-            <div className="social-media-icons">
-              <a href="https://www.facebook.com/">
-                <img src={facebook} alt=""></img>
-              </a>
-              <a href="https://www.instagram.com/">
-                <img src={instagram} alt=""></img>
-              </a>
-            </div>
+            <Link to="/">
+            <div className="logout-btn">התנתק</div>
+            </Link>
           </div>
         </div>
       </div>
+      <SocialFooter backgroundColor='#fff' color='#6097BF'/>
       <Footer />
     </>
   );

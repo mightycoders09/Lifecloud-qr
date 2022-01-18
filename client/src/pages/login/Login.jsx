@@ -4,6 +4,9 @@ import { loginCall } from '../../apiCalls';
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import Topbar from '../../components/topbar/Topbar';
+import SocialFooter from '../../components/socialFooter/socialFooter';
+import Footer from '../../components/footer/Footer';
 export default function Login() {
   // const email = useRef("Janesss@gamil.com");
   const [email, setEmail] = useState('');
@@ -18,84 +21,89 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <span className="loginDesc">Login</span>
-        </div>
-        <div className="loginRight">
-          <div className="loginBox">
-            <form className="loginBox" onSubmit={handleClick}>
-              <input
-                placeholder="Email"
-                type="email"
-                value={email}
-                required
-                className="loginInput"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                placeholder="Password"
-                type="password"
-                value={password}
-                required
-                minLength="6"
-                className="loginInput"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <input
-                placeholder="Phone (optional)"
-                type="phone"
-                value={phone}
-                minLength="6"
-                className="loginInput"
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <button
-                className="loginButton"
-                type="submit"
-                disabled={isFetching}
-              >
-                {isFetching ? (
-                  <CircularProgress color="white" size="20px" />
-                ) : (
-                  'Log In'
-                )}
-              </button>
-              <span className="loginForgot"></span>
-            </form>
-            <div className='loginRegisterContainer'>
-              <p className="loginRegisterButton">
-                {isFetching ? (
-                  <CircularProgress color="white" size="20px" />
-                ) : (
-                  <Link
-                    to="/register"
-                    style={{ textDecoration: 'none' }}
-                    className="loginRegisterButton"
-                  >
-                     הרשמה 
-                  </Link>
-                )}
-              </p>
-               | 
-              <p className="loginRegisterButton">
-                {isFetching ? (
-                  <CircularProgress color="white" size="20px" />
-                ) : (
-                  <Link
-                    to="/register"
-                    style={{ textDecoration: 'none' }}
-                    className="loginRegisterButton"
-                  >
-                     שכחתי סיסמה 
-                  </Link>
-                )}
-              </p>
+    <>
+    <Topbar />
+      <div className="login">
+        <div className="loginWrapper">
+          <div className="loginLeft">
+            <span className="loginDesc">התחברות</span>
+          </div>
+          <div className="loginRight">
+            <div className="loginBox">
+              <form className="loginBox" onSubmit={handleClick}>
+                <input
+                  placeholder="מייל*"
+                  type="email"
+                  value={email}
+                  required
+                  className="login-input"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  placeholder="סיסמא*"
+                  type="password"
+                  value={password}
+                  required
+                  minLength="6"
+                  className="login-input"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <input
+                  placeholder="טלפון"
+                  type="phone"
+                  value={phone}
+                  minLength="6"
+                  className="login-input"
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <button
+                  className="login-button"
+                  type="submit"
+                  disabled={isFetching}
+                >
+                  {isFetching ? (
+                    <CircularProgress color="white" size="20px" />
+                  ) : (
+                    'התחבר'
+                  )}
+                </button>
+                <span className="loginForgot"></span>
+              </form>
+              <div className="loginRegisterContainer">
+                <p className="login-register-button">
+                  {isFetching ? (
+                    <CircularProgress color="white" size="15px" />
+                  ) : (
+                    <Link
+                      to="/register"
+                      style={{ textDecoration: 'none' }}
+                      className="login-register-button"
+                    >
+                      הרשמה
+                    </Link>
+                  )}
+                </p>
+                |
+                <p className="login-register-button">
+                  {isFetching ? (
+                    <CircularProgress color="white" size="15px" />
+                  ) : (
+                    <Link
+                      to="/register"
+                      style={{ textDecoration: 'none' }}
+                      className="login-register-button"
+                    >
+                      שכחתי סיסמה
+                    </Link>
+                  )}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <SocialFooter backgroundColor='#abc9db' color='#fff'/>
+      <Footer />
+    </>
   );
 }

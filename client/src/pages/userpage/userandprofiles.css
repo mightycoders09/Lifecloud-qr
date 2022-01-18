@@ -284,7 +284,7 @@
 .profile-image-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   color: #6097bf;
 }
 .profile-image-container p {
@@ -397,7 +397,7 @@ input::placeholder {
   visibility: hidden;
 }
 .custom-file-input::before {
-  content: '+ Edit profile image';
+  content: '+ הוסף תמונת פרופיל';
   display: inline-block;
   background: linear-gradient(top, #f9f9f9, #e3e3e3);
   /* border: 1px solid #999; */
@@ -422,11 +422,11 @@ input::placeholder {
 }
 .create-profile-container {
   background: #abc9db;
-  /* display: flex; */
+  display: flex;
   justify-content: center;
   align-items: center;
-  /* font-size: 146px; */
   font-weight: 100;
+  font-size: 150px;
   color: #fff;
 }
 a {

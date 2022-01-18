@@ -1,9 +1,12 @@
-.login {
-  width: 100vw;
-  height: 100vh;
-  background-color: #f0f2f5;
+.register {
+  background-color: #dcecf4;
   display: flex;
   align-items: flex-start;
+  max-width: 99.65vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
 }
 
 .loginWrapper {
@@ -17,12 +20,12 @@
   justify-content: center;
 }
 
-.loginLogo {
+.register-logo {
   font-family: Alef !important;
   font-style: normal;
   font-weight: normal;
-  font-size: 100px !important;
-  line-height: 136px !important;
+  font-size: 75px !important;
+  margin-top: 5rem;
   display: flex;
   align-items: center;
   text-align: center;
@@ -41,38 +44,66 @@
   justify-content: space-between;
 }
 
-.loginInput {
-  height: 80px;
+.register-input {
+  text-align: center;
+  direction: rtl;
   border-radius: 10px;
   border: 1px solid #fff;
-  font-size: 35px !important;
+  font-size: 22px !important;
   padding-left: 20px;
   margin: 2px;
   margin-top: 4%;
+  height: 32px;
+  color: #6097bf;
 }
-.nameInput {
-  height: 50px;
+[type='date']::-webkit-inner-spin-button {
+  display: none;
+}
+[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+}
+.name-input {
+  text-align: center;
+  direction: rtl;
   border-radius: 10px;
   border: 1px solid #fff;
-  font-size: 18px;
+  font-size: 22px !important;
   padding-left: 20px;
   margin: 2px;
+  margin-top: 4%;
   width: 44%;
+  color: #abc9db;
 }
 .loginInput:focus {
   outline: none;
 }
 
-.loginButton {
+.register-button {
   height: 50px;
   border-radius: 10px;
   border: none;
-  background-color: #1775ee;
+  background-color: #6097bf;
   color: white;
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
   margin: 2px;
+}
+.register-actions {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: #6097bf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register-actions a {
+  text-decoration: none;
+  color: #6097bf;
+  cursor: pointer;
+}
+.register-actions div {
+  margin-bottom: 1rem;
 }
 
 .loginForgot {
@@ -109,15 +140,27 @@
     margin-bottom: 10px;
   }
 }
-.radio-container {
-  font-size: 35px;
+.radio-container-register {
+  direction: rtl;
+  font-size: 18px;
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
   margin-top: 2rem;
 }
-.radio-input-container {
+.radio-input-container-register {
+  margin: 0 1rem 0 1rem;
+  background: #fff;
   margin: 0 2rem 0 2rem;
+  width: 25px;
+  height: 25px;
+  color: #6097bf;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.register-active {
+  background: #6097bf;
+  color: #fff;
 }
 .names-container {
   display: flex;

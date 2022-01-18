@@ -3,6 +3,9 @@ import { useRef, useState } from 'react';
 import './register.css';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import Topbar from '../../components/topbar/Topbar';
+import SocialFooter from '../../components/socialFooter/socialFooter';
+import Footer from '../../components/footer/Footer';
 
 export default function Register() {
   const [selectedGender, setSelectedGender] = useState('');
@@ -16,7 +19,7 @@ export default function Register() {
   const password = useRef();
   const passwordAgain = useRef();
   const history = useHistory();
-  const [error, setErro] = useState('')
+  const [error, setErro] = useState('');
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -26,172 +29,211 @@ export default function Register() {
     email: '',
     password: '',
     passwordAgain: '',
-  })
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value, 'va')
+    console.log(name, value, 'va');
     // setSelectedGender(e.target.value);
     setUser({
       ...user,
-      [name]: value
-    })
-    setErro('')
+      [name]: value,
+    });
+    setErro('');
   };
   const handleClick = async (e) => {
     e.preventDefault();
     if (user.password !== user.passwordAgain) {
       setErro("Passwords don't match!");
     } else {
-      setErro('')
+      setErro('');
       try {
         fetch('/api/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            Accept: 'application/json',
           },
-          body: JSON.stringify(user)
-        }).then(res => {
-          return res.json()
-        }).then(res => {
-          history.push('/login');
-          console.log(res, 'res')
+          body: JSON.stringify(user),
         })
-
+          .then((res) => {
+            return res.json();
+          })
+          .then((res) => {
+            history.push('/login');
+            console.log(res, 'res');
+          });
       } catch (err) {
         console.log(err);
       }
     }
   };
-  console.log(user, 'user')
+  console.log(user, 'user');
   return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginLeft">
-          <h3 className="loginLogo">Register</h3>
-        </div>
-        <div className="loginRight">
-          <div className="RegBox">
-            <form className="loginBox" onSubmit={handleClick}>
-              <div className='names-container'>
+    <>
+      <Topbar />
+      <div className="register">
+        <div className="loginWrapper">
+          <div className="loginLeft">
+            <h3 className="register-logo">הרשמה</h3>
+          </div>
+          <div className="loginRight">
+            <div className="RegBox">
+              <form className="loginBox" onSubmit={handleClick}>
+                <div className="names-container">
+                  <input
+                    placeholder="* שם פרטי"
+                    required
+                    onChange={handleChange}
+                    ref={firstName}
+                    value={user.firstName}
+                    name="firstName"
+                    className="name-input"
+                  />
+                  <input
+                    placeholder="*שם משפחה"
+                    required
+                    onChange={handleChange}
+                    ref={lastName}
+                    value={user.lastName}
+                    name="lastName"
+                    className="name-input"
+                  />
+                </div>
                 <input
-                  placeholder="First Name"
+                  placeholder="שם החברה"
                   required
                   onChange={handleChange}
-                  ref={firstName}
-                  value={user.firstName}
-                  name='firstName'
-                  className="nameInput"
+                  ref={companyName}
+                  value={user.companyName}
+                  name="companyName"
+                  className="register-input"
+                  type="companyName"
                 />
+                <span>תאריך לידה</span>
                 <input
-                  placeholder="lastName"
+                  placeholder="Date of Birth"
                   required
                   onChange={handleChange}
-                  ref={lastName}
-                  value={user.lastName}
-                  name='lastName'
-                  className="nameInput"
+                  ref={dateOfBirth}
+                  className="register-input"
+                  value={user.dateOfBirth}
+                  name="dateOfBirth"
+                  type="date"
                 />
-              </div>
-              <input
-                placeholder="company Name "
-                required
-                onChange={handleChange}
-                ref={companyName}
-                value={user.companyName}
-                name='companyName'
-                className="loginInput"
-                type="companyName"
-              />
-              <input
-                placeholder="Date of Birth"
-                required
-                onChange={handleChange}
-                ref={dateOfBirth}
-                className="loginInput"
-                value={user.dateOfBirth}
-                name='dateOfBirth'
-                type="date"
-              />
-              <div className='radio-container'>
-                <h3>Gender</h3>
-                <div className='radio-input-container'>
-                  <input
-                    type="radio"
-                    value="male"
-                    id="male"
-                    value='male'
-                    onChange={handleChange}
-                    name="gender"
-                    checked={user.gender === "male"}
-                    className='radio'
-                  />
-                  <label for="male">Male</label>
+                <div className="radio-container-register">
+                  <h3 style={{ color: '#6097BF' }}>* מין</h3>
+                  <div
+                    className={`${
+                      selectedGender === 'male' && 'register-active'
+                    } radio-input-container-register`}
+                    onClick={() => setSelectedGender('male')}
+                  >
+                    <input
+                      type="radio"
+                      value="male"
+                      id="male"
+                      onChange={handleChange}
+                      name="gender"
+                      checked={user.gender === 'male'}
+                      className="radio"
+                    />
+                    <label for="male">ז</label>
+                  </div>
+                  <div
+                    className={`${
+                      selectedGender === 'female' && 'register-active'
+                    } radio-input-container-register`}
+                    onClick={() => setSelectedGender('female')}
+                  >
+                    <input
+                      type="radio"
+                      value="female"
+                      id="female"
+                      onChange={handleChange}
+                      checked={user.gender === 'female'}
+                      name="gender"
+                      className="radio"
+                    />
+                    <label for="female">נ</label>
+                  </div>
                 </div>
-                <div className='radio-input-container'>
-
-                  <input
-                    type="radio"
-                    value="female"
-                    id="female"
-                    onChange={handleChange}
-                    checked={user.gender === "female"}
-                    value='female'
-                    name="gender"
-                    className='radio'
-                  />
-                  <label for="female">Female</label>
+                <input
+                  placeholder="*טלפון"
+                  required
+                  value={user.phone}
+                  name="phone"
+                  ref={phone}
+                  onChange={handleChange}
+                  className="register-input"
+                  type="phone"
+                />
+                <input
+                  placeholder="*אימייל"
+                  required
+                  value={user.email}
+                  name="email"
+                  ref={email}
+                  onChange={handleChange}
+                  className="register-input"
+                  type="email"
+                />
+                <input
+                  placeholder="בחר סיסמא*"
+                  required
+                  value={user.password}
+                  name="password"
+                  ref={password}
+                  className="register-input"
+                  onChange={handleChange}
+                  type="password"
+                  minLength="6"
+                />
+                <input
+                  placeholder="הזן סיסמא שנית*"
+                  required
+                  value={user.passwordAgain}
+                  name="passwordAgain"
+                  ref={passwordAgain}
+                  onChange={handleChange}
+                  className="register-input"
+                  type="password"
+                />
+                <p style={{ color: 'red', textAlign: 'center' }}>
+                  {error.length ? error : ''}
+                </p>
+                <div className="register-actions">
+                  <div>
+                    <Link
+                      to="/login"
+                      style={{ textDecoration: 'none' }}
+                      className=""
+                    >
+                      {' '}
+                      <span className="">התחברות (משתמש קיים) </span>
+                    </Link>
+                    |
+                    <Link
+                      to="/lostPassword"
+                      style={{ textDecoration: 'none' }}
+                      className=""
+                    >
+                      {' '}
+                      <span className="">איבדתי סיסמא </span>
+                    </Link>
+                  </div>
+                  <span>אני מאשר את תנאי השימוש ופרטיות</span>
                 </div>
-              </div>
-              <input
-                placeholder="Email"
-                required
-                value={user.email}
-                name='email'
-                ref={email}
-                onChange={handleChange}
-                className="loginInput"
-                type="email"
-              />
-              <input
-                placeholder="Password"
-                required
-                value={user.password}
-                name='password'
-                ref={password}
-                className="loginInput"
-                onChange={handleChange}
-                type="password"
-                minLength="6"
-              />
-              <input
-                placeholder="Password Again"
-                required
-                value={user.passwordAgain}
-                name='passwordAgain'
-                ref={passwordAgain}
-                onChange={handleChange}
-                className="loginInput"
-                type="password"
-              />
-              <p style={{ color: 'red', textAlign: 'center' }}>{error.length ? error : ''}</p>
-              <button className="loginButton" type="submit">
-                Sign Up
-              </button>
-            </form>
-            <Link
-              to="/login"
-              style={{ textDecoration: 'none' }}
-              className="loginRegisterButton"
-            > <button className="loginRegisterButton">
-
-                Log into Account{' '}
-
-              </button></Link>
+                <button className="register-button" type="submit">
+                  הרשמה
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <SocialFooter />
+      <Footer />
+    </>
   );
 }

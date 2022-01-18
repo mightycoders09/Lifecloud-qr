@@ -3,7 +3,7 @@ import '../../pages/profile/profiledetails.css'
 import { Link } from 'react-router-dom'
 export const Gallery = ({ profiledata, id }) => {
     return <>
-        <h1 className="gallery-title">Gallery</h1>
+        <h1 className="gallery-title">גלריה</h1>
         <div className="imgs-container">
             {profiledata.gallery.slice(0, 4).map((img, index) => {
                 return (

@@ -9,13 +9,16 @@ import { Search } from '@material-ui/icons';
 import Rectangle6 from '../../assets/Rectangle6.png';
 import Rectangle7 from '../../assets/Rectangle7.png';
 import Rectangle8 from '../../assets/Rectangle8.png';
-import Rectangle9 from '../../assets/Rectangle9.png';
 import Rectangle12 from '../../assets/Rectangle12.png';
 import Rectangle13 from '../../assets/Rectangle13.png';
 import Rectangle14 from '../../assets/Rectangle14.png';
 import Rectangle15 from '../../assets/Rectangle15.png';
 import Rectangle16 from '../../assets/Rectangle16.png';
 import Rectangle17 from '../../assets/Rectangle17.png';
+import homeImg from '../../assets/homeImg.png';
+import homeImg2 from '../../assets/homeImg2.png';
+import homeImg3 from '../../assets/homeImg3.png';
+import homeImg4 from '../../assets/homeImg4.png';
 import standart2 from '../../assets/standart2.png';
 import basic1 from '../../assets/basic1.png';
 import basic2 from '../../assets/basic2.png';
@@ -78,41 +81,51 @@ const Home = () => {
       <div className="search-container">
         <div className="searchbar-container">
           <div className="searchbar searchbar-2">
-            <Search className="searchIcon" />
             <input
               type="text"
-              placeholder="Search for Friends"
+              placeholder="...חיפוש מנוח/עמותה"
               className="SearchInput"
               onChange={(e) => setSearchText(e.target.value)}
             />
+            <Search className="searchIcon" />
           </div>
         </div>
         <Sidebar> </Sidebar>
       </div>
+
       <div className="top-image-container">
-        <p className="text-container-home">
-          Life is a puzzle made up of pieces Intertwined in the lives of a
-          family, Friends, Acquaintances. With the passing of a man from the
-          world, The life story dies.
-        </p>
-        <div>
-          <img className="img-350 left-img" src={Rectangle9} alt=""></img>
-          <img className="img-350 right-img" src={Rectangle6} alt=""></img>
+        <h1>
+          <strong>כל אדם מיוחד במינו.</strong>
+        </h1>
+        <h2 style={{ marginBottom: '3rem' }}>
+          כל אדם ראוי לכך שסיפור חייו יהיה מונצח ומונגש לעד
+        </h2>
+        <div className="top-image">
+          <p className="text-container-home">
+            סיפור חייו של אדם הינו פאזל המורכב מחלקים השלובים בחייהם של בני
+            משפחה, חברים ומכרים.<br></br>
+            עם לכתו של אדם מהעולם, סיפור חייו הולך עימו.
+          </p>
+          <div>
+            <img className="img-350 left-img" src={homeImg4} alt=""></img>
+            <img className="img-350 right-img" src={homeImg} alt=""></img>
+          </div>
         </div>
       </div>
       <div className="bottom-image-container">
         <p className="text-container-home">
-          Is it possible to connect The puzzle back Or to revive his story?
+          האם אפשר לחבר את הפאזל בחזרה או להחיות את הסיפור
         </p>
         <div>
-          <img className="img-350 left-img" src={Rectangle8} alt=""></img>
-          <img className="img-350 right-img" src={Rectangle7} alt=""></img>
+          <img className="img-350 left-img" src={homeImg3} alt=""></img>
+          <img className="img-350 right-img" src={homeImg2} alt=""></img>
         </div>
       </div>
+
       <div className="popups-container">
         <h1 className="text-container-home">
-          Life Book of Lifecloud Lets us assemble The puzzle{' '}
-          <strong>using</strong>
+          ספר החיים של Life Cloud מאפשר לנו להרכיב את הפאזל{' '}
+          <strong>באמצעות</strong>
         </h1>
       </div>
       <div className="imgs-container">
@@ -121,9 +134,9 @@ const Home = () => {
             trigger={
               <div>
                 <img className="img-300" src={Rectangle13} alt=""></img>
-                <h1>Social Media</h1>
+                <h1>רשתות חברתיות</h1>
                 <p>+</p>
-                <p className="button"> Read More </p>
+                <p className="button"> קרא עוד </p>
               </div>
             }
             modal
@@ -155,7 +168,7 @@ const Home = () => {
                       close();
                     }}
                   >
-                    close modal
+                    חזור
                   </button>
                 </div>
               </div>
@@ -169,7 +182,7 @@ const Home = () => {
                 <img className="img-300" src={Rectangle14} alt=""></img>
                 <h1>QR Code</h1>
                 <p>+</p>
-                <p>Read More</p>{' '}
+                <p>קרא עוד</p>{' '}
               </div>
             }
             modal
@@ -201,7 +214,7 @@ const Home = () => {
                       close();
                     }}
                   >
-                    close modal
+                    חזרה
                   </button>
                 </div>
               </div>
@@ -213,9 +226,9 @@ const Home = () => {
             trigger={
               <div>
                 <img className="img-300" src={Rectangle12} alt=""></img>
-                <h1>Saving photos&videos</h1>
+                <h1>שמירת תמונות וסרטונים</h1>
                 <p>+</p>
-                <p>Read More</p>{' '}
+                <p>קרא עוד</p>{' '}
               </div>
             }
             modal
@@ -247,7 +260,7 @@ const Home = () => {
                       close();
                     }}
                   >
-                    close modal
+                    חזרה
                   </button>
                 </div>
               </div>
@@ -261,9 +274,9 @@ const Home = () => {
             trigger={
               <div>
                 <img className="img-300" src={Rectangle16} alt=""></img>
-                <h1>Wall management</h1>
+                <h1>ניהול פרופיל</h1>
                 <p>+</p>
-                <p>Read More</p>
+                <p>קרא עוד</p>
               </div>
             }
             modal
@@ -295,7 +308,7 @@ const Home = () => {
                       close();
                     }}
                   >
-                    close modal
+                    חזרה
                   </button>
                 </div>
               </div>
@@ -307,9 +320,9 @@ const Home = () => {
             trigger={
               <div>
                 <img className="img-300" src={Rectangle17} alt=""></img>
-                <h1>Calendar management</h1>
+                <h1>ניהול לוח שנה</h1>
                 <p>+</p>
-                <p>Read More</p>{' '}
+                <p>קרא עוד</p>{' '}
               </div>
             }
             modal
@@ -341,7 +354,7 @@ const Home = () => {
                       close();
                     }}
                   >
-                    close modal
+                    חזרה
                   </button>
                 </div>
               </div>
@@ -353,9 +366,9 @@ const Home = () => {
             trigger={
               <div>
                 <img className="img-300" src={Rectangle15} alt=""></img>
-                <h1>Graves locations</h1>
+                <h1>מיקום הקבר</h1>
                 <p>+</p>
-                <p>Read More</p>{' '}
+                <p>קרא עוד</p>{' '}
               </div>
             }
             modal
@@ -387,7 +400,7 @@ const Home = () => {
                       close();
                     }}
                   >
-                    close modal
+                    חזרה
                   </button>
                 </div>
               </div>
@@ -405,24 +418,21 @@ const Home = () => {
         <Slider {...settings}>
           <div>
             <h3>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
+              לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מודוף
             </h3>
-            <h5>-Idan Mor-</h5>
+            <h5>-עידן מור-</h5>
           </div>
           <div>
             <h3>
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s
+              לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מודוף
             </h3>
-            <h5>-John Smith-</h5>
+            <h5>-עידן מור-</h5>
           </div>
           <div>
             <h3>
-              when an unknown printer took a galley of type and scrambled it to
-              make a type specimen book.
+              לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מודוף
             </h3>
-            <h5>-Michael Garmin-</h5>
+            <h5>-עידן מור-</h5>
           </div>
         </Slider>
       </div>
@@ -445,24 +455,24 @@ const Home = () => {
             <img src={basic1} alt=""></img>
             <h1 className="plan-title">LifePage</h1>
             <div className="plan-description">
-              <h5>Free</h5>
-              <a>+ For more details</a>
+              <h5>חינם</h5>
+              <a>+ לחץ לפרטים נוספים</a>
             </div>
           </div>
           <div className="plan-container">
             <img src={basic2} alt=""></img>
             <h1 className="plan-title">LifeBook</h1>
             <div className="plan-description">
-              <h5>1 Year</h5>
-              <a>+ For more details</a>
+              <h5>שנה</h5>
+              <a>+ לחץ לפרטים נוספים</a>
             </div>
           </div>
           <div className="plan-container">
             <img src={standart2} alt=""></img>
             <h1 className="plan-title">LifeBook</h1>
             <div className="plan-description">
-              <h5>5 Years</h5>
-              <a>+ For more details</a>
+              <h5>5 שנים</h5>
+              <a>+ לחץ לפרטים נוספים</a>
             </div>
           </div>
           <div className="plan-container">
@@ -470,7 +480,7 @@ const Home = () => {
             <h1 className="plan-title">LifeBook</h1>
             <div className="plan-description">
               <h5>Organisation</h5>
-              <a>+ For more details</a>
+              <a>+ לחץ לפרטים נוספים</a>
             </div>
           </div>
         </div>

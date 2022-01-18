@@ -167,8 +167,8 @@ export default function ProfileEdit() {
             formdata.append('googleLocation', wallInformation.googleLocation);
             formdata.append('description', wallInformation.description);
             formdata.append('lifeAxis', JSON.stringify(inputList));
-                for (let i = 0; i < multiFiles.length; i++) {
-                    formdata.append('multiplefiles', multiFiles[i]);
+            for (let i = 0; i < multiFiles.length; i++) {
+                formdata.append('multiplefiles', multiFiles[i]);
 
             }
             // const config = {
@@ -205,12 +205,12 @@ export default function ProfileEdit() {
         setMessage('')
     }
     return (
-        <div className="create-profile-container">
+        <div className="profile-creation-container">
             <Topbar />
             <div className="profile-creation">
                 <div className="loginWrapper">
                     <div className="loginLeft">
-                        <h3 className="loginLogo">Edit Profile</h3>
+                        <h3 className="profile-creation-title">ערוך פרופיל</h3>
                     </div>
                     <div className="profile-images">
                         <div className="register_profile_image"></div>
@@ -245,7 +245,7 @@ export default function ProfileEdit() {
                                 alt=""
                             ></img>
                             <input
-                                className="custom-file-input"
+                                className="custom-file-input-cover"
                                 type="file"
                                 onChange={onChangeCover}
                                 name="profileImg"
@@ -254,10 +254,10 @@ export default function ProfileEdit() {
                     </div>
                     <div className="loginRight">
                         <div className="RegBox">
-                            <form className="loginBox" onSubmit={handleClick}>
+                            <form className="profile-creation-box" onSubmit={handleClick}>
                                 <div className="names-container">
                                     <input
-                                        placeholder="* First Name"
+                                        placeholder="* שם פרטי"
                                         value={wallInformation.firstName}
                                         ref={firstName}
                                         onChange={handleChangeValue}
@@ -265,7 +265,7 @@ export default function ProfileEdit() {
                                         className="nameInput"
                                     />
                                     <input
-                                        placeholder="* Last Name"
+                                        placeholder="* שם משפחה"
                                         value={wallInformation.lastName}
                                         ref={lastName}
                                         onChange={handleChangeValue}
@@ -275,7 +275,7 @@ export default function ProfileEdit() {
                                 </div>
                                 <div className="names-container">
                                     <input
-                                        placeholder="* Birth Date"
+                                        placeholder="* תאריך לידה"
                                         required
                                         type="date"
                                         ref={birthDate}
@@ -286,7 +286,7 @@ export default function ProfileEdit() {
 
                                     />
                                     <input
-                                        placeholder="* Death Date"
+                                        placeholder="* תאריך פטירה"
                                         required
                                         type="date"
                                         onChange={handleChangeValue}
@@ -297,7 +297,7 @@ export default function ProfileEdit() {
                                     />
                                 </div>
                                 <div className="radio-container">
-                                    <h3>Gender</h3>
+                                    <h3>מין</h3>
                                     <div className="radio-input-container">
                                         <input
                                             type="radio"
@@ -312,7 +312,7 @@ export default function ProfileEdit() {
                                             className={`${wallInformation.gender === 'male' && 'active'
                                                 } input-label`}
                                         >
-                                            Male
+                                            ז
                                         </label>
                                     </div>
                                     <div className="radio-input-container">
@@ -329,12 +329,12 @@ export default function ProfileEdit() {
                                             className={`${wallInformation.gender === 'female' && 'active'
                                                 } input-label`}
                                         >
-                                            Female
+                                            נ
                                         </label>
                                     </div>
                                 </div>
                                 <div className="location-container">
-                                    <h1>* Graves Location</h1>
+                                    <h1>* מיקום הקבר</h1>
                                     <div className="location-semicontainer">
                                         <div className="names-container">
                                             <input
@@ -359,7 +359,7 @@ export default function ProfileEdit() {
                                     </div>
                                 </div>
                                 <div className="location-container">
-                                    <h1>* Upload photos & videos to gallery</h1>
+                                    <h1>* העלאת תמונות לגלריה</h1>
                                     <div>
                                         <div className="names-container">
                                             <div className="register_profile_image">
@@ -380,10 +380,9 @@ export default function ProfileEdit() {
                                             </div> */}
                                         </div>
                                     </div>{' '}
-                                    to do
                                 </div>
                                 <input
-                                    placeholder="* Add description of the deceased"
+                                    placeholder="* + על הנפטר"
                                     ref={description}
                                     onChange={handleChangeValue}
                                     value={wallInformation.description}
@@ -391,28 +390,28 @@ export default function ProfileEdit() {
                                     className="nameInput description"
                                 />
                                 <div>
-                                    <h1 style={{ textAlign: 'center' }}>Life Axis</h1>
+                                    <h1 style={{ textAlign: 'center' }}>ציר חיים</h1>
                                     {inputList.map((x, i) => {
                                         return (
                                             <div className="box" key={i}>
                                                 <div className="inner-box">
                                                     <input
                                                         name="axisTitle"
-                                                        placeholder="* Title"
+                                                        placeholder="* כותרת"
                                                         value={x.axisTitle}
                                                         onChange={(e) => handleInputChange(e, i)}
                                                         className="axis-input"
                                                     />
                                                     <input
                                                         name="axisDate"
-                                                        placeholder="* Date"
+                                                        placeholder="* תאריך"
                                                         value={x.axisDate}
                                                         onChange={(e) => handleInputChange(e, i)}
                                                         className="axis-input"
                                                     />
                                                     <input
                                                         name="axisDescription"
-                                                        placeholder="* Description"
+                                                        placeholder="* טקסט"
                                                         value={x.axisDescription}
                                                         onChange={(e) => handleInputChange(e, i)}
                                                         className="axis-description"
@@ -423,7 +422,7 @@ export default function ProfileEdit() {
                                                                 className="delete-btn"
                                                                 onClick={() => handleRemoveClick(i)}
                                                             >
-                                                                -Delete
+                                                                -הסר
                                                             </p>
                                                         )}
                                                     </div>

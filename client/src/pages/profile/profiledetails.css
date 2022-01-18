@@ -87,6 +87,7 @@
   margin-bottom: 2rem;
 }
 .details-and-icons {
+  direction: rtl;
   color: #6097bf;
   background-color: #fff;
   font-size: 20px;
@@ -97,10 +98,16 @@
   justify-content: space-between;
   align-items: center;
 }
+.wall-main-container {
+  align-self: self-end;
+}
 .icon {
   height: 50px;
   width: 50px;
   margin-left: 20px;
+}
+.no-link-icon {
+  opacity: 0.2;
 }
 .gallery-container {
   display: flex;
@@ -414,9 +421,8 @@
   margin-right: 2rem;
 }
 
-.icons-container {
+.profile-icons-container {
   display: flex;
-  margin-top: -65px;
   justify-content: space-evenly;
 }
 .memory-actions {
@@ -424,4 +430,29 @@
   justify-content: space-evenly;
   width: 700px;
   margin: auto;
+}
+.memories-div {
+  padding-bottom: 3rem;
+}
+.profile-creation-title {
+  font-size: 50px;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
+  color: #6097bf;
+}
+input[type='date']::before {
+  color: #ABC9DB;
+  ;
+  content: attr(placeholder);
+}
+input[type='date'] {
+  color: #ffffff;
+}
+input[type='date']:focus,
+input[type='date']:valid {
+  color: #ABC9DB;
+}
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  content: '' !important;
 }

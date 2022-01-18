@@ -7,14 +7,14 @@ import profiles from './dummy-profiles.json';
 import './profile.css';
 import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router';
-import SnackBar from '../../components/snackbar/SnackBar'
+import SnackBar from '../../components/snackbar/SnackBar';
 export default function ProfileCreate() {
   const { user } = useContext(AuthContext);
   const id = useParams().id;
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
-  const [open,setOpen] = useState(false)
-  const [message,setMessage]  = useState('')
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
   console.log(imgData, 'imgData');
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
@@ -40,14 +40,14 @@ export default function ProfileCreate() {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-  const [multiFiles, setMultiFiles] = useState()
+  const [multiFiles, setMultiFiles] = useState();
   const onChangeMultiplePicture = (e) => {
-    setMultiFiles(e.target.files)
-  }
+    setMultiFiles(e.target.files);
+  };
   const [inputList, setInputList] = useState([
     { axisTitle: '', axisDate: '', axisDescription: '' },
   ]);
-  console.log(multiFiles, 'multiFiles')
+  console.log(multiFiles, 'multiFiles');
   console.log(picture, 'pic');
   console.log(image, 'image');
   const [selectedGender, setSelectedGender] = useState('');
@@ -141,29 +141,28 @@ export default function ProfileCreate() {
         })
         .then((res) => {
           console.log(res);
-          if(res){
-            setMessage('Profile created successfully!')
-            setOpen(true)
+          if (res) {
+            setMessage('פרופיל נוצר בהצלחה');
+            setOpen(true);
           }
         });
-
     } catch (err) {
       console.log(err);
-      setMessage('Something went wrong!')
-      setOpen(true)
+      setMessage('Something went wrong!');
+      setOpen(true);
     }
   };
-const handleClose = () => {
-  setOpen(false)
-  setMessage('')
-}
+  const handleClose = () => {
+    setOpen(false);
+    setMessage('');
+  };
   return (
-    <div className="create-profile-container">
+    <div className="profile-creation-container">
       <Topbar />
       <div className="profile-creation">
         <div className="loginWrapper">
           <div className="loginLeft">
-            <h3 className="loginLogo">Create Profile</h3>
+            <h3 className="profile-creation-title">צור פרופיל</h3>
           </div>
           <div className="profile-images">
             <div className="register_profile_image"></div>
@@ -205,25 +204,25 @@ const handleClose = () => {
                 alt=""
               ></img>
               <input
-                className="custom-file-input"
+                className="custom-file-input-cover"
                 type="file"
                 onChange={onChangeCover}
-                name="profileImg"
+                name="coverImg"
               />
             </div>
           </div>
           <div className="loginRight">
             <div className="RegBox">
-              <form className="loginBox" onSubmit={handleClick}>
+              <form className="profile-creation-box" onSubmit={handleClick}>
                 <div className="names-container">
                   <input
-                    placeholder="* First Name"
+                    placeholder="* שם פרטי"
                     required
                     ref={firstName}
                     className="nameInput"
                   />
                   <input
-                    placeholder="* Last Name"
+                    placeholder="* שם משפחה"
                     required
                     ref={lastName}
                     className="nameInput"
@@ -231,69 +230,72 @@ const handleClose = () => {
                 </div>
                 <div className="names-container">
                   <input
-                    placeholder="* Birth Date"
+                    placeholder="* תאריך לידה"
                     required
                     ref={birthDate}
                     className="nameInput"
                     type="date"
                   />
                   <input
-                    placeholder="* Death Date"
+                    placeholder="* תאריך פטירה"
                     required
                     type="date"
                     ref={deathDate}
                     className="nameInput"
                   />
                 </div>
-                <div className="radio-container">
-                  <h3>Gender</h3>
-                  <div className="radio-input-container">
+                <div className="radio-container-register">
+                  <h3 style={{ color: '#6097BF' }}>* מין</h3>
+                  <div
+                    className={`${
+                      selectedGender === 'male' && 'register-active'
+                    } radio-input-container-register`}
+                    onClick={() => setSelectedGender('male')}
+                  >
                     <input
                       type="radio"
                       value="male"
                       id="male"
                       onChange={handleChange}
                       name="gender"
+                      checked={user.gender === 'male'}
                       className="radio"
                     />
-                    <label
-                      for="male"
-                      className={`${selectedGender === 'male' && 'active'
-                        } input-label`}
-                    >
-                      Male
-                    </label>
+                    <label for="male">ז</label>
                   </div>
-                  <div className="radio-input-container">
+                  <div
+                    className={`${
+                      selectedGender === 'female' && 'register-active'
+                    } radio-input-container-register`}
+                    onClick={() => setSelectedGender('female')}
+                  >
                     <input
                       type="radio"
                       value="female"
                       id="female"
                       onChange={handleChange}
+                      checked={user.gender === 'female'}
                       name="gender"
                       className="radio"
                     />
-                    <label
-                      for="female"
-                      className={`${selectedGender === 'female' && 'active'
-                        } input-label`}
-                    >
-                      Female
-                    </label>
+                    <label for="female">נ</label>
                   </div>
                 </div>
-                <div className="location-container">
-                  <h1>* Graves Location</h1>
+                <div
+                  className="location-container"
+                  style={{ marginTop: '2rem' }}
+                >
+                  <h1>* מיקום הקבר</h1>
                   <div className="location-semicontainer">
                     <div className="names-container">
                       <input
-                        placeholder="* Add waze navigation"
+                        placeholder="*הוספת מיקום ווייז "
                         required
                         ref={wazeLocation}
                         className="nameInput"
                       />
                       <input
-                        placeholder="* Add google map location"
+                        placeholder="* הוספת מיקום גוגל"
                         required
                         ref={googleLocation}
                         className="nameInput"
@@ -301,10 +303,15 @@ const handleClose = () => {
                     </div>
                   </div>
                 </div>
-                <div className="location-container">
-                  <h1>* Upload photos & videos to gallery</h1>
+                <div
+                  className="location-container"
+                  style={{ marginTop: '2rem' }}
+                >
+                  <h1>* העלאת תמונות/זכרונות</h1>
                   <div>
                     <div className="names-container">
+                      <div className="form-group multi-preview">
+                      </div>
                       <div className="register_profile_image">
                         <input
                           id="profilePic"
@@ -323,37 +330,36 @@ const handleClose = () => {
                       </div>
                     </div>
                   </div>{' '}
-                  to do
                 </div>
                 <input
-                  placeholder="* Add description of the deceased"
+                  placeholder="+ על הנפטר"
                   required
                   ref={description}
-                  className="nameInput description"
+                  className="profile-creation-description"
                 />
-                <div>
-                  <h1 style={{ textAlign: 'center' }}>Life Axis</h1>
+                <div style={{ marginTop: '2rem' }}>
+                  <h1 style={{ textAlign: 'center' }}>ציר חיים</h1>
                   {inputList.map((x, i) => {
                     return (
                       <div className="box" key={i}>
                         <div className="inner-box">
                           <input
                             name="axisTitle"
-                            placeholder="* Title"
+                            placeholder="* כותרת"
                             value={x.axisTitle}
                             onChange={(e) => handleInputChange(e, i)}
                             className="axis-input"
                           />
                           <input
                             name="axisDate"
-                            placeholder="* Date"
+                            placeholder="* תאריך"
                             value={x.axisDate}
                             onChange={(e) => handleInputChange(e, i)}
                             className="axis-input"
                           />
                           <input
                             name="axisDescription"
-                            placeholder="* Description"
+                            placeholder="* טקסט"
                             value={x.axisDescription}
                             onChange={(e) => handleInputChange(e, i)}
                             className="axis-description"
@@ -364,7 +370,7 @@ const handleClose = () => {
                                 className="delete-btn"
                                 onClick={() => handleRemoveClick(i)}
                               >
-                                -Delete
+                                -הסר
                               </p>
                             )}
                           </div>
@@ -388,7 +394,7 @@ const handleClose = () => {
             </div>
           </div>
         </div>
-        <SnackBar open={open} handleClose={handleClose} message={message}  />
+        <SnackBar open={open} handleClose={handleClose} message={message} />
       </div>
     </div>
   );

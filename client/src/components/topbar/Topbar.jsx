@@ -1,12 +1,6 @@
 import React from 'react';
 import './topbar.css';
-import {
-  Person,
-  Search,
-  Chat,
-  Notifications,
-  ExitToApp,
-} from '@material-ui/icons';
+import blueLogo from '../../assets/logo-blue.png';
 import { Link, useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
@@ -21,105 +15,76 @@ const Topbar = () => {
     <div className="topbarContainer">
       <div className="topbarLeft">
         <Link to="/" style={{ textDecoration: 'none', color: '#6097BF' }}>
-          <span className="logo">LifeCloud</span>
+          <img className="logo" src={blueLogo} alt="" />
         </Link>
       </div>
       <div className="topbarCenter">
-        <div className="searchbar">
-          <Search className="searchIcon" />
-          <input
-            type="text"
-            placeholder="Search for Friends"
-            className="SearchInput"
-            onChange={(e) => setSearchText(e.target.value)}
-          />
+        <input
+          type="text"
+          placeholder="חיפוש..."
+          className="SearchInput top-search"
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <div className="topbarRight">
+          <div className="topbarLinks">
+            {user ? (
+              <div className="logged-nav">
+                <Link
+                  to={`/about`}
+                  style={{ textDecoration: 'none', color: '#6097BF' }}
+                >
+                  אודות
+                </Link>
+                <Link
+                  style={{ marginRight: '15px' }}
+                  to={`/userprofiles/${user._id}`}
+                >
+                  <img
+                    src={
+                      user.profilePicture
+                        ? user.profilePicture
+                        : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
+                    }
+                    alt=""
+                    className="topbarImg"
+                  />
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <Link
+                  to={`/about`}
+                  style={{ textDecoration: 'none', color: '#6097BF' }}
+                  className="topbarLink"
+                >
+                  אודות
+                </Link>
+                <Link
+                  to={`/plans`}
+                  style={{ textDecoration: 'none', color: '#6097BF' }}
+                  className="topbarLink"
+                >
+                  תוכנות
+                </Link>
+                <Link
+                  to={`/login`}
+                  style={{ textDecoration: 'none', color: '#6097BF' }}
+                  className="topbarLink"
+                >
+                  התחברות
+                </Link>
+                <Link
+                  to={`/register`}
+                  style={{ textDecoration: 'none', color: '#6097BF' }}
+                  className="topbarLink"
+                >
+                  הרשמה
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <div className="topbarRight">
-        <div className="topbarLinks">
-          <Link
-            style={{
-              textDecoration: 'none',
-              color: '#6097BF',
-              padding: '10px',
-            }}
-            to="/"
-          >
-            <span className="topbarLink">Homepage</span>
-          </Link>
-          {user ? <Link
-            to={`/userprofiles/${user._id}`}
-            style={{ textDecoration: 'none', color:'blue' }}
-          >
-            <span className="topbarLink">user page</span>
-          </Link> : <Link
-            to={`/`}
-            style={{ textDecoration: 'none', color: 'blue' }}
-          >
-            <span className="topbarLink">user page</span>
-          </Link>}
-      
-{/* 
-          {user ? (
-            <Link
-              to={`/profile/${userName}`}
-              style={{ textDecoration: 'none', color: '#6097BF' }}
-            >
-              <span className="topbarLink">Timeline</span>
-            </Link>
-          ) : (
-            <Link to={`/`} style={{ textDecoration: 'none', color: '#6097BF' }}>
-              <span className="topbarLink">Timeline</span>
-            </Link>
-          )} */}
-        </div>
-        <div className="topbarIcons">
-          <div
-            className="topbarIconItem"
-            onClick={() => {
-              localStorage.clear();
-              history.push('/');
-              window.location.reload();
-            }}
-          >
-            <ExitToApp />
-          </div>
-
-          {/* <div className="topbarIconItem">
-            <Chat />
-            <span className="tobparIconBadge">1</span>
-          </div>
-          <div className="topbarIconItem">
-            <Notifications />
-            <span className="tobparIconBadge">1</span>
-          </div> */}
-        </div>
-      </div>
-      {user ? (
-        <Link style={{ marginRight: '15px' }} to={`/profile/${user.username}`}>
-          <img
-            src={
-              user.profilePicture
-                ? user.profilePicture
-                : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
-            }
-            alt=""
-            className="topbarImg"
-          />
-        </Link>
-      ) : (
-        <Link style={{ marginRight: '15px' }} to={`/`}>
-          <img
-            src={
-              user.profilePicture
-                ? user.profilePicture
-                : 'https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png'
-            }
-            alt=""
-            className="topbarImg"
-          />
-        </Link>
-      )}
     </div>
   );
 };

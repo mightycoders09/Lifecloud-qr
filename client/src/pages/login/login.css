@@ -41,25 +41,33 @@
   justify-content: space-between;
 }
 
-.loginInput {
-  height: 50px;
+.login-input {
+  text-align: center;
+  direction: rtl;
   border-radius: 10px;
   border: 1px solid #fff;
-  font-size: 18px;
+  font-size: 22px !important;
   padding-left: 20px;
+  margin: 2px;
+  margin-top: 4%;
+  height: 32px;
+
 }
 
 .loginInput:focus {
   outline: none;
 }
 
-.loginButton {
+.login-button {
+  cursor: pointer;
+  color: #fff;
   border: 2px solid #ffffff;
   box-sizing: border-box;
   border-radius: 10px;
   background: #abc9db;
-  width: 300px;
-  height: 100px;
+  width: 220px;
+  height: 70px;
+  font-size: 19px;
   margin: auto;
   margin-top: 2rem;
 }
@@ -69,11 +77,11 @@
   color: #1775ee;
 }
 
-.loginRegisterButton {
+.login-register-button {
   font-family: Alef;
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 15px;
   line-height: 41px;
   display: flex;
   align-items: center;
@@ -83,6 +91,7 @@
   padding-left: 1rem;
 }
 .loginRegisterContainer {
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   font-size: 40px;

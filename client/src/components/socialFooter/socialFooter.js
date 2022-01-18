@@ -4,10 +4,11 @@ import rightCloud from '../../assets/rightCloud.png'
 import facebook from '../../assets/facebook.png'
 import instagram from '../../assets/instagram.png'
 
-const SocialFooter = (links) => {
+const SocialFooter = ({links, backgroundColor, color}) => {
+    console.log(backgroundColor, color)
     return (
-        <div className="social-footer">
-            <h1>Follow us</h1>
+        <div className="social-footer" style={{backgroundColor: backgroundColor, color: color}}>
+            <h1>עקבו אחרינו</h1>
             <div className="icons-container social-footer-icons">
                 <div className="facebook-container social-footer-facebook">
                     <div className="heart-div social-footer-icon">
