@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const dotenv = require('dotenv')
+const path = require('path')
 const mongoose = require("mongoose");
 const {MemoryRouter} = require('./Routes/memory')
 const { UserRouter } = require('./Routes/users')
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname, "client/build")))
 app.use('/api/users', UserRouter);
 app.use('/api/memory', MemoryRouter);
 app.use('/api/auth', AuthRouter);
