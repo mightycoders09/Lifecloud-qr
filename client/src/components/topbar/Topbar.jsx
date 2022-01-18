@@ -64,7 +64,7 @@ const Topbar = () => {
                   style={{ textDecoration: 'none', color: '#6097BF' }}
                   className="topbarLink"
                 >
-                  תוכנות
+                  תוכניות
                 </Link>
                 <Link
                   to={`/login`}

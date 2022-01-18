@@ -9,7 +9,7 @@ import facebook from '../../assets/facebook.png';
 import Arrow1 from '../../assets/Arrow1.png';
 import moment from 'moment'
 
-const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment, commenting, setCommenting, handleDelete,handleDellMemory }) => {
+const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment, commenting, setCommenting, handleDelete, handleDellMemory }) => {
 
     const isUserAdmin = true
     const comments = [
@@ -81,17 +81,22 @@ const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment,
                         <div className='action-btns-container'>
                             <div onClick={() => setCommenting(!commenting)} style={{ cursor: 'pointer' }} className={!commenting && 'comment-btn'}> Comment... </div>
                             {commenting ?
-                                <input onChange={onhandleChangeComment} placeholder='write comment' />
+                                <input onChange={onhandleChangeComment} placeholder='write comment' style={{
+                                    width: '99%',
+                                    height: '25px',
+                                    border: '1px solid #abc9db',
+                                    borderRadius: '10px'
+                                }} />
                                 :
                                 ''
                             }
 
                             <div className='action-btns'>
                                 <div className='action-btn' onClick={() => handleComment(data)} style={{ cursor: 'pointer' }}>Publish</div>
-                                <div className='action-btn'>Cancel</div>
+                                <div className='action-btn' onClick={() => setCommenting(!commenting)} style={{ cursor: 'pointer' }}>Cancel</div>
                             </div>
                             {isUserAdmin &&
-                                <div className='dlt-comment-btn' onClick={() => handleDellMemory(data)}  style={{ cursor: 'pointer' }}>Delete Memory</div>
+                                <div className='dlt-comment-btn' onClick={() => handleDellMemory(data)} style={{ cursor: 'pointer' }}>Delete Memory</div>
                             }
                         </div>
                     </div>

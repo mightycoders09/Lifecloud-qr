@@ -110,9 +110,8 @@ export default function Register() {
                   className="register-input"
                   type="companyName"
                 />
-                <span>תאריך לידה</span>
                 <input
-                  placeholder="Date of Birth"
+                  placeholder="תאריך לידה"
                   required
                   onChange={handleChange}
                   ref={dateOfBirth}

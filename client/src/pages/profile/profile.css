@@ -278,6 +278,11 @@
   display: flex;
   justify-content: space-between;
 }
+.icons-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: -65px;
+}
 .loginBox {
   height: auto;
 }
