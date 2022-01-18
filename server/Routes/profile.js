@@ -186,4 +186,59 @@ ProfileRouter.get('/getSingleProfileDetails/:id', (req, res, next) => {
             res.json(resonse);
         });
 })
+
+
+ProfileRouter.get('/addFriends/:id',async (req, res, next) => {
+
+    let profileAccess = profileModel.findById(req.params.id)
+        .populate("originalUser").exec() // key to populate
+        .then(resonse => {
+            if (!resonse) {
+                return res.status(404).json({
+                    message: 'data not found'
+                })
+            }
+            res.json(resonse);
+        });
+    await profileAccess.updateOne({
+        $push: {
+            addFriends: {
+                $each: [{ user: req.body.userId, isFriend: req.body.isFriend }],
+                $position: -1
+            }
+        }
+    }, {
+        upsert: true //to return updated document
+    });
+    res.status(200).json('friend Added');
+
+})
+
+ProfileRouter.get('/addAdmins/:id', async (req, res, next) => {
+
+    let profileAccess = profileModel.findById(req.params.id)
+        .populate("originalUser").exec() // key to populate
+        .then(resonse => {
+            if (!resonse) {
+                return res.status(404).json({
+                    message: 'data not found'
+                })
+            }
+            res.json(resonse);
+        });
+    await profileAccess.updateOne({
+        $push: {
+            addAdmins: {
+                $each: [{ user: req.body.userId, isAdmin: req.body.isAdmin }],
+                $position: -1
+            }
+        }
+    }, {
+        upsert: true //to return updated document
+    });
+    res.status(200).json('access accepted');
+
+})
+
+
 module.exports = { ProfileRouter };

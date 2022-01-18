@@ -109,9 +109,9 @@ MemoryRouter.delete('/commentdellOBJ/:id', async (req, res) => {
     }
 });
 
-MemoryRouter.get('/getallmemory', (req, res) => {
+MemoryRouter.get('/getallmemory/:id', (req, res) => {
     Memory
-        .find({}) // key to populate
+        .find({originalUser: req.params.id}) // key to populate
         .then(resonse => {
             if (!resonse) {
                 return res.status(404).json({
@@ -121,6 +121,8 @@ MemoryRouter.get('/getallmemory', (req, res) => {
             res.json(resonse);
         });
 })
+
+
 
 
 module.exports = { MemoryRouter };

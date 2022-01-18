@@ -3,6 +3,14 @@ const mongoose = require('mongoose');
 const PostSchema = new mongoose.Schema(
     {
         originalUser: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+        addFriends: [{
+            user: String,
+            isFriend: Boolean
+        }],
+        addFriends: [{
+            user: String,
+            isFriend: Boolean
+        }],
         profileImg: {
             type: String
         },

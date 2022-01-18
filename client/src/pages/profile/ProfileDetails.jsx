@@ -28,12 +28,13 @@ import FriendsList from '../../components/friendsList/friendsList';
 // import { useParams } from 'react-router-dom';
 export default function Profile() {
   const { dispatch } = useContext(AuthContext);
-  const [profiledata, setProfileData] = useState([]);
+  const [profiledata, setProfileData] = useState({});
   const [memoryData, setmemoryData] = useState([]);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [text, setText] = useState({ comments: [{ text: '' }] });
   const [show, setShow] = useState('wall');
+  const [flag,setFlag] = useState(false)
   const history = useHistory();
   const [likeMessage, setLikeMessage] = useState('');
   const [commenting, setCommenting] = useState(false);
@@ -47,25 +48,32 @@ export default function Profile() {
   };
   console.log(id);
   useEffect(() => {
-    fetchuserprofiles();
-    fetchmemories();
+    if (Object.keys(profiledata).length > 0) {
+      fetchmemories();
+    }
     setCommenting('');
     setComment('');
     setLikeMessage('');
-  }, [likeMessage, comment, DellComment]);
+  }, [likeMessage, comment, DellComment,flag]);
+  useEffect(()=>{
+    fetchuserprofiles();
+  },[])
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
+    if(res){
+      setFlag(e => !e)
+    }
   };
 
   const fetchmemories = async () => {
-    const res = await axios.get(`/api/memory/getallmemory`);
-    console.log(res);
+    const res = await axios.get(`/api/memory/getallmemory/${profiledata.originalUser[0]._id}`);
+    console.log(res, 'memo');
     setmemoryData(res.data);
   };
 
   console.log(memoryData);
-  console.log(profiledata);
+  console.log(profiledata, 'prog');
   let pasrseAxios = Object.keys(profiledata).length
     ? JSON.parse(profiledata.lifeAxis)
     : '';
@@ -207,7 +215,7 @@ export default function Profile() {
     year: 'numeric',
   };
   console.log(text, 'setText');
-  // const {file} = memoryData
+
   if (Object.keys(profiledata).length > 0) {
     return (
       <div>
@@ -377,7 +385,7 @@ export default function Profile() {
                   )
                 )
               ) : (
-                <p style={{ marginBottom: '40px' }}>כאן יהיו הזכרונות שלנו מ{profiledata.firstName}</p>
+                <p style={{ marginBottom: '40px' }}>כאן יהיו הזכרונות שלנו מ</p>
               )}
 
               {/* })} */}
@@ -410,16 +418,16 @@ export default function Profile() {
           </div>
           <div>
             {pasrseAxios.map((axis) => (
-            <div className="axis-container">
-              <div className="axis-sub-container">
-                <h1 className="axis-title">{axis.axisTitle}</h1>
-                <p className="axis-description2">{axis.axisDescription}</p>
+              <div className="axis-container">
+                <div className="axis-sub-container">
+                  <h1 className="axis-title">{axis.axisTitle}</h1>
+                  <p className="axis-description2">{axis.axisDescription}</p>
+                </div>
+                <div className="axis-bubble">
+                  <span>{axis.axisDate}</span>
+                </div>
               </div>
-              <div className="axis-bubble">
-                <span>{axis.axisDate}</span>
-              </div>
-            </div>
-          ))}
+            ))}
           </div>
         </div>
         <div
