@@ -8,8 +8,10 @@ import instagram from '../../assets/instagram.png';
 import facebook from '../../assets/facebook.png';
 import Arrow1 from '../../assets/Arrow1.png';
 import moment from 'moment'
+import LanguageContext from '../../context/LanguageContext';
 
 const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment, commenting, setCommenting, handleDelete, handleDellMemory }) => {
+    const [language, setLanguage] = useState(LanguageContext.language);
 
     const isUserAdmin = true
     const comments = [

@@ -9,7 +9,7 @@ import LanguageContext from '../../context/LanguageContext';
 import WithLanguage from '../languageButton/WithLanguage';
 import LanguageButton from '../languageButton/LanguageButton';
 
-const Topbar = (props) => {
+const ENTopbar = (props) => {
   const history = useHistory();
   const { searchText, setSearchText } = useSearch();
   const { user } = useContext(AuthContext);
@@ -38,7 +38,7 @@ const Topbar = (props) => {
                   to={`/about`}
                   style={{ textDecoration: 'none', color: '#6097BF' }}
                 >
-                  אודות
+                  About
                 </Link>
                 <Link
                   style={{ marginRight: '15px' }}
@@ -62,28 +62,28 @@ const Topbar = (props) => {
                   style={{ textDecoration: 'none', color: '#6097BF' }}
                   className="topbarLink"
                 >
-                  אודות
+                  About
                 </Link>
                 <Link
                   to={`/plans`}
                   style={{ textDecoration: 'none', color: '#6097BF' }}
                   className="topbarLink"
                 >
-                  תוכניות
+                  Plans
                 </Link>
                 <Link
                   to={`/login`}
                   style={{ textDecoration: 'none', color: '#6097BF' }}
                   className="topbarLink"
                 >
-                  התחברות
+                  Login
                 </Link>
                 <Link
                   to={`/register`}
                   style={{ textDecoration: 'none', color: '#6097BF' }}
                   className="topbarLink"
                 >
-                  הרשמה
+                  Register
                 </Link>
               </div>
             )}
@@ -94,4 +94,4 @@ const Topbar = (props) => {
   );
 };
 
-export default Topbar;
+export default ENTopbar;
