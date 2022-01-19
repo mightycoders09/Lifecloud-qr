@@ -6,10 +6,10 @@ const AuthReducer = (state, action) => {
         isFetching: true,
         error: false,
       };
-      case "USER-PROFILES":
-        return {
-          profiledata: action.payload,
-        };
+    case "USER-PROFILES":
+      return {
+        profiledata: action.payload,
+      };
     case "LOGIN_SUCCESS":
       return {
         user: action.payload,
