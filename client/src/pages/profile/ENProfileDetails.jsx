@@ -40,6 +40,7 @@ export default function ENProfile() {
   const [commenting, setCommenting] = useState(false);
   const [comment, setComment] = useState();
   const [DellComment, setDelComment] = useState('');
+  const [friendFlagReq,setrfriendReq] = useState([])
   const id = useParams().id;
   const [memories, setMemories] = useState([]);
   const [next, setnext] = useState(1);
@@ -53,10 +54,11 @@ export default function ENProfile() {
     setCommenting('');
     setComment('');
     setLikeMessage('');
-  }, [likeMessage, comment, DellComment]);
+  }, [likeMessage, comment, DellComment,friendFlagReq]);
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
+    console.log(res,'res')
   };
 
   const fetchmemories = async () => {
@@ -446,7 +448,7 @@ export default function ENProfile() {
         <div
           className={`${show === 'friends' && 'display'} friends-list d-none`}
         >
-          <ENFriendsList />
+          <ENFriendsList proid={id} profiledata={profiledata} setrfriendReq={setrfriendReq} />
         </div>
         <SnackBar open={open} handleClose={handleClose} message={message} />
         <ENSocialFooter />
