@@ -162,7 +162,7 @@ ProfileRouter.get('/getallprofile', (req, res) => {
 ProfileRouter.get('/getallprofileofSingleUser/:id', (req, res, next) => {
 
     profileModel.find({ originalUser: req.params.id })
-        .populate("originalUser").exec() // key to populate
+        .populate("originalUser").populate('').exec() // key to populate
         .then(resonse => {
             if (!resonse) {
                 return res.status(404).json({
@@ -176,7 +176,7 @@ ProfileRouter.get('/getallprofileofSingleUser/:id', (req, res, next) => {
 ProfileRouter.get('/getSingleProfileDetails/:id', (req, res, next) => {
 
     profileModel.findById(req.params.id)
-        .populate("originalUser").exec() // key to populate
+        .populate("originalUser").populate('addFriends.user').exec() // key to populate
         .then(resonse => {
             if (!resonse) {
                 return res.status(404).json({
@@ -220,6 +220,47 @@ ProfileRouter.put('/addFriends/:id', async (req, res) => {
 
 
 })
+
+
+ProfileRouter.put('/addAcceptFriends/:id', async (req, res) => {
+    try {
+        console.log(req.params.id, req.body, 'cec')
+        // if (pullreq._id == req.body.userId) {
+
+        // let a = profileModel.updateOne(
+        //     { _id: req.body.params, "addFriends._id": "61ea16df8a551f93de109bc3" },
+        //     {
+        //         $set: {
+        //             "addFriends.$.isFriend": true,
+        //         }
+        //     },
+        //     {
+        //         upsert: true
+        //     }
+        // )
+        // }
+
+
+        let a = await profileModel.findByIdAndUpdate(
+            { _id: req.body.params, },
+            {
+                $set: {
+                    addFriends: [{
+                        isFriend: req.body.isFriend,
+                        user: req.body.user
+                    }]
+                }
+            }, {
+            upsert: true,
+        } // Update
+        );
+        console.log(a, 'a')
+        res.send('friend request accepted');
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 ProfileRouter.get('/addAdmins/:id', async (req, res, next) => {
 

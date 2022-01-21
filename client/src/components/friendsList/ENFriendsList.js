@@ -39,6 +39,25 @@ const ENFriendsList = ({ proid, profiledata, setrfriendReq }) => {
 
 
     }
+    const handleAddFrined = (e) => {
+        // setuserid(e)
+       
+        fetch(`/api/profile/addAcceptFriends/${proid}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'Application/json',
+            },
+            body: JSON.stringify({ isFriend: true, userId: e._id,user: e.user[0]._id }),
+        })
+            .then((res) => {
+                return res.json();
+            }).then(res => {
+                console.log(res, 'res')
+                setrfriendReq(res)
+            })
+
+
+    }
     console.log(profiledata, 'profiledata list')
     let valchek = profiledata && profiledata.addFriends.length > 0 && profiledata.addFriends.map(item => {
         return item.user
@@ -52,15 +71,15 @@ const ENFriendsList = ({ proid, profiledata, setrfriendReq }) => {
             {isAdmin ? (
                 <div>
                     <h1>New friends</h1>
-                    {friendsList.friendRequests.map(friend => {
+                    {profiledata &&profiledata.addFriends.length > 0 && profiledata.addFriends.map((friend,i) => {
                         return (
-                            <div className="friend-request" key={friend.id}>
+                            <div className="friend-request" key={friend.user && friend.user[0].id}>
                                 <div className='friend-request-details'>
                                     <img src={friend.profileImg} alt="profile" />
-                                    <p>{friend.name}</p>
+                                    <p>{friend.user && friend.user[0].firstName}</p>
                                 </div>
                                 <div>
-                                    <span style={{ cursor: 'pointer' }}>Add Friend</span>
+                                    <span style={{ cursor: 'pointer' }} onClick={()=>handleAddFrined(friend)}>Add Friend</span>
                                     |
                                     <span style={{ cursor: 'pointer' }}>decline</span>
                                 </div>

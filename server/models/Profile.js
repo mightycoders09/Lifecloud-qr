@@ -15,8 +15,10 @@ const PostSchema = new mongoose.Schema(
         //     isAdmin: Boolean
         // },
         addFriends: [{
-            user: String,
-            isFriend: Boolean
+            user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+            isFriend: {
+                type: Boolean
+            }
         }],
         profileImg: {
             type: String
