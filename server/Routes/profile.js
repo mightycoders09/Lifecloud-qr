@@ -176,7 +176,7 @@ ProfileRouter.get('/getallprofileofSingleUser/:id', (req, res, next) => {
 ProfileRouter.get('/getSingleProfileDetails/:id', (req, res, next) => {
 
     profileModel.findById(req.params.id)
-        .populate("originalUser").populate('addFriends.user').exec() // key to populate
+        .populate("originalUser").populate('addFriends.user').populate('addAdmins.user').exec() // key to populate
         .then(resonse => {
             if (!resonse) {
                 return res.status(404).json({
@@ -192,13 +192,14 @@ ProfileRouter.put('/addFriends/:id', async (req, res) => {
 
     let profileAccess = await profileModel.findById(req.params.id)
     let pullreq = profileAccess.addFriends.find(friend => {
+        console.log(friend)
         return friend.user == req.body.userId
     })
     console.log(pullreq, req.body.userId, 'pro')
     if (pullreq && pullreq.user == req.body.userId) {
         let result = await profileAccess.updateOne({
             $pull: {
-                addFriends: { user: req.body.userId, isFriend: req.body.isFriend }
+                addFriends: { user: req.body.userId }
             }
         }, {
             upsert: true //to return updated document
@@ -244,31 +245,39 @@ ProfileRouter.put('/addAcceptFriends/:id', async (req, res) => {
     // }
 });
 
-ProfileRouter.get('/addAdmins/:id', async (req, res, next) => {
+ProfileRouter.put('/addAdmins/:id', async (req, res) => {
 
-    let profileAccess = profileModel.findById(req.params.id)
-        .populate("originalUser").exec() // key to populate
-        .then(resonse => {
-            if (!resonse) {
-                return res.status(404).json({
-                    message: 'data not found'
-                })
+    let profileAccess = await profileModel.findById(req.params.id)
+    let pullreq = profileAccess.addAdmins.find(friend => {
+        return friend.user == req.body.userId
+    })
+    console.log(pullreq, req.body.userId, 'pro')
+    if (pullreq && pullreq.user == req.body.userId) {
+        let result = await profileAccess.updateOne({
+            $pull: {
+                addAdmins: { user: req.body.userId, isAdmin: req.body.isAdmin }
             }
-            res.json(resonse);
+        }, {
+            upsert: true //to return updated document
         });
-    await profileAccess.updateOne({
-        $push: {
-            addAdmins: {
-                $each: [{ user: req.body.userId, isAdmin: req.body.isAdmin }],
-                $position: -1
+        res.send(profileAccess);
+    } else {
+        let result = await profileAccess.updateOne({
+            $push: {
+                addAdmins: {
+                    $each: [{ user: req.body.userId, isAdmin: req.body.isAdmin }],
+                    $position: -1
+                }
             }
-        }
-    }, {
-        upsert: true //to return updated document
-    });
-    res.status(200).json('access accepted');
+        }, {
+            upsert: true //to return updated document
+        });
+        res.send(profileAccess);
+    }
+
 
 })
+
 
 
 

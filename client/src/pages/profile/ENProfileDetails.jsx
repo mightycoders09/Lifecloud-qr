@@ -41,6 +41,7 @@ export default function ENProfile() {
   const [comment, setComment] = useState();
   const [DellComment, setDelComment] = useState('');
   const [friendFlagReq,setrfriendReq] = useState([])
+  const [adminFlagReq,setAdminres] = useState([])
   const id = useParams().id;
   const [memories, setMemories] = useState([]);
   const [next, setnext] = useState(1);
@@ -54,7 +55,7 @@ export default function ENProfile() {
     setCommenting('');
     setComment('');
     setLikeMessage('');
-  }, [likeMessage, comment, DellComment,friendFlagReq]);
+  }, [likeMessage, comment, DellComment,friendFlagReq,adminFlagReq]);
   const fetchuserprofiles = async () => {
     const res = await axios.get(`/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
@@ -77,12 +78,6 @@ export default function ENProfile() {
   const handleLike = (e) => {
     try {
       const formdata = new FormData();
-      // formdata.append('userId',);
-      // const config = {
-      //   headers: {
-      //     'content-type': 'multipart/form-data'
-      //   }
-      // }
       let data = {
         userId: profiledata.originalUser[0]._id,
       };
@@ -448,7 +443,7 @@ export default function ENProfile() {
         <div
           className={`${show === 'friends' && 'display'} friends-list d-none`}
         >
-          <ENFriendsList proid={id} profiledata={profiledata} setrfriendReq={setrfriendReq} />
+          <ENFriendsList proid={id} profiledata={profiledata} setAdminres={setAdminres} setrfriendReq={setrfriendReq} />
         </div>
         <SnackBar open={open} handleClose={handleClose} message={message} />
         <ENSocialFooter />

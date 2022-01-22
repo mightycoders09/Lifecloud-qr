@@ -3,13 +3,12 @@ const mongoose = require('mongoose');
 const PostSchema = new mongoose.Schema(
     {
         originalUser: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-        addAdmins: {
-            type: Map,
-            of: new mongoose.Schema({
-                isAdmin: Boolean,
-                user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-            })
-        },
+        addAdmins: [{
+            user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+            isAdmin: {
+                type: Boolean
+            }
+        }],
         // addAdmins: {
         //     user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
         //     isAdmin: Boolean
