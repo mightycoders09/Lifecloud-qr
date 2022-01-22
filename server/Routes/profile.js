@@ -224,7 +224,7 @@ ProfileRouter.put('/addFriends/:id', async (req, res) => {
 
 ProfileRouter.put('/addAcceptFriends/:id', async (req, res) => {
     try {
-        const filter = { _id: req.body.params, 'addFriends._id': req.body.userId };
+        const filter = { _id: req.params.id, 'addFriends._id': req.body.userId };
         const options = { upsert: true };
         const updateDoc = {
             $set: {
@@ -232,11 +232,7 @@ ProfileRouter.put('/addAcceptFriends/:id', async (req, res) => {
             }
         };
         const result = await profileModel.updateOne(filter, updateDoc, options);
-        console.log(
-            result
-            // `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
-        );
-        res.send('friend request accepted');
+        res.send(true);
     } catch (err) {
         res.status(500).json(err);
     }

@@ -59,11 +59,22 @@ const ENFriendsList = ({ proid, profiledata, setrfriendReq }) => {
 
     }
     console.log(profiledata, 'profiledata list')
-    let valchek = profiledata && profiledata.addFriends.length > 0 && profiledata.addFriends.map(item => {
-        return item.user
+    let valchek = profiledata && profiledata.addFriends.length > 0 && profiledata.addFriends.map((item,i) => {
+        return  item.user.map(itemA=>{
+            console.log(itemA,'a')
+            return itemA._id
+        })
     })
-    console.log(valchek, 'user')
-    let e = users.map(n => valchek && valchek.includes(n._id))
+    let valcheckFinal = valchek  && valchek.length > 0 && valchek.map((item,i)=>{
+        return  { 
+            id: item[0], 
+          }; 
+    })
+    let valfinalcheckid = valcheckFinal && valcheckFinal.map(item=>{
+        return item.id
+    })
+    console.log(valcheckFinal, 'user')
+    let e = users.map((n,i) => valfinalcheckid && valfinalcheckid.includes(n._id))
     // let result = profiledata && profiledata.addFriends.length > 0 && profiledata.addFriends.includes(userid)
     console.log(e, 'e')
     return (
