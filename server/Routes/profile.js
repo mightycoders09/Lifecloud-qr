@@ -224,42 +224,28 @@ ProfileRouter.put('/addFriends/:id', async (req, res) => {
 
 ProfileRouter.put('/addAcceptFriends/:id', async (req, res) => {
     try {
-        console.log(req.params.id, req.body, 'cec')
-        // if (pullreq._id == req.body.userId) {
-
-        // let a = profileModel.updateOne(
-        //     { _id: req.body.params, "addFriends._id": "61ea16df8a551f93de109bc3" },
-        //     {
-        //         $set: {
-        //             "addFriends.$.isFriend": true,
-        //         }
-        //     },
-        //     {
-        //         upsert: true
-        //     }
-        // )
-        // }
-
-
-        let a = await profileModel.findByIdAndUpdate(
-            { _id: req.body.params, },
-            {
-                $set: {
-                    addFriends: [{
-                        isFriend: req.body.isFriend,
-                        user: req.body.user
-                    }]
-                }
-            }, {
-            upsert: true,
-        } // Update
+        const filter = { _id: req.body.params, 'addFriends._id': req.body.userId };
+        const options = { upsert: true };
+        const updateDoc = {
+            $set: {
+                'addFriends.$.isFriend': req.body.isFriend,
+            }
+        };
+        const result = await profileModel.updateOne(filter, updateDoc, options);
+        console.log(
+            result
+            // `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
         );
-        console.log(a, 'a')
         res.send('friend request accepted');
-
     } catch (err) {
         res.status(500).json(err);
     }
+
+    // res.send('friend request accepted');
+
+    // } catch (err) {
+    //     res.status(500).json(err);
+    // }
 });
 
 ProfileRouter.get('/addAdmins/:id', async (req, res, next) => {
