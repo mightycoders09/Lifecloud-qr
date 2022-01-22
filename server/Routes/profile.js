@@ -275,4 +275,20 @@ ProfileRouter.get('/addAdmins/:id', async (req, res, next) => {
 })
 
 
+
+ProfileRouter.get('/searchProfile/:firstName', (req, res, next) => {
+
+    profileModel.find({ firstName: { $regex: req.params.firstName, $options: "i" } })
+        .populate("originalUser").populate('addFriends.user').exec() // key to populate
+        .then(resonse => {
+            if (!resonse) {
+                return res.status(404).json({
+                    message: 'data not found'
+                })
+            }
+            res.json(resonse);
+        });
+})
+
+
 module.exports = { ProfileRouter };

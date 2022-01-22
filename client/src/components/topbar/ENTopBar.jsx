@@ -11,8 +11,10 @@ import LanguageButton from '../languageButton/LanguageButton';
 
 const ENTopbar = (props) => {
   const history = useHistory();
-  const { searchText, setSearchText } = useSearch();
+  // const { searchText, setSearchText } = useSearch();
   const { user } = useContext(AuthContext);
+  const [searchText,setSeachText] = useState('')
+  console.log(searchText)
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -28,11 +30,11 @@ const ENTopbar = (props) => {
           type="text"
           placeholder="חיפוש..."
           className="SearchInput top-search"
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => setSeachText(e.target.value)}
         />
         <div className="topbarRight">
           <div className="topbarLinks">
-            {user ? (
+            {user && user.length > 0 ? (
               <div className="logged-nav">
                 <Link
                   to={`/about`}

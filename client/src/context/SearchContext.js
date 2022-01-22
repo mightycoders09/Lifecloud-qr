@@ -8,6 +8,7 @@ export const SearchProvider = ({ children }) => {
     searchText,
     setSearchText,
   };
+  // console.log(searchText,'searchtext')
   return (
     <SearchContext.Provider value={value}>
       {children}

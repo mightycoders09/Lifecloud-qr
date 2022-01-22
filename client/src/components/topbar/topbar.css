@@ -12,6 +12,20 @@
 .topbarLeft {
   flex: 3;
 }
+.ResultBoxMain{
+  width: 120%;
+  border-radius: 8px;
+  background: aquamarine;
+  position: absolute;
+}
+.ResultBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: aquamarine;
+  padding: 7px;
+  cursor: pointer;
+}
 
 .logo {
   font-size: 24px;
@@ -52,20 +66,20 @@
   transform: rotate(90deg);
 }
 .top-search {
-  width: 30% !important;
+  width: 100% !important;
   height: 30px !important;
   border: 1px solid #abc9db !important;
   border-radius: 7px !important;
   display: flex !important;
   align-items: center !important;
-  padding-right: 25px !important;
+  padding-right: 35px !important;
 }
 
 .SearchInput {
   border: none;
   width: 90%;
   color: #6097bf;
-  direction: rtl;
+  /* direction: rtl; */
 }
 
 .SearchInput:focus {
