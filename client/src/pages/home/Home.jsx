@@ -9,6 +9,7 @@ import { Search } from '@material-ui/icons';
 import Rectangle6 from '../../assets/Rectangle6.png';
 import Rectangle7 from '../../assets/Rectangle7.png';
 import Rectangle8 from '../../assets/Rectangle8.png';
+import PlayerImage from '../../assets/PlayerImage.png';
 import Rectangle12 from '../../assets/Rectangle12.png';
 import Rectangle13 from '../../assets/Rectangle13.png';
 import Rectangle14 from '../../assets/Rectangle14.png';
@@ -38,10 +39,10 @@ const Home = () => {
     infinite: true,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     cssEase: 'linear',
     lazyLoad: true,
-    speed: 500,
+    speed: 750,
     slidesToShow: 1,
     initialSlide: 2,
     responsive: [
@@ -71,19 +72,27 @@ const Home = () => {
       },
     ],
   };
+
   const { searchText, setSearchText } = useSearch();
   return (
     <div>
       <Topbar />
-      <div className="homeContainer">
-        <img src={mainImage} alt="mainImage" className="main-image"></img>
-      </div>
+      <div
+        className="homeContainer"
+        style={{
+          backgroundImage: `url(${mainImage})`,
+          width: '100%',
+          height: '65vh',
+          overflow: 'hidden',
+          backgroundPosition: 'right',
+        }}
+      ></div>
       <div className="search-container">
         <div className="searchbar-container">
           <div className="searchbar searchbar-2">
             <input
               type="text"
-              placeholder="...חיפוש מנוח/עמותה"
+              placeholder="Search for a deceased/organisation"
               className="SearchInput"
               onChange={(e) => setSearchText(e.target.value)}
             />
@@ -93,37 +102,45 @@ const Home = () => {
         <Sidebar> </Sidebar>
       </div>
 
-      <div className="top-image-container">
-        <h1>
-          <strong>כל אדם מיוחד במינו.</strong>
-        </h1>
-        <h2 style={{ marginBottom: '3rem' }}>
-          כל אדם ראוי לכך שסיפור חייו יהיה מונצח ומונגש לעד
-        </h2>
-        <div className="top-image">
-          <p className="text-container-home">
-            סיפור חייו של אדם הינו פאזל המורכב מחלקים השלובים בחייהם של בני
-            משפחה, חברים ומכרים.<br></br>
-            עם לכתו של אדם מהעולם, סיפור חייו הולך עימו.
-          </p>
-          <div>
-            <img className="img-350 left-img" src={homeImg4} alt=""></img>
-            <img className="img-350 right-img" src={homeImg} alt=""></img>
-          </div>
+      <div className="vid-text-container">
+        <div className="vid-text-title">
+          <h1>
+            <strong>כל אדם מיוחד במינו.</strong>
+          </h1>
+          <h2 style={{ marginBottom: '3rem' }}>
+            כל אדם ראוי לכך שסיפור חייו יהיה מונצח ומונגש לעד
+          </h2>
+          <h2 style={{ color: '#ABC9DB', fontSize: '23px' }}>MOMENTS. LEGACY. COMMUNITY</h2>
         </div>
-      </div>
-      <div className="bottom-image-container">
-        <p className="text-container-home">
-          האם אפשר לחבר את הפאזל בחזרה או להחיות את הסיפור
-        </p>
-        <div>
-          <img className="img-350 left-img" src={homeImg3} alt=""></img>
-          <img className="img-350 right-img" src={homeImg2} alt=""></img>
+        <div className="text-section-container">
+          <div className="top-image-container">
+            <div className="top-image">
+              <p className="text-container-home">
+                סיפור חייו של אדם הינו פאזל המורכב מחלקים השלובים בחייהם של בני
+                משפחה, חברים ומכרים.<br></br>
+                עם לכתו של אדם מהעולם, סיפור חייו הולך עימו.
+              </p>
+            </div>
+          </div>
+          <div className="bottom-image-container">
+            <p className="text-container-home" style={{color: '#ffff', fontWeight: '900', fontSize: '35px'}}>
+              האם אפשר לחבר את הפאזל בחזרה או להחיות את הסיפור
+            </p>
+            <Player
+              poster={PlayerImage}
+              src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+              width="50%"
+              height="50%"
+              className="react-player"
+              controls={false}
+              playing
+            />
+          </div>
         </div>
       </div>
 
       <div className="popups-container">
-        <h1 className="text-container-home">
+        <h1 className="text-container-home" style={{width: '100%', textAlign: 'center', margin: '1rem'}}>
           ספר החיים של Life Cloud מאפשר לנו להרכיב את הפאזל{' '}
           <strong>באמצעות</strong>
         </h1>
@@ -408,12 +425,48 @@ const Home = () => {
           </Popup>
         </div>
       </div>
-      <Player
-        playsInline
-        poster={Poster}
-        src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
-        height="50%"
-      />
+
+      <div className="example-profile">
+        <Slider {...settings}>
+          <a href="#">
+            <div
+              style={{ backgroundImage: `url(${exampleProfileImage})` }}
+              className="example-profile-image"
+            ></div>
+          </a>
+          <a href="#">
+            <div
+              style={{ backgroundImage: `url(${exampleProfileImage})` }}
+              className="example-profile-image"
+            ></div>
+          </a>
+          <a href="#">
+            <div
+              style={{ backgroundImage: `url(${exampleProfileImage})` }}
+              className="example-profile-image"
+            ></div>
+          </a>
+          <a href="#">
+            <div
+              style={{ backgroundImage: `url(${exampleProfileImage})` }}
+              className="example-profile-image"
+            ></div>
+          </a>
+        </Slider>
+      </div>
+      <a href="/createprofile" className="creation-btn">
+        <div className="profile-div">+ לצפייה בפרופיל לדוגמה</div>
+      </a>
+      <a href="/createprofile" className="creation-btn">
+        <div className="profile-div" style={{ backgroundColor: '#6097BF' }}>
+          + לחץ כאן ליצור פרופיל
+        </div>
+      </a>
+      <a href="/createprofile" className="creation-btn">
+        <div className="profile-div" style={{ backgroundColor: '#46779B' }}>
+          + לעמוד תוכניות ורכישה
+        </div>
+      </a>
       <div className="testimonials">
         <Slider {...settings}>
           <div>
@@ -436,19 +489,8 @@ const Home = () => {
           </div>
         </Slider>
       </div>
-      <div className="example-profile">
-        <a href="#">
-          <img
-            src={exampleProfileImage}
-            alt=""
-            className="example-profile-image"
-          ></img>
-        </a>
-      </div>
-      <a href="/createprofile" className="creation-btn">
-        <div className="profile-div">+ Tap here to create a new profile</div>
-      </a>
-      <div className="plans-section">
+
+      {/* <div className="plans-section">
         <h1 className="plans-title">Plans and options for purchase</h1>
         <div className="plans-container">
           <div className="plan-container">
@@ -485,7 +527,7 @@ const Home = () => {
           </div>
         </div>
         <div className="link-plans">+ To the plans and purchase page</div>
-      </div>
+      </div> */}
       <SocialFooter />
       <Footer />
     </div>

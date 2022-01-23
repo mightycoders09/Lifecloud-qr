@@ -40,6 +40,19 @@ export default function ENProfileCreate() {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
+  const [graveImage, setGraveImage] = useState(null);
+  const [graveData, setGraveData] = useState(null);
+  const onChangeGrave = (e) => {
+    if (e.target.files[0]) {
+      console.log('picture: ', e.target.files);
+      setGraveImage(e.target.files[0]);
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        setGraveData(reader.result);
+      });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
   const [multiFiles, setMultiFiles] = useState();
   const onChangeMultiplePicture = (e) => {
     setMultiFiles(e.target.files);
@@ -55,7 +68,11 @@ export default function ENProfileCreate() {
   const lastName = useRef();
   const companyName = useRef();
   const birthDate = useRef();
+  const hebBirthDate = useRef();
   const deathDate = useRef();
+  const hebDeathDate = useRef();
+  const city = useRef();
+  const degree = useRef();
   const gender = selectedGender;
   const phone = useRef();
   const email = useRef();
@@ -101,10 +118,15 @@ export default function ENProfileCreate() {
     const wallInformation = {
       originalUser: id,
       profileImg: picture,
+      graveImg: graveImage,
       wallImg: image,
       firstName: firstName.current.value,
       lastName: lastName.current.value,
       birthDate: birthDate.current.value,
+      hebBirthDate: hebBirthDate.current.value,
+      hebDeathDate: hebDeathDate.current.value,
+      city: city.current.value,
+      degree: degree.current.value,
       deathDate: deathDate.current.value,
       gender: selectedGender,
       wazeLocation: wazeLocation.current.value,
@@ -117,11 +139,16 @@ export default function ENProfileCreate() {
     try {
       const formdata = new FormData();
       formdata.append('profileImg', picture);
+      formdata.append('graveImg', graveImage);
       formdata.append('wallImg', image);
       formdata.append('firstName', wallInformation.firstName);
       formdata.append('originalUser', wallInformation.originalUser);
       formdata.append('lastName', wallInformation.lastName);
       formdata.append('birthDate', wallInformation.birthDate);
+      formdata.append('hebBirthDate', wallInformation.hebBirthDate);
+      formdata.append('hebDeathDate', wallInformation.hebDeathDate);
+      formdata.append('city', wallInformation.city);
+      formdata.append('degree', wallInformation.degree);
       formdata.append('deathDate', wallInformation.deathDate);
       formdata.append('gender', wallInformation.gender);
       formdata.append('wazeLocation', wallInformation.wazeLocation);
@@ -161,8 +188,11 @@ export default function ENProfileCreate() {
       <Topbar />
       <div className="profile-creation">
         <div className="loginWrapper">
-          <div className="loginLeft">
+          <div className="loginLeft" style={{ marginBottom: '3rem' }}>
             <h3 className="profile-creation-title">Create profile</h3>
+            <div className="profile-example-btn">
+              Click to see profile example
+            </div>
           </div>
           <div className="profile-images">
             <div className="register_profile_image"></div>
@@ -228,19 +258,57 @@ export default function ENProfileCreate() {
                     className="nameInput"
                   />
                 </div>
+                <div
+                  style={{ display: 'flex', justifyContent: 'spaceBetween' }}
+                >
+                  <h1>Date of birth</h1>
+                  <h1>Date of death</h1>
+                </div>
                 <div className="names-container">
                   <input
-                    placeholder="* Date of birth"
+                    placeholder="* English"
                     required
                     ref={birthDate}
                     className="nameInput"
                     type="date"
                   />
                   <input
-                    placeholder="* Date of death"
+                    placeholder="* English"
                     required
                     type="date"
                     ref={deathDate}
+                    className="nameInput"
+                  />
+                </div>
+                <div className="names-container">
+                  <input
+                    placeholder="* Hebrew"
+                    required
+                    ref={hebBirthDate}
+                    className="nameInput"
+                    type="date"
+                  />
+                  <input
+                    placeholder="* Hebrew"
+                    required
+                    type="date"
+                    ref={hebDeathDate}
+                    className="nameInput"
+                  />
+                </div>
+                <div className="names-container" style={{ marginTop: '3rem' }}>
+                  <input
+                    placeholder="* City"
+                    required
+                    ref={city}
+                    className="nameInput"
+                    type="date"
+                  />
+                  <input
+                    placeholder="* Degree"
+                    required
+                    type="date"
+                    ref={degree}
                     className="nameInput"
                   />
                 </div>
@@ -280,27 +348,22 @@ export default function ENProfileCreate() {
                     />
                     <label for="female">נ</label>
                   </div>
-                </div>
-                <div
-                  className="location-container"
-                  style={{ marginTop: '2rem' }}
-                >
-                  <h1>* Graves location</h1>
-                  <div className="location-semicontainer">
-                    <div className="names-container">
-                      <input
-                        placeholder="*הוספת מיקום ווייז "
-                        required
-                        ref={wazeLocation}
-                        className="nameInput"
-                      />
-                      <input
-                        placeholder="* הוספת מיקום גוגל"
-                        required
-                        ref={googleLocation}
-                        className="nameInput"
-                      />
-                    </div>
+                  <div
+                    className={`${
+                      selectedGender === 'female' && 'register-active'
+                    } radio-input-container-register`}
+                    onClick={() => setSelectedGender('female')}
+                  >
+                    <input
+                      type="radio"
+                      value="female"
+                      id="female"
+                      onChange={handleChange}
+                      checked={user.gender === 'female'}
+                      name="gender"
+                      className="radio"
+                    />
+                    <label for="female">א</label>
                   </div>
                 </div>
                 <div
@@ -310,8 +373,7 @@ export default function ENProfileCreate() {
                   <h1>* Upload media</h1>
                   <div>
                     <div className="names-container">
-                      <div className="form-group multi-preview">
-                      </div>
+                      <div className="form-group multi-preview"></div>
                       <div className="register_profile_image">
                         <input
                           id="profilePic"
@@ -391,6 +453,42 @@ export default function ENProfileCreate() {
                   Save
                 </button>
               </form>
+            </div>
+          </div>
+          <div className="location-container" style={{ marginTop: '2rem' }}>
+            <h1>* Graves location</h1>
+            <div className="location-semicontainer">
+              <div className="names-container">
+                <input
+                  placeholder="*הוספת מיקום ווייז "
+                  required
+                  ref={wazeLocation}
+                  className="nameInput"
+                />
+                <input
+                  placeholder="* הוספת מיקום גוגל"
+                  required
+                  ref={googleLocation}
+                  className="nameInput"
+                />
+              </div>
+            </div>
+            <div className="profile-image-container">
+              <img
+                className="profile-image"
+                src={
+                  coverData
+                    ? coverData
+                    : `https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png`
+                }
+                alt=""
+              ></img>
+              <input
+                className="custom-file-grave"
+                type="file"
+                onChange={onChangeGrave}
+                name="coverImg"
+              />
             </div>
           </div>
         </div>

@@ -58,24 +58,17 @@
   width: 350px;
 }
 .text-container-home {
-  width: 40%;
-  font-family: Alef;
-  font-size: 48px;
-  font-style: normal;
+  width: 35%;
+  font-size: 35px;
   font-weight: 400;
-  line-height: 65px;
-  letter-spacing: 0em;
   color: #6097bf;
-  text-align: right;
 }
 .top-image {
-  display: flex;
-  justify-content: space-around;
+  padding-right: 6%;
 }
 .top-image-container {
   color: #6097bf;
   display: flex;
-  align-items: center;
   justify-content: space-around;
   margin-top: 5rem;
   padding-bottom: 2rem;
@@ -83,10 +76,10 @@
   flex-direction: column;
 }
 .bottom-image-container {
+  padding-right: 6%;
+  height: 200px;
+  background-position: center;
   direction: rtl;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
   padding-bottom: 2rem;
   background-image: url('../../assets/leftImageBG.png');
 }
@@ -158,6 +151,27 @@
 .video-react-button {
   display: none !important;
 }
+.player-wrapper {
+  position: relative;
+}
+.vid-text-container {
+}
+.vid-text-title {
+  text-align: center;
+  color: #6097bf;
+  font-size: 25px;
+}
+.react-player {
+  border-radius: 15px;
+  margin-right: 45%;
+  padding-top: 22.5% !important;
+  width: 40% !important;
+  max-width: 40% !important;
+  margin-top: -350px;
+}
+.video-react-poster {
+  background-size: cover !important;
+}
 .slick-slider {
   width: 75%;
 }
@@ -190,15 +204,24 @@
   font-size: 21px;
 }
 .example-profile {
-  text-align: center;
+  display: flex;
   background: #dcecf4;
-  padding-top: 7.5%;
-  padding-bottom: 7.5%;
+  padding-top: 3.5%;
+  padding-bottom: 3.5%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+.slick-list {
+  border-radius: 15px !important;
 }
 .example-profile-image {
-  width: 85vw;
-  height: 85vh;
-  border-radius: 10px;
+  border-radius: 15px;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+  background-position: right center;
+  background-repeat: no-repeat;
 }
 .profile-div {
   background: #abc9db;

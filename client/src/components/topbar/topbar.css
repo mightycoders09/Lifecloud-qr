@@ -12,7 +12,7 @@
 .topbarLeft {
   flex: 3;
 }
-.ResultBoxMain{
+.ResultBoxMain {
   width: 120%;
   border-radius: 8px;
   background: aquamarine;
@@ -28,6 +28,7 @@
 }
 
 .logo {
+  height: 40px;
   font-size: 24px;
   margin-left: 20px;
   margin-right: 10px;
