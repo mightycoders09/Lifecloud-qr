@@ -12,6 +12,8 @@ import ProgressBar from '../../components/progressbar/progressBar'
 import instagram from '../../assets/instagram.png';
 import Footer from '../../components/footer/Footer';
 import SocialFooter from '../../components/socialFooter/socialFooter';
+import ENTopbar from '../../components/topbar/ENTopBar';
+import ENSocialFooter from '../../components/socialFooter/ENSocialFooter';
 export const ENUserAndprofiles = () => {
   const LoggedUser = useContext(AuthContext);
   const [data, setData] = useState([]);
@@ -20,12 +22,12 @@ export const ENUserAndprofiles = () => {
     fetchuserprofiles();
   }, []);
   const fetchuserprofiles = async () => {
-    const res = await axios.get(`/api/profile/getallprofileofSingleUser/${id}`);
+    const res = await axios.get(`https://api.lifecloud-qr.com/api/profile/getallprofileofSingleUser/${id}`);
     setData(res.data);
   };
   return (
     <>
-      <Topbar />
+      <ENTopbar />
       <div className="profile">
         <div className="profileRight">
           <div className="user-main">
@@ -107,7 +109,7 @@ export const ENUserAndprofiles = () => {
           </div>
         </div>
       </div>
-      <SocialFooter backgroundColor='#fff' color='#6097BF'/>
+      <ENSocialFooter backgroundColor='#fff' color='#6097BF'/>
       <Footer />
     </>
   );

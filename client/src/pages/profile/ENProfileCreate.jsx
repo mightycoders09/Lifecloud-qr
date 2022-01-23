@@ -8,6 +8,7 @@ import './profile.css';
 import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router';
 import SnackBar from '../../components/snackbar/SnackBar';
+import ENTopbar from '../../components/topbar/ENTopBar';
 export default function ENProfileCreate() {
   const { user } = useContext(AuthContext);
   const id = useParams().id;
@@ -159,7 +160,7 @@ export default function ENProfileCreate() {
         formdata.append('multiplefiles', multiFiles[i]);
       }
 
-      fetch('/api/profile/createProfile', {
+      fetch('https://api.lifecloud-qr.com/api/profile/createProfile', {
         method: 'POST',
         body: formdata,
       })
@@ -185,7 +186,7 @@ export default function ENProfileCreate() {
   };
   return (
     <div className="profile-creation-container">
-      <Topbar />
+      <ENTopbar />
       <div className="profile-creation">
         <div className="loginWrapper">
           <div className="loginLeft" style={{ marginBottom: '3rem' }}>

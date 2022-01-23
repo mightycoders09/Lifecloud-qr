@@ -28,7 +28,7 @@ const ENTopbar = (props) => {
       <div className="topbarCenter">
         <input
           type="text"
-          placeholder="חיפוש..."
+          placeholder="Search..."
           className="SearchInput top-search"
           onChange={(e) => setSeachText(e.target.value)}
         />

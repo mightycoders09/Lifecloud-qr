@@ -14,15 +14,6 @@ const Memory = ({ data, close, handleLike, onhandleChangeComment, handleComment,
     const [language, setLanguage] = useState(LanguageContext.language);
 
     const isUserAdmin = true
-    const comments = [
-        {
-            profileImg: Rectangle6,
-            uploadDate: '12/12/2020',
-            uploadTime: '12:12',
-            uploaderName: 'John Doe',
-            comment: 'time flies...'
-        }]
-    console.log(data, 'data')
     return (
         <div className="memory-page">
             <div className='single-memory-content-container'>
