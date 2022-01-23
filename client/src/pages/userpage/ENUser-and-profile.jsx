@@ -22,7 +22,7 @@ export const ENUserAndprofiles = () => {
     fetchuserprofiles();
   }, []);
   const fetchuserprofiles = async () => {
-    const res = await axios.get(`/api/profile/getallprofileofSingleUser/${id}`);
+    const res = await axios.get(`https://api.lifecloud-qr.com/api/profile/getallprofileofSingleUser/${id}`);
     setData(res.data);
   };
   return (

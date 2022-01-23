@@ -48,7 +48,7 @@ export default function Register() {
     } else {
       setErro('');
       try {
-        fetch('/api/auth/register', {
+        fetch('https://api.lifecloud-qr.com/api/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

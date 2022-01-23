@@ -132,7 +132,7 @@ export default function ProfileCreate() {
         formdata.append('multiplefiles', multiFiles[i]);
       }
 
-      fetch('/api/profile/createProfile', {
+      fetch('https://api.lifecloud-qr.com/api/profile/createProfile', {
         method: 'POST',
         body: formdata,
       })
