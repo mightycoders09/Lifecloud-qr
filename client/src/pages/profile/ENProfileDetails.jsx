@@ -25,6 +25,7 @@ import SnackBar from '../../components/snackbar/SnackBar';
 import ENSocialFooter from '../../components/socialFooter/ENSocialFooter';
 import ENFriendsList from '../../components/friendsList/ENFriendsList';
 import Footer from '../../components/footer/Footer';
+import ENTopbar from '../../components/topbar/ENTopBar';
 
 // import { useParams } from 'react-router-dom';
 export default function ENProfile() {
@@ -209,7 +210,7 @@ export default function ENProfile() {
   if (Object.keys(profiledata).length > 0) {
     return (
       <div>
-        <TopBar />
+        <ENTopbar />
         <img
           src={`http://localhost:8800/${profiledata.wallImg}`}
           alt=""

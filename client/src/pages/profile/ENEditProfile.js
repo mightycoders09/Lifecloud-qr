@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useParams } from 'react-router';
 import moment from 'moment'
 import SnackBar from '../../components/snackbar/SnackBar'
+import ENTopbar from '../../components/topbar/ENTopBar';
 export default function ENProfileEdit() {
     const { user } = useContext(AuthContext);
     const [image, setImage] = useState(null);
@@ -206,7 +207,7 @@ export default function ENProfileEdit() {
     }
     return (
         <div className="profile-creation-container">
-            <Topbar />
+            <ENTopbar />
             <div className="profile-creation">
                 <div className="loginWrapper">
                     <div className="loginLeft">
