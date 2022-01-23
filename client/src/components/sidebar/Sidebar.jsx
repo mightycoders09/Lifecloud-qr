@@ -11,11 +11,11 @@ const Sidebar = () => {
   useEffect(() => {
     const getpeople = async () => {
       try {
-        const friendList = await axios.get('/users/all/every');
+        const friendList = await axios.get('https://api.lifecloud-qr.com/api/users/all/every');
         setPeople(friendList.data);
         setPeople(
           friendList.data.filter((user) =>
-            user.username.toLowerCase().includes(searchText.toLowerCase())
+          searchText && searchText.length !== 0 &&  user.username.toLowerCase().includes(searchText.toLowerCase())
           )
         );
       } catch (err) {
