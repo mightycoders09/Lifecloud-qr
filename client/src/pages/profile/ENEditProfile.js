@@ -228,7 +228,7 @@ export default function ENProfileEdit() {
                         <div className="profile-image-container">
                             <img
                                 className="profile-image"
-                                src={imgData ? imgData : `http://localhost:8800/${wallInformation.profileImg}`
+                                src={imgData ? imgData : `https://api.lifecloud-qr.com/${wallInformation.profileImg}`
                                 }
                                 alt=""
                             ></img>
@@ -242,7 +242,7 @@ export default function ENProfileEdit() {
                         <div className="profile-image-container">
                             <img
                                 className="profile-image"
-                                src={coverData ? coverData : `http://localhost:8800/${wallInformation.wallImg}`}
+                                src={coverData ? coverData : `https://api.lifecloud-qr.com/${wallInformation.wallImg}`}
                                 alt=""
                             ></img>
                             <input

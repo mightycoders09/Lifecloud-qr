@@ -29,12 +29,12 @@ import FriendsList from '../../components/friendsList/friendsList';
 export default function Profile() {
   const { dispatch } = useContext(AuthContext);
   const [profiledata, setProfileData] = useState({});
+  const [flag,setFlag] = useState(false)
   const [memoryData, setmemoryData] = useState([]);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [text, setText] = useState({ comments: [{ text: '' }] });
   const [show, setShow] = useState('wall');
-  const [flag,setFlag] = useState(false)
   const history = useHistory();
   const [likeMessage, setLikeMessage] = useState('');
   const [commenting, setCommenting] = useState(false);
@@ -221,13 +221,13 @@ export default function Profile() {
       <div>
         <TopBar />
         <img
-          src={`http://localhost:8800/${profiledata.wallImg}`}
+          src={`https://api.lifecloud-qr.com/${profiledata.wallImg}`}
           alt=""
           className="profile-cover"
         ></img>
         <div className="profile-details">
           <img
-            src={`http://localhost:8800/${profiledata.profileImg}`}
+            src={`https://api.lifecloud-qr.com/${profiledata.profileImg}`}
             alt=""
             className="profile-img"
           ></img>
@@ -319,13 +319,13 @@ export default function Profile() {
                       trigger={
                         <div className="memory-container" key={index}>
                           <img
-                            src={`http://localhost:8800/${imgData.file}`}
+                            src={`https://api.lifecloud-qr.com/${imgData.file}`}
                             alt=""
                             className="memory-img"
                           ></img>
                           {/* {imgData.file.map(item => {
                           return <img
-                            src={`http://localhost:8800/${item}`}
+                            src={`https://api.lifecloud-qr.com/${item}`}
                             alt=""
                             className="memory-img"
                           ></img>
@@ -437,7 +437,7 @@ export default function Profile() {
             {profiledata.gallery.map((img, index) => (
               <div className="full-gallery-img-container" key={index}>
                 <img
-                  src={`http://localhost:8800/${img}`}
+                  src={`https://api.lifecloud-qr.com/${img}`}
                   alt=""
                   className="full-gallery-img"
                 ></img>

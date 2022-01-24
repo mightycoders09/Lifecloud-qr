@@ -7,8 +7,13 @@ import { Link } from 'react-router-dom';
 import Topbar from '../../components/topbar/Topbar';
 import SocialFooter from '../../components/socialFooter/socialFooter';
 import Footer from '../../components/footer/Footer';
+import TwitterLogin from 'react-twitter-auth';
+import FacebookLogin from 'react-facebook-login';
+import { GoogleLogin } from 'react-google-login';
 export default function Login() {
-  // const email = useRef("Janesss@gamil.com");
+  const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
+  const [loginStatus, setLoginStatus] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -20,13 +25,38 @@ export default function Login() {
     loginCall({ email: email, password: password }, dispatch);
   };
 
+  // const responseGoogle = (response) => {
+  //   console.log(response);
+  //   setName(response.profileObj.name);
+  //   setEmail(response.profileObj.email);
+  //   setUrl(response.profileObj.imageUrl);
+  //   setLoginStatus(true);
+  // };
+  // const logout = () => {
+  //   console.log('logout');
+  //   setLoginStatus(false);
+  // };
   return (
     <>
-    <Topbar />
+      <Topbar />
       <div className="login">
         <div className="loginWrapper">
           <div className="loginLeft">
             <span className="loginDesc">התחברות</span>
+          </div>
+          <div>
+            {/* <GoogleLogin
+              clientId="671348139606-906f7lcl8vk6l26hivc1ka0hk2teuvb1.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={'single_host_origin'}
+            /> */}
+            {/* <GoogleLogout
+              clientId="671348139606-906f7lcl8vk6l26hivc1ka0hk2teuvb1.apps.googleusercontent.com"
+              buttonText="Logout"
+              onLogoutSuccess={logout}
+            /> */}
           </div>
           <div className="loginRight">
             <div className="loginBox">
@@ -102,7 +132,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <SocialFooter backgroundColor='#abc9db' color='#fff'/>
+      <SocialFooter backgroundColor="#abc9db" color="#fff" />
       <Footer />
     </>
   );
