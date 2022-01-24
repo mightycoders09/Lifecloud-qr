@@ -53,7 +53,7 @@ export const UserAndprofiles = () => {
                         <img
                           className="profile-image"
                           src={
-                            `http://localhost:8800/${userProfiles.profileImg}`
+                            `https://api.lifecloud-qr.com/${userProfiles.profileImg}`
                           }
                           alt=""
                         />
