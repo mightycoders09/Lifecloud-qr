@@ -84,7 +84,7 @@ const ENHome = () => {
           width: '100%',
           height: '65vh',
           overflow: 'hidden',
-          backgroundPosition: 'right',
+          backgroundPosition: 'center',
         }}
       ></div>
       <div className="search-container">
