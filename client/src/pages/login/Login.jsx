@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import './login.css';
 import { loginCall } from '../../apiCalls';
 import { AuthContext } from '../../context/AuthContext';
@@ -7,16 +7,14 @@ import { Link } from 'react-router-dom';
 import Topbar from '../../components/topbar/Topbar';
 import SocialFooter from '../../components/socialFooter/socialFooter';
 import Footer from '../../components/footer/Footer';
-import TwitterLogin from 'react-twitter-auth';
-import FacebookLogin from 'react-facebook-login';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { useHistory, useRouteMatch } from 'react-router-dom';
-import LoginHooks from './LoginHooks';
+// import TwitterLogin from 'react-twitter-auth';
+// import FacebookLogin from 'react-facebook-login';
+// import { GoogleLogin, GoogleLogout } from 'react-google-login';
+// import { useHistory, useRouteMatch } from 'react-router-dom';
+// import LoginHooks from './LoginHooks';
 
 const Login = () => {
-  const [name, setName] = useState('');
-  const [url, setUrl] = useState('');
-  const [loginStatus, setLoginStatus] = useState(false);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -69,7 +67,7 @@ const Login = () => {
             <span className="loginDesc">התחברות</span>
           </div>
           <div>
-            <LoginHooks />
+            {/* <LoginHooks /> */}
             {/* <GoogleLogin
               clientId="305504033223-16bn629q68os1b2og9b2jtdqd03pcb2n.apps.googleusercontent.com"
               onSuccess={onLoginSuccess}
