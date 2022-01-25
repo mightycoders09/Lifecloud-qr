@@ -9,14 +9,21 @@ import SocialFooter from '../../components/socialFooter/socialFooter';
 import Footer from '../../components/footer/Footer';
 import TwitterLogin from 'react-twitter-auth';
 import FacebookLogin from 'react-facebook-login';
-import { GoogleLogin } from 'react-google-login';
-export default function Login() {
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import LoginHooks from './LoginHooks';
+
+const Login = () => {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
   const [loginStatus, setLoginStatus] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
+  // const [googleData, setGoogleData] = useState(null);
+  // const history = useHistory();
+  // const [visible, setVisible] = useState('none');
+  // const [isSignedIn, setIsSignedIn] = useState('logoff');
 
   const { isFetching, dispatch } = useContext(AuthContext);
 
@@ -25,16 +32,33 @@ export default function Login() {
     loginCall({ email: email, password: password }, dispatch);
   };
 
-  // const responseGoogle = (response) => {
-  //   console.log(response);
-  //   setName(response.profileObj.name);
-  //   setEmail(response.profileObj.email);
-  //   setUrl(response.profileObj.imageUrl);
-  //   setLoginStatus(true);
+  // const onLoginSuccess = (response) => {
+  //   console.log('-->mylog.101-login');
+  //   console.log('responseGoogle', response.profileObj);
+  //   setGoogleData(response.profileObj);
+  //   /* this.setState({ isSignedIn: true }); */
+  //   setIsSignedIn('LogIn');
+  //   console.log('-->mylog.103-login');
+  //   alert('login success');
+  //   setVisible('Block');
   // };
-  // const logout = () => {
+
+  // const onLoginFailure = (response) => {
+  //   console.log('-->mylog.102-login-failure');
+  //   console.log('responseGoogle', response.profileObj);
+  //   setGoogleData(response.profileObj);
+  //   /* this.setState({ isSignedIn: false }); */
+  //   setIsSignedIn('LogIn-failure');
+  //   alert('login failure');
+  //   setVisible('Block');
+  // };
+
+  // const onLogout = (response) => {
   //   console.log('logout');
-  //   setLoginStatus(false);
+  //   /* this.setState({ isSignedIn: false }); */
+  //   setIsSignedIn('LogOut');
+  //   setVisible('none');
+  //   alert('Log out Succuss');
   // };
   return (
     <>
@@ -45,18 +69,21 @@ export default function Login() {
             <span className="loginDesc">התחברות</span>
           </div>
           <div>
+            <LoginHooks />
             {/* <GoogleLogin
-              clientId="671348139606-906f7lcl8vk6l26hivc1ka0hk2teuvb1.apps.googleusercontent.com"
-              buttonText="Login"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
+              clientId="305504033223-16bn629q68os1b2og9b2jtdqd03pcb2n.apps.googleusercontent.com"
+              onSuccess={onLoginSuccess}
+              onFailure={onLoginFailure}
               cookiePolicy={'single_host_origin'}
-            /> */}
-            {/* <GoogleLogout
-              clientId="671348139606-906f7lcl8vk6l26hivc1ka0hk2teuvb1.apps.googleusercontent.com"
-              buttonText="Logout"
-              onLogoutSuccess={logout}
-            /> */}
+              // scope='https://www.googleapis.com/auth/drive.file'
+            />
+
+            <GoogleLogout
+              style={{ marginTop: 20 }}
+              clientId="305504033223-16bn629q68os1b2og9b2jtdqd03pcb2n.apps.googleusercontent.com"
+              buttonText="Logout Google"
+              onLogoutSuccess={onLogout}
+            ></GoogleLogout> */}
           </div>
           <div className="loginRight">
             <div className="loginBox">
@@ -136,4 +163,6 @@ export default function Login() {
       <Footer />
     </>
   );
-}
+};
+
+export default Login;
