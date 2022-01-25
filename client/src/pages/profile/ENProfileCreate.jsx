@@ -461,14 +461,14 @@ export default function ENProfileCreate() {
             <div className="location-semicontainer">
               <div className="names-container">
                 <input
-                  placeholder="*הוספת מיקום ווייז "
+                  placeholder="*Add waze direction "
                   required
                   ref={wazeLocation}
                   className="nameInput"
                 />
                 <input
-                  placeholder="* הוספת מיקום גוגל"
-                  required
+                  placeholder="* add google direction"
+                  
                   ref={googleLocation}
                   className="nameInput"
                 />
