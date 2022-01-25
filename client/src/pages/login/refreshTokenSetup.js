@@ -1,4 +1,3 @@
-import React from 'react'
 
 export const refreshTokenSetup = (response) => {
     let refreshTiming = (response.tokenObj.expires_in || 3600 - 5 * 60) * 1000;
