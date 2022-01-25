@@ -67,13 +67,12 @@ export default function Profile() {
   };
 
   const fetchmemories = async () => {
-    const res = await axios.get(`https://api.lifecloud-qr.com/api/memory/getallmemory/${profiledata.originalUser[0]._id}`);
+    const res = await axios.get(`/api/memory/getallmemory/${profiledata.originalUser[0]._id}`);
     console.log(res, 'memo');
     setmemoryData(res.data);
   };
 
-  console.log(memoryData);
-  console.log(profiledata, 'prog');
+ 
   let pasrseAxios = Object.keys(profiledata).length
     ? JSON.parse(profiledata.lifeAxis)
     : '';
