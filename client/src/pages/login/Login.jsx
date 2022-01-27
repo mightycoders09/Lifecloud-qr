@@ -7,18 +7,12 @@ import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import Topbar from '../../components/topbar/Topbar';
 import SocialFooter from '../../components/socialFooter/socialFooter';
 import Footer from '../../components/footer/Footer';
-<<<<<<< Updated upstream
-import SocialLogin from './LoginHooks'
+// import SocialLogin from './LoginHooks'
 // import TwitterLogin from 'react-twitter-auth';
 // import FacebookLogin from 'react-facebook-login';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { useHistory, useRouteMatch } from 'react-router-dom';
-=======
-import TwitterLogin from 'react-twitter-auth';
-import FacebookLogin from 'react-facebook-login';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
->>>>>>> Stashed changes
-import LoginHooks from './LoginHooks';
+// import { GoogleLogin, GoogleLogout } from 'react-google-login';
+// import FacebookLogin from 'react-facebook-login';
+// import LoginHooks from './LoginHooks';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -36,34 +30,34 @@ const Login = () => {
     loginCall({ email: email, password: password }, dispatch);
   };
 
-  const onLoginSuccess = (response) => {
-    console.log('-->mylog.101-login');
-    console.log('responseGoogle', response.profileObj);
-    setGoogleData(response.profileObj);
-    /* this.setState({ isSignedIn: true }); */
-    setIsSignedIn('LogIn');
-    console.log('-->mylog.103-login');
-    alert('login success');
-    setVisible('Block');
-  };
+  // const onLoginSuccess = (response) => {
+  //   console.log('-->mylog.101-login');
+  //   console.log('responseGoogle', response.profileObj);
+  //   setGoogleData(response.profileObj);
+  //   /* this.setState({ isSignedIn: true }); */
+  //   setIsSignedIn('LogIn');
+  //   console.log('-->mylog.103-login');
+  //   alert('login success');
+  //   setVisible('Block');
+  // };
 
-  const onLoginFailure = (response) => {
-    console.log('-->mylog.102-login-failure');
-    console.log('responseGoogle', response.profileObj);
-    setGoogleData(response.profileObj);
-    /* this.setState({ isSignedIn: false }); */
-    setIsSignedIn('LogIn-failure');
-    alert('login failure');
-    setVisible('Block');
-  };
+  // const onLoginFailure = (response) => {
+  //   console.log('-->mylog.102-login-failure');
+  //   console.log('responseGoogle', response.profileObj);
+  //   setGoogleData(response.profileObj);
+  //   /* this.setState({ isSignedIn: false }); */
+  //   setIsSignedIn('LogIn-failure');
+  //   alert('login failure');
+  //   setVisible('Block');
+  // };
 
-  const onLogout = (response) => {
-    console.log('logout');
-    /* this.setState({ isSignedIn: false }); */
-    setIsSignedIn('LogOut');
-    setVisible('none');
-    alert('Log out Succuss');
-  };
+  // const onLogout = (response) => {
+  //   console.log('logout');
+  //   /* this.setState({ isSignedIn: false }); */
+  //   setIsSignedIn('LogOut');
+  //   setVisible('none');
+  //   alert('Log out Succuss');
+  // };
   return (
     <>
       <Topbar />
@@ -73,11 +67,7 @@ const Login = () => {
             <span className="loginDesc">התחברות</span>
           </div>
           <div>
-<<<<<<< Updated upstream
-            <LoginHooks />
-=======
             {/* <LoginHooks />
->>>>>>> Stashed changes
             <GoogleLogin
               clientId="305504033223-16bn629q68os1b2og9b2jtdqd03pcb2n.apps.googleusercontent.com"
               onSuccess={onLoginSuccess}
@@ -91,7 +81,7 @@ const Login = () => {
               clientId="305504033223-16bn629q68os1b2og9b2jtdqd03pcb2n.apps.googleusercontent.com"
               buttonText="Logout Google"
               onLogoutSuccess={onLogout}
-            ></GoogleLogout>
+            ></GoogleLogout> */}
           </div>
           <div className="loginRight">
             <div className="loginBox">
@@ -167,7 +157,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <SocialLogin />
+      {/* <SocialLogin /> */}
       <SocialFooter backgroundColor="#abc9db" color="#fff" />
       <Footer />
     </>
