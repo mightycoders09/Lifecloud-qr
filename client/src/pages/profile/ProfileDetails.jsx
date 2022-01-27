@@ -38,6 +38,7 @@ export default function Profile() {
   const history = useHistory();
   const [likeMessage, setLikeMessage] = useState('');
   const [commenting, setCommenting] = useState(false);
+  const [friendFlagReq, setrfriendReq] = useState([])
   const [comment, setComment] = useState();
   const [DellComment, setDelComment] = useState('');
   const id = useParams().id;
