@@ -51,9 +51,7 @@ export default function ENProfile() {
   };
   console.log(id);
   useEffect(() => {
-    if (Object.keys(profiledata).length > 0) {
-      fetchmemories();
-    }
+  
     setCommenting('');
     setComment('');
     setLikeMessage('');
@@ -61,7 +59,11 @@ export default function ENProfile() {
   useEffect(()=>{
     fetchuserprofiles();
   },[])
- 
+ useEffect(()=>{
+  if (Object.keys(profiledata).length > 0) {
+    fetchmemories();
+  }
+ })
   const fetchuserprofiles = async () => {
     const res = await axios.get(`https://api.lifecloud-qr.com/api/profile/getSingleProfileDetails/${id}`);
     setProfileData(res.data);
