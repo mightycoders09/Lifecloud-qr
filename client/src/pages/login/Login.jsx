@@ -3,19 +3,24 @@ import './login.css';
 import { loginCall } from '../../apiCalls';
 import { AuthContext } from '../../context/AuthContext';
 import { CircularProgress } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import Topbar from '../../components/topbar/Topbar';
 import SocialFooter from '../../components/socialFooter/socialFooter';
 import Footer from '../../components/footer/Footer';
+<<<<<<< Updated upstream
 import SocialLogin from './LoginHooks'
 // import TwitterLogin from 'react-twitter-auth';
 // import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+=======
+import TwitterLogin from 'react-twitter-auth';
+import FacebookLogin from 'react-facebook-login';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+>>>>>>> Stashed changes
 import LoginHooks from './LoginHooks';
 
 const Login = () => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -68,7 +73,11 @@ const Login = () => {
             <span className="loginDesc">התחברות</span>
           </div>
           <div>
+<<<<<<< Updated upstream
             <LoginHooks />
+=======
+            {/* <LoginHooks />
+>>>>>>> Stashed changes
             <GoogleLogin
               clientId="305504033223-16bn629q68os1b2og9b2jtdqd03pcb2n.apps.googleusercontent.com"
               onSuccess={onLoginSuccess}
