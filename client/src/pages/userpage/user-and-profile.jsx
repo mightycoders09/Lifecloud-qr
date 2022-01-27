@@ -30,7 +30,8 @@ export const UserAndprofiles = () => {
       <div className="profile">
         <div className="profileRight">
           <div className="user-main">
-            <h1 className="user-name">שלום, {LoggedUser.user.firstName}!</h1>
+            <h1 className="user-name" style={{direction: 'rtl'}}>שלום, {LoggedUser.user.firstName}!</h1>
+            <div></div>
             {/* <p className='user-description'>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text

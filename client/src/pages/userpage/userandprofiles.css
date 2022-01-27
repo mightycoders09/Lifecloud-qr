@@ -82,13 +82,59 @@
     padding: 2px;
   }
 }
-
+.notification-line{
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  width: 75%;
+  margin: auto;
+  align-items: center;
+  border-radius: 15px;
+  height: 75px;
+  margin-bottom: 2rem;
+}
+.notifications-title {
+  display: flex;
+  justify-content: space-between;
+  width: 15%;
+  margin: auto;
+  padding-top: 75px;
+  margin-bottom: 40px;
+}
+.notifications-container {
+  text-align: center;
+  color: #6097bf;
+  background: #dcecf4;
+}
+.notification-text {
+  font-size: 25px;
+  font-weight: 600;
+  padding-left: 3rem;
+}
+.notification-img {
+  height: 50px;
+  width: 50px;
+  margin-right: 3rem;
+  border-radius: 100%;
+}
 .user-main {
   background-color: #f5fcff;
   color: #6097bf;
   padding-top: 5rem;
-  padding-left: 10rem;
+  display: flex;
   min-height: 25vh;
+  justify-content: space-around;
+}
+.notifications-btn {
+  height: 75px;
+  width: 200px;
+  background: #dcecf4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .user-description {
@@ -293,7 +339,12 @@
 input::placeholder {
   color: #abc9db;
 }
-
+.notifications-button {
+  width: 200px;
+  height: 75px;
+  background: #dcecf4;
+  border-radius: 10px;
+}
 .location-container {
   display: flex;
   flex-direction: column;
