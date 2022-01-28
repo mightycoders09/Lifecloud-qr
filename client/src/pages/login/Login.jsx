@@ -62,9 +62,9 @@ const Login = () => {
     <>
       <Topbar />
       <div className="login">
-        <div className="loginWrapper">
+        <div className="login-wrapper">
           <div className="loginLeft">
-            <span className="loginDesc">התחברות</span>
+            <span className="login-desc">כניסה</span>
           </div>
           <div>
             {/* <LoginHooks />
@@ -158,7 +158,7 @@ const Login = () => {
         </div>
       </div>
       {/* <SocialLogin /> */}
-      <SocialFooter backgroundColor="#abc9db" color="#fff" />
+      <SocialFooter backgroundColor="#6097bf" color="#fff" />
       <Footer />
     </>
   );

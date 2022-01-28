@@ -65,6 +65,7 @@ export default function ENProfileCreate() {
   console.log(picture, 'pic');
   console.log(image, 'image');
   const [selectedGender, setSelectedGender] = useState('');
+  const [selectedPrivacy, setSelectedPrivacy] = useState('');
   const firstName = useRef();
   const lastName = useRef();
   const companyName = useRef();
@@ -75,6 +76,7 @@ export default function ENProfileCreate() {
   const city = useRef();
   const degree = useRef();
   const gender = selectedGender;
+  const privacy = selectedPrivacy;
   const phone = useRef();
   const email = useRef();
   const password = useRef();
@@ -88,6 +90,9 @@ export default function ENProfileCreate() {
   const history = useHistory();
   const handleChange = (e) => {
     setSelectedGender(e.target.value);
+  };
+  const handlePrivacyChange = (e) => {
+    setSelectedPrivacy(e.target.value);
   };
 
   // handle input change
@@ -130,6 +135,7 @@ export default function ENProfileCreate() {
       degree: degree.current.value,
       deathDate: deathDate.current.value,
       gender: selectedGender,
+      privacy: selectedPrivacy,
       wazeLocation: wazeLocation.current.value,
       googleLocation: googleLocation.current.value,
       description: description.current.value,
@@ -152,6 +158,7 @@ export default function ENProfileCreate() {
       formdata.append('degree', wallInformation.degree);
       formdata.append('deathDate', wallInformation.deathDate);
       formdata.append('gender', wallInformation.gender);
+      formdata.append('privacy', wallInformation.privacy);
       formdata.append('wazeLocation', wallInformation.wazeLocation);
       formdata.append('googleLocation', wallInformation.googleLocation);
       formdata.append('description', wallInformation.description);
@@ -450,46 +457,98 @@ export default function ENProfileCreate() {
                     );
                   })}
                 </div>
+                <div
+                  className="location-container"
+                  style={{ marginTop: '2rem' }}
+                >
+                  <h1>* Graves location</h1>
+                  <div className="location-semicontainer">
+                    <div className="names-container">
+                      <input
+                        placeholder="*Add waze direction "
+                        required
+                        ref={wazeLocation}
+                        className="nameInput"
+                      />
+                      <input
+                        placeholder="* add google direction"
+                        ref={googleLocation}
+                        className="nameInput"
+                      />
+                    </div>
+                  </div>
+                  <div className="profile-image-container">
+                    <img
+                      className="profile-image"
+                      src={
+                        graveData
+                          ? graveData
+                          : `https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png`
+                      }
+                      alt=""
+                    ></img>
+                    <input
+                      className="custom-file-grave"
+                      type="file"
+                      onChange={onChangeGrave}
+                      name="graveimage"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="radio-container-register"
+                  style={{ direction: 'ltr' }}
+                >
+                  <h3 style={{ color: '#6097BF' }}>* Privacy</h3>
+                  <div
+                    style={{
+                      width: 'unset',
+                      paddingRight: '10px',
+                      paddingLeft: '10px',
+                    }}
+                    className={`${
+                      selectedPrivacy === 'private' && 'register-active'
+                    } radio-input-container-register`}
+                    onClick={() => setSelectedPrivacy('private')}
+                  >
+                    <input
+                      type="radio"
+                      value="private"
+                      id="private"
+                      onChange={handlePrivacyChange}
+                      checked={user.privacy === 'private'}
+                      name="privacy"
+                      className="radio"
+                    />
+                    <label for="private">private</label>
+                  </div>
+                  <div
+                    style={{
+                      width: 'unset',
+                      paddingRight: '10px',
+                      paddingLeft: '10px',
+                    }}
+                    className={`${
+                      selectedPrivacy === 'public' && 'register-active'
+                    } radio-input-container-register`}
+                    onClick={() => setSelectedPrivacy('public')}
+                  >
+                    <input
+                      type="radio"
+                      value="public"
+                      id="public"
+                      onChange={handlePrivacyChange}
+                      checked={user.privacy === 'public'}
+                      name="privacy"
+                      className="radio"
+                    />
+                    <label for="public">public</label>
+                  </div>
+                </div>
                 <button className="create-btn" type="submit">
                   Save
                 </button>
               </form>
-            </div>
-          </div>
-          <div className="location-container" style={{ marginTop: '2rem' }}>
-            <h1>* Graves location</h1>
-            <div className="location-semicontainer">
-              <div className="names-container">
-                <input
-                  placeholder="*Add waze direction "
-                  required
-                  ref={wazeLocation}
-                  className="nameInput"
-                />
-                <input
-                  placeholder="* add google direction"
-                  
-                  ref={googleLocation}
-                  className="nameInput"
-                />
-              </div>
-            </div>
-            <div className="profile-image-container">
-              <img
-                className="profile-image"
-                src={
-                  graveData
-                    ? graveData
-                    : `https://res.cloudinary.com/social-media-appwe/image/upload/v1633782265/social/assets/person/noAvatar_f5amkd.png`
-                }
-                alt=""
-              ></img>
-              <input
-                className="custom-file-grave"
-                type="file"
-                onChange={onChangeGrave}
-                name="graveimage"
-              />
             </div>
           </div>
         </div>

@@ -82,11 +82,14 @@
     padding: 2px;
   }
 }
-.notification-line{
+.notification-line {
+  padding-left: 30px;
+  padding-right: 30px;
+  direction: rtl;
   display: flex;
   justify-content: space-between;
   background: #fff;
-  width: 75%;
+  width: 50%;
   margin: auto;
   align-items: center;
   border-radius: 15px;
@@ -95,11 +98,10 @@
 }
 .notifications-title {
   display: flex;
-  justify-content: space-between;
-  width: 15%;
-  margin: auto;
+  justify-content: center;
   padding-top: 75px;
   margin-bottom: 40px;
+  align-items: center;
 }
 .notifications-container {
   text-align: center;
@@ -120,13 +122,15 @@
 .user-main {
   background-color: #f5fcff;
   color: #6097bf;
-  padding-top: 5rem;
   display: flex;
+  flex-direction: column;
   min-height: 25vh;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 75px;
 }
 .notifications-btn {
-  height: 75px;
+  height: 50px;
   width: 200px;
   background: #dcecf4;
   border-radius: 10px;
@@ -135,6 +139,8 @@
   justify-content: center;
   font-size: 25px;
   font-weight: 600;
+  margin-top: 40px;
+  cursor: pointer;
 }
 
 .user-description {
@@ -144,7 +150,9 @@
   padding-bottom: 5rem;
 }
 .user-name {
-  font-size: 28px;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .profiles-container {

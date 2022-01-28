@@ -78,7 +78,7 @@ const Home = () => {
 
   const { searchText, setSearchText } = useSearch();
   return (
-    <div>
+    <div style={{cursor: 'default'}}>
       <Topbar />
       <div
         className="homeContainer"
@@ -166,10 +166,18 @@ const Home = () => {
       <div className="popups-container">
         <h1
           className="text-container-home"
-          style={{ width: '100%', textAlign: 'center', margin: '1rem' }}
+          style={{
+            width: '100%',
+            textAlign: 'center',
+            margin: '1rem',
+            fontSize: '40px',
+          }}
         >
-          ספר החיים של Life Cloud מאפשר לנו להרכיב את הפאזל{' '}
-          <strong>באמצעות</strong>
+          ספר החיים של לייף קלאוד מאפשר לנו
+          <br></br>{' '}
+          <strong style={{ fontSize: '50px' }}>
+            לחבר ולשתף את הסיפורים והחוויות באמצעות
+          </strong>
         </h1>
       </div>
       <div className="imgs-container">
@@ -192,14 +200,15 @@ const Home = () => {
                 </span>
               </div>
             </div>
-            <h1 style={{ marginTop: '2rem' }}>רשתות חברתיות</h1>
+            <h1 style={{ marginTop: '2rem', fontSize: '35px' }}>קישור לרשתות חברתיות</h1>
           </div>
         </div>
         <div>
           <div>
             <div className="img-300 fourteen">
               <p className="img-300-text">
-                חיבור עמודי המנוח ברשתות החברתיות הקיימות.
+                קוד QR החרוט במקום ייחודי ועמיד שתבחרו, יחבר כל סמארטפון ישירות
+                לספר החיים של המנוח{' '}
               </p>
               <div className="read-more-home">
                 <span
@@ -214,14 +223,15 @@ const Home = () => {
                 </span>
               </div>
             </div>{' '}
-            <h1 style={{ marginTop: '2rem' }}>QR Code</h1>
+            <h1 style={{ marginTop: '2rem', fontSize: '35px' }}>ייחודי QR קוד</h1>
           </div>
         </div>
         <div>
           <div>
             <div className="img-300 twelve">
               <p className="img-300-text">
-                חיבור עמודי המנוח ברשתות החברתיות הקיימות.
+                בדרך קלה, ידידותית ויעילה, ניתן להעלות סרטונים ותמונות, ליצור
+                אלבומים, ולשתף חברים, משפחה וקהילה
               </p>
               <div className="read-more-home">
                 <span
@@ -236,7 +246,7 @@ const Home = () => {
                 </span>
               </div>
             </div>{' '}
-            <h1 style={{ marginTop: '2rem' }}>שמירת תמונות וסרטונים</h1>
+            <h1 style={{ marginTop: '2rem', fontSize: '35px' }}>העלאת תמונות וסרטונים</h1>
           </div>
           ]
         </div>
@@ -246,7 +256,8 @@ const Home = () => {
           <div>
             <div className="img-300 sixteen">
               <p className="img-300-text">
-                חיבור עמודי המנוח ברשתות החברתיות הקיימות.
+                ניתן להוסיף תגובות, לשתף זיכרונות ותמונות עם משפחה, חברים
+                ומכרים.{' '}
               </p>
               <div className="read-more-home">
                 <span
@@ -261,14 +272,14 @@ const Home = () => {
                 </span>
               </div>
             </div>{' '}
-            <h1 style={{ marginTop: '2rem' }}>ניהול פרופיל</h1>
+            <h1 style={{ marginTop: '2rem', fontSize: '35px' }}>כתיבה ושיתוף זכרונות</h1>
           </div>
         </div>
         <div>
           <div>
             <div className="img-300 seventeen">
               <p className="img-300-text">
-                חיבור עמודי המנוח ברשתות החברתיות הקיימות.
+                לוח שנה –ציון ימים חשובים, שליחת הזמנות לאירועי אזכרה ומפגשים.{' '}
               </p>
               <div className="read-more-home">
                 <span
@@ -283,15 +294,13 @@ const Home = () => {
                 </span>
               </div>
             </div>{' '}
-            <h1 style={{ marginTop: '2rem' }}>ניהול לוח שנה</h1>
+            <h1 style={{ marginTop: '2rem', fontSize: '35px' }}>ניהול מועדים</h1>
           </div>
         </div>
         <div>
           <div>
             <div className="img-300 fifteen">
-              <p className="img-300-text">
-                חיבור עמודי המנוח ברשתות החברתיות הקיימות.
-              </p>
+              <p className="img-300-text">מיקום הקבר </p>
               <div className="read-more-home">
                 <span
                   style={{
@@ -305,7 +314,7 @@ const Home = () => {
                 </span>
               </div>
             </div>{' '}
-            <h1 style={{ marginTop: '2rem' }}>מיקום הקבר</h1>
+            <h1 style={{ marginTop: '2rem', fontSize: '35px' }}>מיקום הקבר</h1>
           </div>
         </div>
       </div>
@@ -355,21 +364,30 @@ const Home = () => {
         <Slider {...settings}>
           <div>
             <h3 className="pilKahol">
-              לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מודוף
+              "בזכות העלאה ושיתוף תמונות, סיפורים וסרטונים של חברים ומכרים,
+              נחשפתי לצדדים חדשים ומרגשים [של אהובי]{' '}
             </h3>
-            <h5 style={{ marginBottom: '15px' }}>-עידן מור-</h5>
+            <h5 style={{ marginBottom: '15px' }}>-ס״א-</h5>
           </div>
           <div>
             <h3 className="pilKahol">
-              לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מודוף
+              "הבנתי שאם אני לא עושה לייף בוק לאמא שלי, נכדיי לא יכירו אותה"
+              אידית צעירי
             </h3>
-            <h5 style={{ marginBottom: '15px' }}>-עידן מור-</h5>
+            <h5 style={{ marginBottom: '15px' }}>-עידית צעירי-</h5>
           </div>
           <div>
             <h3 className="pilKahol">
-              לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית קולורס מודוף
+              "חיילי גולני הצעירים זכו לראשונה להכיר את בני צחי, בזכות ה-QR שעל
+              המצבה"{' '}
             </h3>
-            <h5 style={{ marginBottom: '15px' }}>-עידן מור-</h5>
+            <h5 style={{ marginBottom: '15px' }}>-שולה דאלי-</h5>
+          </div>
+          <div>
+            <h3 className="pilKahol">
+              ״הלייף בוק נראה ממש כמו הפרופיל שלעולם לא היה לאמא בפייסבוק.״
+            </h3>
+            <h5 style={{ marginBottom: '15px' }}>-אריאל-</h5>
           </div>
         </Slider>
         <img
