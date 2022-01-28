@@ -83,7 +83,10 @@
 .SearchInput:focus {
   outline: none;
 }
-
+.SearchInput::placeholder {
+  color: #6097bf;
+  font-weight: bolder;
+}
 .topbarRight {
   display: flex;
   align-items: center;

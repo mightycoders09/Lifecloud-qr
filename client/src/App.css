@@ -28,3 +28,7 @@ body {
 input {
   color: #6097bf;
 }
+input:focus {
+  outline: none;
+  opacity: 0.9;
+}
