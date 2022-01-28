@@ -20,6 +20,7 @@ export default function Register() {
   const history = useHistory();
   const [error, setErro] = useState('');
   const [user, setUser] = useState({
+    isOrganisation: false,
     firstName: '',
     lastName: '',
     dateOfBirth: '',
@@ -237,11 +238,17 @@ export default function Register() {
                   </div>
                   <span style={{ marginBottom: '1rem' }}>
                     אני מאשר את תנאי השימוש ופרטיות{' '}
-                    <input type="checkbox"  style={{marginLeft: '15px'}}></input>
+                    <input
+                      type="checkbox"
+                      style={{ marginLeft: '15px' }}
+                    ></input>
                   </span>
                   <span style={{ display: 'flex', marginBottom: '1rem' }}>
                     אני מאשר קבלת מיילים <div class="container"></div>
-                    <input type="checkbox" style={{marginLeft: '15px'}}></input>
+                    <input
+                      type="checkbox"
+                      style={{ marginLeft: '15px' }}
+                    ></input>
                   </span>
                 </div>
                 <button className="register-button" type="submit">
