@@ -292,7 +292,7 @@ export default function ENProfileCreate() {
                   />
                 </div>
                 <input
-                  placeholder="* תאריך פטירה עברי"
+                  placeholder="תאריך פטירה עברי"
                   type="text"
                   ref={hebDeathDate}
                   className="nameInput"
@@ -304,11 +304,11 @@ export default function ENProfileCreate() {
                     required
                     ref={city}
                     className="nameInput"
-                    type="date"
+                    type="text"
                   />
                   <input
-                    placeholder="* תואר"
-                    type="date"
+                    placeholder="תואר"
+                    type="text"
                     ref={degree}
                     className="nameInput"
                   />

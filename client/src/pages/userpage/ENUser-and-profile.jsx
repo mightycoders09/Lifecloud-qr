@@ -19,6 +19,7 @@ export const ENUserAndprofiles = () => {
   const LoggedUser = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
+  const [isOrganisation, setIsOrganisation] = useState(true);
   const id = useParams().id;
   useEffect(() => {
     fetchuserprofiles();
@@ -54,6 +55,12 @@ export const ENUserAndprofiles = () => {
       profileImg: 'https://picsum.photos/200/300',
     },
   ];
+  const organisation = {
+    _id: '89723g4f234rfvdsgfb',
+    firstName: 'atalef',
+    lastName: 'organisation',
+    admins: [{ _id: 'lku21h3412', firstName: 'test admin' }],
+  };
   return (
     <>
       <ENTopbar />
@@ -78,6 +85,33 @@ export const ENUserAndprofiles = () => {
             </p> */}
               </div>
               <div className="profiles-container">
+                {isOrganisation && (
+                  <div>
+                    <h1>Main Profile</h1>
+                    <Link
+                      to={`/organisationdetails`}
+                      state={{ id: organisation._id }}
+                      style={{ cursor: 'hover' }}
+                    >
+                      <div className="profile-container">
+                        <img
+                          className="profile-image"
+                          src={`https://api.lifecloud-qr.com/${organisation.profileImg}`}
+                          alt=""
+                        />
+                        <div className="profile-name">
+                          {organisation.firstName} {organisation.lastName}
+                        </div>
+                        <ul className="admins-list">
+                          {organisation.admins &&
+                            organisation.admins.map((admin) => (
+                              <li key={admin._id}>{admin.firstName}</li>
+                            ))}
+                        </ul>
+                      </div>
+                    </Link>
+                  </div>
+                )}
                 <h1 className="profile-title">My Profiles</h1>
                 <div className="profiles">
                   {data && data.length > 0 ? (
