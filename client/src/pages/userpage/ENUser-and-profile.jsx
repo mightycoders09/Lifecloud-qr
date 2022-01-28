@@ -157,16 +157,26 @@ export const ENUserAndprofiles = () => {
         </>
       ) : (
         <div className="notifications-container">
-          <div className="notifications-title">
-            <h1 onClick={() => setShow(false)} style={{cursor: 'pointer'}}>Back</h1>
-            <h1>Notifications</h1>
+          <div className="notifications-title" style={{ direction: '' }}>
+            <h1 style={{ fontSize: '60px', paddingLeft: '160px' }}>
+              Notifications
+            </h1>
+            <h1
+              onClick={() => setShow(false)}
+              style={{
+                cursor: 'pointer',
+                paddingLeft: '115px',
+              }}
+            >
+              Back
+            </h1>
           </div>
           <h3 style={{ fontSize: '20px', marginBottom: '20px' }}>
             New Notifications
           </h3>
           {Notifications.map((n) => {
             return (
-              <div className="notification-line">
+              <div className="notification-line" style={{ direction: 'ltr' }}>
                 <div className="notification-text">
                   <span>{n.date}</span> | <span>{n.time}</span>{' '}
                   <span>{n.action}</span>
