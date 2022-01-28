@@ -65,7 +65,7 @@ export default function ENProfileCreate() {
   console.log(picture, 'pic');
   console.log(image, 'image');
   const [selectedGender, setSelectedGender] = useState('');
-  const [selectedPrivacy, setSelectedPrivacy] = useState('');
+  const [selectedPrivacy, setSelectedPrivacy] = useState('public');
   const firstName = useRef();
   const lastName = useRef();
   const companyName = useRef();
