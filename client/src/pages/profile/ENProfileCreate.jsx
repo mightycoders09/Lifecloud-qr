@@ -70,9 +70,9 @@ export default function ENProfileCreate() {
   const lastName = useRef();
   const companyName = useRef();
   const birthDate = useRef();
-  const hebBirthDate = useRef();
+  // const hebBirthDate = useRef();
   const deathDate = useRef();
-  const hebDeathDate = useRef();
+  // const hebDeathDate = useRef();
   const city = useRef();
   const degree = useRef();
   const gender = selectedGender;
@@ -88,13 +88,14 @@ export default function ENProfileCreate() {
   const axisTitle = useRef();
   const axisDate = useRef();
   const history = useHistory();
+  
   const handleChange = (e) => {
     setSelectedGender(e.target.value);
   };
   const handlePrivacyChange = (e) => {
     setSelectedPrivacy(e.target.value);
   };
-
+// console.log(hebBirthDate,'hebBirthDate')
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -129,8 +130,8 @@ export default function ENProfileCreate() {
       firstName: firstName.current.value,
       lastName: lastName.current.value,
       birthDate: birthDate.current.value,
-      hebBirthDate: hebBirthDate.current.value,
-      hebDeathDate: hebDeathDate.current.value,
+      // hebBirthDate: hebBirthDate.current.value,
+      // hebDeathDate: hebDeathDate.current.value,
       city: city.current.value,
       degree: degree.current.value,
       deathDate: deathDate.current.value,
@@ -148,12 +149,13 @@ export default function ENProfileCreate() {
       formdata.append('profileImg', picture);
       formdata.append('graveImg', graveImage);
       formdata.append('wallImg', image);
+      formdata.append('privacy', privacy);
       formdata.append('firstName', wallInformation.firstName);
       formdata.append('originalUser', wallInformation.originalUser);
       formdata.append('lastName', wallInformation.lastName);
       formdata.append('birthDate', wallInformation.birthDate);
-      formdata.append('hebBirthDate', wallInformation.hebBirthDate);
-      formdata.append('hebDeathDate', wallInformation.hebDeathDate);
+      // formdata.append('hebBirthDate', wallInformation.hebBirthDate);
+      // formdata.append('hebDeathDate', wallInformation.hebDeathDate);
       formdata.append('city', wallInformation.city);
       formdata.append('degree', wallInformation.degree);
       formdata.append('deathDate', wallInformation.deathDate);
@@ -289,12 +291,12 @@ export default function ENProfileCreate() {
                   />
                 </div>
                 <div className="names-container">
-                  <input
+                  {/* <input
                     placeholder="Hebrew"
                     type="date"
                     ref={hebDeathDate}
                     className="nameInput"
-                  />
+                  /> */}
                 </div>
                 <div className="names-container" style={{ marginTop: '3rem' }}>
                   <input

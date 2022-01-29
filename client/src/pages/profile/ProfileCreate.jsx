@@ -140,7 +140,7 @@ export default function ENProfileCreate() {
       firstName: firstName.current.value,
       lastName: lastName.current.value,
       birthDate: birthDate.current.value,
-      hebDeathDate: hebDeathDate.current.value,
+      // hebDeathDate: hebDeathDate.current.value,
       city: city.current.value,
       degree: degree.current.value,
       deathDate: deathDate.current.value,
